@@ -14,10 +14,19 @@ const Router = Ember.Router.extend(ResetScrollMixin, googlePageview, {
 
 Router.map(function() {
   this.route('raiding', function() {
-    this.route('roster');
-    this.route('loot');
-    this.route('loot', { path: 'loot/:raidDate' });
-    this.route('progress');
+    this.route('index');
+    this.route('weekday', function() {
+      this.route('roster');
+      this.route('loot');
+      this.route('loot', { path: 'loot/:raidDate' });
+      this.route('progress');
+    });
+    this.route('weekend', function() {
+      this.route('roster');
+      this.route('loot');
+      this.route('loot', { path: 'loot/:raidDate' });
+      this.route('progress');
+    });
   });
   this.route('join');
   this.route('social');

@@ -15,9 +15,13 @@ export default Ember.Route.extend({
   },
 
   redirect(model, transition) {
-    let target = (transition.targetName !== 'raiding.index') ?
-      transition.targetName : 'raiding.index';
+    let target = (transition.targetName !== 'raiding.weekend.index') ? 
+      transition.targetName : 'raiding.weekend.roster';
     this.set('transitionTarget', target);
     this.transitionTo(target);
+  },
+
+  setupController(controller) {
+    controller.set('tabsSelection', this.get('transitionTarget'));
   }
 });
