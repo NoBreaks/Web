@@ -3336,7 +3336,7 @@ define("nobreaks/templates/join", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("The officers are Konnovar, Truhealz, Nebet, Skarlin, Shdowhuntr, Themurloc, and Stormpeaks.");
+        var el4 = dom.createTextNode("The officers are Konnovar, Nebet, Skarlin, Shdowhuntr, Stormpeaks, Dêathunknown, Veksaryn, and Shadrÿn.");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
@@ -4130,7 +4130,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "col s12 m8");
+        dom.setAttribute(el3, "class", "col s12 m9");
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createComment("");
@@ -4187,7 +4187,7 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 76,
+            "line": 77,
             "column": 0
           }
         },
@@ -4199,6 +4199,12 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("h1");
+        var el2 = dom.createTextNode("Raiding");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "raiding-general card blue-grey darken-1");
         var el2 = dom.createTextNode("\n  ");
@@ -4210,7 +4216,7 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         var el3 = dom.createElement("div");
         dom.setAttribute(el3, "class", "card-title");
         var el4 = dom.createElement("h4");
-        var el5 = dom.createTextNode("Raiding");
+        var el5 = dom.createTextNode("Info");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
@@ -5145,11 +5151,11 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 15,
+                  "line": 12,
                   "column": 14
                 },
                 "end": {
-                  "line": 19,
+                  "line": 16,
                   "column": 14
                 }
               },
@@ -5193,11 +5199,11 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
             "loc": {
               "source": null,
               "start": {
-                "line": 9,
+                "line": 6,
                 "column": 6
               },
               "end": {
-                "line": 25,
+                "line": 22,
                 "column": 6
               }
             },
@@ -5266,7 +5272,7 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
             morphs[3] = dom.createAttrMorph(element2, 'src');
             return morphs;
           },
-          statements: [["attribute", "class", ["concat", ["col s12 m6 l3 ", ["subexpr", "if", [["get", "boss.heroicKills", ["loc", [null, [10, 36], [10, 52]]]], "killed"], [], ["loc", [null, [10, 31], [10, 63]]]]]]], ["content", "boss.name", ["loc", [null, [14, 50], [14, 63]]]], ["block", "if", [["get", "boss.heroicKills", ["loc", [null, [15, 20], [15, 36]]]]], [], 0, null, ["loc", [null, [15, 14], [19, 21]]]], ["attribute", "src", ["get", "boss.thumbnail", ["loc", [null, [20, 25], [20, 39]]]]]],
+          statements: [["attribute", "class", ["concat", ["col s12 m6 l3 ", ["subexpr", "if", [["get", "boss.heroicKills", ["loc", [null, [7, 36], [7, 52]]]], "killed"], [], ["loc", [null, [7, 31], [7, 63]]]]]]], ["content", "boss.name", ["loc", [null, [11, 50], [11, 63]]]], ["block", "if", [["get", "boss.heroicKills", ["loc", [null, [12, 20], [12, 36]]]]], [], 0, null, ["loc", [null, [12, 14], [16, 21]]]], ["attribute", "src", ["get", "boss.thumbnail", ["loc", [null, [17, 25], [17, 39]]]]]],
           locals: ["boss"],
           templates: [child0]
         };
@@ -5278,11 +5284,11 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
           "loc": {
             "source": null,
             "start": {
-              "line": 5,
+              "line": 2,
               "column": 2
             },
             "end": {
-              "line": 28,
+              "line": 25,
               "column": 2
             }
           },
@@ -5331,7 +5337,7 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
           morphs[1] = dom.createMorphAt(dom.childAt(element3, [3]), 1, 1);
           return morphs;
         },
-        statements: [["content", "raid.name", ["loc", [null, [7, 8], [7, 21]]]], ["block", "each", [["get", "raid.bosses", ["loc", [null, [9, 14], [9, 25]]]]], [], 0, null, ["loc", [null, [9, 6], [25, 15]]]]],
+        statements: [["content", "raid.name", ["loc", [null, [4, 8], [4, 21]]]], ["block", "each", [["get", "raid.bosses", ["loc", [null, [6, 14], [6, 25]]]]], [], 0, null, ["loc", [null, [6, 6], [22, 15]]]]],
         locals: ["raid"],
         templates: [child0]
       };
@@ -5349,7 +5355,7 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
             "column": 0
           },
           "end": {
-            "line": 30,
+            "line": 27,
             "column": 0
           }
         },
@@ -5363,19 +5369,6 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "progress-tab");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "row tab-header col s12");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("h4");
-        var el4 = dom.createTextNode("Weekday Progression");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         var el2 = dom.createComment("");
@@ -5387,10 +5380,10 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 3, 3);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 1, 1);
         return morphs;
       },
-      statements: [["block", "each", [["get", "model.raids", ["loc", [null, [5, 10], [5, 21]]]]], [], 0, null, ["loc", [null, [5, 2], [28, 11]]]]],
+      statements: [["block", "each", [["get", "model.raids", ["loc", [null, [2, 10], [2, 21]]]]], [], 0, null, ["loc", [null, [2, 2], [25, 11]]]]],
       locals: [],
       templates: [child0]
     };
@@ -5452,7 +5445,7 @@ define("nobreaks/templates/raiding/weekday/roster", ["exports"], function (expor
           var el5 = dom.createTextNode("\n            ");
           dom.appendChild(el4, el5);
           var el5 = dom.createElement("div");
-          dom.setAttribute(el5, "class", "info col s6 m8 white-text");
+          dom.setAttribute(el5, "class", "info col s6 m10 white-text");
           var el6 = dom.createTextNode("\n              ");
           dom.appendChild(el5, el6);
           var el6 = dom.createElement("p");
@@ -5688,11 +5681,11 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 15,
+                  "line": 12,
                   "column": 14
                 },
                 "end": {
-                  "line": 19,
+                  "line": 16,
                   "column": 14
                 }
               },
@@ -5736,11 +5729,11 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
             "loc": {
               "source": null,
               "start": {
-                "line": 9,
+                "line": 6,
                 "column": 6
               },
               "end": {
-                "line": 25,
+                "line": 22,
                 "column": 6
               }
             },
@@ -5809,7 +5802,7 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
             morphs[3] = dom.createAttrMorph(element2, 'src');
             return morphs;
           },
-          statements: [["attribute", "class", ["concat", ["col s12 m6 l3 ", ["subexpr", "if", [["get", "boss.heroicKills", ["loc", [null, [10, 36], [10, 52]]]], "killed"], [], ["loc", [null, [10, 31], [10, 63]]]]]]], ["content", "boss.name", ["loc", [null, [14, 50], [14, 63]]]], ["block", "if", [["get", "boss.heroicKills", ["loc", [null, [15, 20], [15, 36]]]]], [], 0, null, ["loc", [null, [15, 14], [19, 21]]]], ["attribute", "src", ["get", "boss.thumbnail", ["loc", [null, [20, 25], [20, 39]]]]]],
+          statements: [["attribute", "class", ["concat", ["col s12 m6 l3 ", ["subexpr", "if", [["get", "boss.heroicKills", ["loc", [null, [7, 36], [7, 52]]]], "killed"], [], ["loc", [null, [7, 31], [7, 63]]]]]]], ["content", "boss.name", ["loc", [null, [11, 50], [11, 63]]]], ["block", "if", [["get", "boss.heroicKills", ["loc", [null, [12, 20], [12, 36]]]]], [], 0, null, ["loc", [null, [12, 14], [16, 21]]]], ["attribute", "src", ["get", "boss.thumbnail", ["loc", [null, [17, 25], [17, 39]]]]]],
           locals: ["boss"],
           templates: [child0]
         };
@@ -5821,11 +5814,11 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
           "loc": {
             "source": null,
             "start": {
-              "line": 5,
+              "line": 2,
               "column": 2
             },
             "end": {
-              "line": 28,
+              "line": 25,
               "column": 2
             }
           },
@@ -5874,7 +5867,7 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
           morphs[1] = dom.createMorphAt(dom.childAt(element3, [3]), 1, 1);
           return morphs;
         },
-        statements: [["content", "raid.name", ["loc", [null, [7, 8], [7, 21]]]], ["block", "each", [["get", "raid.bosses", ["loc", [null, [9, 14], [9, 25]]]]], [], 0, null, ["loc", [null, [9, 6], [25, 15]]]]],
+        statements: [["content", "raid.name", ["loc", [null, [4, 8], [4, 21]]]], ["block", "each", [["get", "raid.bosses", ["loc", [null, [6, 14], [6, 25]]]]], [], 0, null, ["loc", [null, [6, 6], [22, 15]]]]],
         locals: ["raid"],
         templates: [child0]
       };
@@ -5892,7 +5885,7 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
             "column": 0
           },
           "end": {
-            "line": 30,
+            "line": 27,
             "column": 0
           }
         },
@@ -5906,19 +5899,6 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "progress-tab");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "row tab-header col s12");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("h4");
-        var el4 = dom.createTextNode("Weekend Progression");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         var el2 = dom.createComment("");
@@ -5930,10 +5910,10 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 3, 3);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 1, 1);
         return morphs;
       },
-      statements: [["block", "each", [["get", "model.raids", ["loc", [null, [5, 10], [5, 21]]]]], [], 0, null, ["loc", [null, [5, 2], [28, 11]]]]],
+      statements: [["block", "each", [["get", "model.raids", ["loc", [null, [2, 10], [2, 21]]]]], [], 0, null, ["loc", [null, [2, 2], [25, 11]]]]],
       locals: [],
       templates: [child0]
     };
@@ -5995,7 +5975,7 @@ define("nobreaks/templates/raiding/weekend/roster", ["exports"], function (expor
           var el5 = dom.createTextNode("\n            ");
           dom.appendChild(el4, el5);
           var el5 = dom.createElement("div");
-          dom.setAttribute(el5, "class", "info col s6 m8 white-text");
+          dom.setAttribute(el5, "class", "info col s6 m10 white-text");
           var el6 = dom.createTextNode("\n              ");
           dom.appendChild(el5, el6);
           var el6 = dom.createElement("p");
