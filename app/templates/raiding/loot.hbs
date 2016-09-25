@@ -7,16 +7,16 @@
         {{/if}}
         <span class="tab-header-control-nav">
           {{#if model.prevRaidDate}}
-            {{#link-to 'raiding.weekday.loot' model.prevRaidDate tagName='i' class='prev material-icons'}}
-              {{link-to 'play_arrow' 'raiding.weekday.loot' model.prevRaidDate class='white-text'}}
+            {{#link-to 'raiding.loot' model.prevRaidDate tagName='i' class='prev material-icons'}}
+              {{link-to 'play_arrow' 'raiding.loot' model.prevRaidDate class='white-text'}}
             {{/link-to}}
           {{/if}}
         </span>
         <h4>{{model.raidDate}}</h4>
         <span class="tab-header-control-nav">
           {{#if model.nextRaidDate}}
-            {{#link-to 'raiding.weekday.loot' model.nextRaidDate tagName='i' class='next material-icons'}}
-              {{link-to 'play_arrow' 'raiding.weekday.loot' model.nextRaidDate class='white-text'}}
+            {{#link-to 'raiding.loot' model.nextRaidDate tagName='i' class='next material-icons'}}
+              {{link-to 'play_arrow' 'raiding.loot' model.nextRaidDate class='white-text'}}
             {{/link-to}}
           {{/if}}
         </span>

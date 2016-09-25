@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import fetch from 'ember-network/fetch';
-import { API_PATH, API_EPGP_LOOT_PATH } from '../../../const';
+import { API_PATH, API_EPGP_LOOT_PATH } from '../../const';
 
 export default Ember.Route.extend({
   transitionTarget: '',
@@ -14,8 +14,8 @@ export default Ember.Route.extend({
   },
 
   redirect(model, transition) {
-    if (!transition.params['raiding.weekend.loot'].raidDate) {
-      this.transitionTo('raiding.weekend.loot', this.get('raidDate'));
+    if (!transition.params['raiding.loot'].raidDate) {
+      this.transitionTo('raiding.loot', this.get('raidDate'));
     }
   }
 });
