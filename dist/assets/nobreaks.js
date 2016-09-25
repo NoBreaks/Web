@@ -2363,10 +2363,10 @@ define("nobreaks/templates/application", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("a");
-        dom.setAttribute(el4, "href", "https://www.youtube.com/channel/UCiTx1a_BI53itw-fHNIib2w");
+        dom.setAttribute(el4, "href", "https://forum.nobreaksguild.com/");
         dom.setAttribute(el4, "target", "_blank");
         var el5 = dom.createElement("i");
-        dom.setAttribute(el5, "class", "fa fa-youtube-square");
+        dom.setAttribute(el5, "class", "fa fa-comments");
         dom.setAttribute(el5, "aria-hidden", "true");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
