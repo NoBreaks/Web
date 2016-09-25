@@ -1379,10 +1379,6 @@ define('nobreaks/routes/raiding', ['exports', 'ember'], function (exports, _embe
       var target = transition.targetName !== 'raiding.index' ? transition.targetName : 'raiding.index';
       this.set('transitionTarget', target);
       this.transitionTo(target);
-    },
-
-    setupController: function setupController(controller) {
-      // controller.set('tabsSelection', this.get('transitionTarget'));
     }
   });
 });
@@ -3743,7 +3739,6 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
             },
             "moduleName": "nobreaks/templates/raiding.hbs"
           },
-<<<<<<< HEAD
           isEmpty: false,
           arity: 0,
           cachedFragment: null,
@@ -3778,12 +3773,6 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
             }
           },
           "moduleName": "nobreaks/templates/raiding.hbs"
-=======
-          "end": {
-            "line": 106,
-            "column": 0
-          }
->>>>>>> 4dc1f3b1710be23cd8a7471dc61106339539b2c6
         },
         isEmpty: false,
         arity: 0,
@@ -4002,122 +3991,10 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         dom.setAttribute(el3, "class", "col s12 m8");
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
-<<<<<<< HEAD
         var el4 = dom.createComment("");
-=======
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "raiding-general card blue-grey darken-1");
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("div");
-        dom.setAttribute(el5, "class", "card-content");
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
-        dom.setAttribute(el6, "class", "card-title");
-        var el7 = dom.createElement("h4");
-        var el8 = dom.createTextNode("Raiding");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("h5");
-        var el7 = dom.createTextNode("Schedule");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("\n            Weekday Team: Tuesday, Wednesday, and Thursday from 7-10PM EST\n            ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("br");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n            Weekend Team: Friday, Saturday, and Sunday from 7-10PM EST\n          ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("h5");
-        var el7 = dom.createTextNode("Required Addons");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("We require a few addons to make the raiding experience more efficient. They are mandatory.");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("br");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("a");
-        dom.setAttribute(el6, "href", "https://mods.curse.com/addons/wow/deadly-boss-mods");
-        dom.setAttribute(el6, "target", "_blank");
-        dom.setAttribute(el6, "class", "waves-effect waves-light btn cyan");
-        var el7 = dom.createTextNode("DBM");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("a");
-        dom.setAttribute(el6, "href", "https://mods.curse.com/addons/wow/exorsus-raid-tools");
-        dom.setAttribute(el6, "target", "_blank");
-        dom.setAttribute(el6, "class", "waves-effect waves-light btn cyan");
-        var el7 = dom.createTextNode("Exorsus");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("a");
-        dom.setAttribute(el6, "href", "https://mods.curse.com/addons/wow/epgp_lootmaster");
-        dom.setAttribute(el6, "target", "_blank");
-        dom.setAttribute(el6, "class", "waves-effect waves-light btn cyan");
-        var el7 = dom.createTextNode("EPGP Lootmaster");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("br");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("h5");
-        var el7 = dom.createTextNode("Communication");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("We use Mumble. You must have a working headset and microphone to raid. Ask a guildie for the login info.");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("br");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("a");
-        dom.setAttribute(el6, "href", "http://www.mumble.com/mumble-download.php");
-        dom.setAttribute(el6, "target", "_blank");
-        dom.setAttribute(el6, "class", "waves-effect waves-light btn cyan");
-        var el7 = dom.createTextNode("Mumble");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n        ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
-        dom.appendChild(el4, el5);
->>>>>>> 4dc1f3b1710be23cd8a7471dc61106339539b2c6
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n    ");
         dom.appendChild(el3, el4);
-<<<<<<< HEAD
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
         dom.appendChild(el2, el3);
@@ -4163,7 +4040,7 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 69,
+            "line": 76,
             "column": 0
           }
         },
@@ -4176,7 +4053,7 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("div");
-        dom.setAttribute(el1, "class", "card blue-grey darken-1");
+        dom.setAttribute(el1, "class", "raiding-general card blue-grey darken-1");
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
@@ -4187,59 +4064,6 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         dom.setAttribute(el3, "class", "card-title");
         var el4 = dom.createElement("h4");
         var el5 = dom.createTextNode("Raiding");
-=======
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "epgp-info card blue-grey darken-1");
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("div");
-        dom.setAttribute(el5, "class", "card-content");
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
-        dom.setAttribute(el6, "class", "card-title");
-        var el7 = dom.createElement("h4");
-        var el8 = dom.createTextNode("How Loot Works");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("h5");
-        var el7 = dom.createTextNode("EPGP");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("\n            EPGP is a ratio of Effort Points (EP) and Gear Points (GP).\n            Effort points are awarded for a fixed amount for showing up on time, boss kills, and guild contests.\n            They may also be taken away for being tardy without notice, absence without notice, rage quitting, etc.\n            Gear Points is the score given for your equiped and not-equiped gear.\n          ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("br");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("h5");
-        var el7 = dom.createTextNode("The Ratio");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("\n            EPGP is not DKP. You won't be bidding on items. If you roll on an item you want,\n            the lootmaster will be able to see all the rolls for said item and compare EPGP ratios.\n            The roll with highest effort points vs lowest gear points wins the roll.\n            This system ensures fair loot distribution across the raid group to maintain even gear scores.\n            The lootmaster does have final say in who wins the item.\n          ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("br");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n        ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
->>>>>>> 4dc1f3b1710be23cd8a7471dc61106339539b2c6
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
@@ -4248,7 +4072,6 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         var el3 = dom.createElement("h5");
         var el4 = dom.createTextNode("Schedule");
         dom.appendChild(el3, el4);
-<<<<<<< HEAD
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
@@ -4341,7 +4164,7 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
-        dom.setAttribute(el1, "class", "card blue-grey darken-1");
+        dom.setAttribute(el1, "class", "epgp-info card blue-grey darken-1");
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
@@ -4352,106 +4175,6 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         dom.setAttribute(el3, "class", "card-title");
         var el4 = dom.createElement("h4");
         var el5 = dom.createTextNode("How Loot Works");
-=======
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "expectations card blue-grey darken-1");
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("div");
-        dom.setAttribute(el5, "class", "card-content");
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
-        dom.setAttribute(el6, "class", "card-title");
-        var el7 = dom.createElement("h4");
-        var el8 = dom.createTextNode("What We Expect of our Raiders");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("h5");
-        var el7 = dom.createTextNode("Attendance");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("\n            Please post in the forums or on the facebook page if you will be late\n            or cannot make your raid time. It gives us time to find a replacement\n            for you and saves you from losing EP! We understand life happens sometimes.\n          ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("h5");
-        var el7 = dom.createTextNode("Attitude");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("\n            Although we find rage-quitting to be highly entertaining, we prefer it doesn't happen. We're here to have fun!\n          ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("ul");
-        var el7 = dom.createTextNode("\n            ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("li");
-        var el8 = dom.createElement("i");
-        dom.setAttribute(el8, "class", "material-icons");
-        var el9 = dom.createTextNode("chevron_right");
-        dom.appendChild(el8, el9);
-        dom.appendChild(el7, el8);
-        var el8 = dom.createTextNode(" If something happens and you're not having fun, tell us.");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n            ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("li");
-        var el8 = dom.createElement("i");
-        dom.setAttribute(el8, "class", "material-icons");
-        var el9 = dom.createTextNode("chevron_right");
-        dom.appendChild(el8, el9);
-        dom.appendChild(el7, el8);
-        var el8 = dom.createTextNode(" If you need a minute to fix something or take care of real life issues, step out of the raid and come back when you're ready.");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n            ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("li");
-        var el8 = dom.createElement("i");
-        dom.setAttribute(el8, "class", "material-icons");
-        var el9 = dom.createTextNode("chevron_right");
-        dom.appendChild(el8, el9);
-        dom.appendChild(el7, el8);
-        var el8 = dom.createTextNode(" We know progression is rough. Keep your cool.");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n          ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("h5");
-        var el7 = dom.createTextNode("Be Prepared");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("\n            Until the market evens out again, we'll be requiring everyone to supply their own flasks, potions, and food.\n            If you need help or are able to help others, talk to your guildmates!\n          ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("br");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n        ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
->>>>>>> 4dc1f3b1710be23cd8a7471dc61106339539b2c6
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
@@ -4464,7 +4187,7 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("\n      EPGP is a ratio of Effort Points (EP) and Gear Points (GP).\n      Effort points are awarded for a fixed amount for showing up on time, boss kills, and guild contests.\n      They may also be taken away for being tardy without notice, absence without notice, rage quitting, etc.\n      Gear Points is the score given for your equiped and not-equiped gear.\n    ");
+        var el4 = dom.createTextNode("\n      EPGP is a ratio of Effort Points (EP) and Gear Points (GP).\n      Effort points are awarded for a fixed amount for showing up on time, boss kills, and guild contests.\n      They may also be taken away for being tardy without notice, absence without notice, rage quitting, etc.\n      Gear Points is the score given for your equipped and not-equipped gear.\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n    ");
@@ -4487,6 +4210,25 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("br");
         dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createTextNode("\n      The complete list of EP values can be found here.\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("br");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3, "href", "https://forum.nobreaksguild.com/topic/7/epgp-awards-and-costs");
+        dom.setAttribute(el3, "target", "_blank");
+        dom.setAttribute(el3, "class", "waves-effect waves-light btn cyan");
+        var el4 = dom.createTextNode("EP Info");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
@@ -4496,7 +4238,7 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
-        dom.setAttribute(el1, "class", "card blue-grey darken-1");
+        dom.setAttribute(el1, "class", "expectations card blue-grey darken-1");
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
@@ -4531,7 +4273,7 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("\n      Although we find rage-quitting highly entertaining, we prefer it doesn't happen. We're here to have fun!\n    ");
+        var el4 = dom.createTextNode("\n      Although we find rage-quitting to be highly entertaining, we prefer it doesn't happen. We're here to have fun!\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n    ");
@@ -4540,19 +4282,34 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("li");
-        var el5 = dom.createTextNode("If something happens and you're not having fun, tell us.");
+        var el5 = dom.createElement("i");
+        dom.setAttribute(el5, "class", "material-icons");
+        var el6 = dom.createTextNode("chevron_right");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode(" If something happens and you're not having fun, tell us.");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("li");
-        var el5 = dom.createTextNode("If you need a minute to fix something or take care of real life issues, step out of the raid and come back when you're ready.");
+        var el5 = dom.createElement("i");
+        dom.setAttribute(el5, "class", "material-icons");
+        var el6 = dom.createTextNode("chevron_right");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode(" If you need a minute to fix something or take care of real life issues, step out of the raid and come back when you're ready.");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("li");
-        var el5 = dom.createTextNode("We know progression is rough. Keep your cool.");
+        var el5 = dom.createElement("i");
+        dom.setAttribute(el5, "class", "material-icons");
+        var el6 = dom.createTextNode("chevron_right");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode(" We know progression is rough. Keep your cool.");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n    ");
@@ -4567,8 +4324,12 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("\n      lorem ipsum\n    ");
+        var el4 = dom.createTextNode("\n      Until the market evens out again, we'll be requiring everyone to supply their own flasks, potions, and food.\n      If you need help or are able to help others, talk to your guildmates!\n    ");
         dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("br");
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
         dom.appendChild(el2, el3);
@@ -5799,11 +5560,7 @@ define("nobreaks/templates/raiding/weekend", ["exports"], function (exports) {
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-<<<<<<< HEAD
       statements: [["block", "md-tabs", [], ["selected", ["subexpr", "@mut", [["get", "tabsSelection", ["loc", [null, [2, 11], [2, 24]]]]], [], []], "class", "blue-grey darken-3 col s12 m8"], 0, null, ["loc", [null, [1, 0], [6, 12]]]], ["content", "outlet", ["loc", [null, [8, 0], [8, 10]]]]],
-=======
-      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/sylvanas.jpg"], ["loc", [null, [1, 0], [1, 77]]]], ["content", "outlet", ["loc", [null, [104, 2], [104, 12]]]]],
->>>>>>> 4dc1f3b1710be23cd8a7471dc61106339539b2c6
       locals: [],
       templates: [child0]
     };
