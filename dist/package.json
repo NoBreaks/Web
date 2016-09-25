@@ -25,7 +25,7 @@
       },
       "APP": {
         "name": "nobreaks",
-        "version": "2.0.0+3ff456d7",
+        "version": "2.0.0+872bc1a3",
         "autoboot": false
       },
       "materializeDefaults": {

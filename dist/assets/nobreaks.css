@@ -6326,7 +6326,8 @@ button, .btn, .btn-large {
     padding-bottom: 10px; }
 
 .roster-tab .card-content img {
-  margin-top: 0.5em; }
+  margin-top: 0.5em;
+  margin-bottom: 0.5em; }
 
 .roster-tab .epgp-count {
   padding-top: 10px; }
