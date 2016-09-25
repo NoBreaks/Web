@@ -6446,27 +6446,28 @@ button, .btn, .btn-large {
   background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warrior.png") no-repeat center center;
   background-size: contain; }
 
-.loot-tab .tab-header {
-  text-align: center; }
-  .loot-tab .tab-header h4 {
-    display: inline-block; }
-  .loot-tab .tab-header .prev {
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH"; }
-  .loot-tab .tab-header .tab-header-controls {
-    text-align: center;
-    width: 250px; }
-    .loot-tab .tab-header .tab-header-controls .tab-header-control-nav {
-      width: 48px;
+.loot-tab {
+  padding-top: 0; }
+  .loot-tab .tab-header {
+    text-align: center; }
+    .loot-tab .tab-header h4 {
       display: inline-block; }
-
-.loot-tab .card img {
-  margin: 0 auto;
-  display: block; }
+    .loot-tab .tab-header .prev {
+      -moz-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      filter: FlipH;
+      -ms-filter: "FlipH"; }
+    .loot-tab .tab-header .tab-header-controls {
+      text-align: center;
+      width: 250px; }
+      .loot-tab .tab-header .tab-header-controls .tab-header-control-nav {
+        width: 48px;
+        display: inline-block; }
+  .loot-tab .card img {
+    margin: 0 auto;
+    display: block; }
 
 .progress-tab .card {
   position: relative; }
