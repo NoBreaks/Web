@@ -2723,11 +2723,11 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 92,
+                "line": 97,
                 "column": 8
               },
               "end": {
-                "line": 92,
+                "line": 97,
                 "column": 33
               }
             },
@@ -2758,11 +2758,11 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 91,
+              "line": 96,
               "column": 6
             },
             "end": {
-              "line": 93,
+              "line": 98,
               "column": 6
             }
           },
@@ -2787,7 +2787,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["block", "link-to", ["join"], [], 0, null, ["loc", [null, [92, 8], [92, 33]]]]],
+        statements: [["block", "link-to", ["join"], [], 0, null, ["loc", [null, [97, 8], [97, 33]]]]],
         locals: [],
         templates: [child0]
       };
@@ -2806,7 +2806,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 112,
+            "line": 117,
             "column": 0
           }
         },
@@ -3105,6 +3105,28 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3, "class", "col s12 m4");
+        var el4 = dom.createTextNode("\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("a");
+        dom.setAttribute(el4, "href", "https://forum.nobreaksguild.com/");
+        dom.setAttribute(el4, "target", "_blank");
+        dom.setAttribute(el4, "class", "btn cyan");
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("i");
+        dom.setAttribute(el5, "class", "fa fa-comments");
+        dom.setAttribute(el5, "aria-hidden", "true");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("Guild Forum\n      ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
@@ -3249,7 +3271,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/legion-2560x1440-wide.jpg"], ["loc", [null, [1, 0], [1, 90]]]], ["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/emerald-nightmare.jpg"], ["loc", [null, [24, 0], [24, 86]]]], ["block", "link-to", ["raiding"], ["tagName", "button", "class", "btn cyan"], 0, null, ["loc", [null, [31, 6], [33, 18]]]], ["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/legion.png"], ["loc", [null, [79, 0], [79, 75]]]], ["block", "link-to", ["join"], ["tagName", "button", "class", "cyan btn"], 1, null, ["loc", [null, [91, 6], [93, 18]]]]],
+      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/legion-2560x1440-wide.jpg"], ["loc", [null, [1, 0], [1, 90]]]], ["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/emerald-nightmare.jpg"], ["loc", [null, [24, 0], [24, 86]]]], ["block", "link-to", ["raiding"], ["tagName", "button", "class", "btn cyan"], 0, null, ["loc", [null, [31, 6], [33, 18]]]], ["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/legion.png"], ["loc", [null, [84, 0], [84, 75]]]], ["block", "link-to", ["join"], ["tagName", "button", "class", "cyan btn"], 1, null, ["loc", [null, [96, 6], [98, 18]]]]],
       locals: [],
       templates: [child0, child1]
     };
