@@ -3488,7 +3488,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 104,
+            "line": 106,
             "column": 0
           }
         },
@@ -3609,7 +3609,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "card blue-grey darken-1");
+        dom.setAttribute(el4, "class", "raiding-general card blue-grey darken-1");
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("div");
@@ -3720,7 +3720,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "card blue-grey darken-1");
+        dom.setAttribute(el4, "class", "epgp-info card blue-grey darken-1");
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("div");
@@ -3775,7 +3775,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "card blue-grey darken-1");
+        dom.setAttribute(el4, "class", "expectations card blue-grey darken-1");
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("div");
@@ -3810,7 +3810,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el6 = dom.createTextNode("\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("\n            Although we find rage-quitting highly entertaining, we prefer it doesn't happen. We're here to have fun!\n          ");
+        var el7 = dom.createTextNode("\n            Although we find rage-quitting to be highly entertaining, we prefer it doesn't happen. We're here to have fun!\n          ");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n          ");
@@ -3819,19 +3819,34 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el7 = dom.createTextNode("\n            ");
         dom.appendChild(el6, el7);
         var el7 = dom.createElement("li");
-        var el8 = dom.createTextNode("If something happens and you're not having fun, tell us.");
+        var el8 = dom.createElement("i");
+        dom.setAttribute(el8, "class", "material-icons");
+        var el9 = dom.createTextNode("chevron_right");
+        dom.appendChild(el8, el9);
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode(" If something happens and you're not having fun, tell us.");
         dom.appendChild(el7, el8);
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode("\n            ");
         dom.appendChild(el6, el7);
         var el7 = dom.createElement("li");
-        var el8 = dom.createTextNode("If you need a minute to fix something or take care of real life issues, step out of the raid and come back when you're ready.");
+        var el8 = dom.createElement("i");
+        dom.setAttribute(el8, "class", "material-icons");
+        var el9 = dom.createTextNode("chevron_right");
+        dom.appendChild(el8, el9);
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode(" If you need a minute to fix something or take care of real life issues, step out of the raid and come back when you're ready.");
         dom.appendChild(el7, el8);
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode("\n            ");
         dom.appendChild(el6, el7);
         var el7 = dom.createElement("li");
-        var el8 = dom.createTextNode("We know progression is rough. Keep your cool.");
+        var el8 = dom.createElement("i");
+        dom.setAttribute(el8, "class", "material-icons");
+        var el9 = dom.createTextNode("chevron_right");
+        dom.appendChild(el8, el9);
+        dom.appendChild(el7, el8);
+        var el8 = dom.createTextNode(" We know progression is rough. Keep your cool.");
         dom.appendChild(el7, el8);
         dom.appendChild(el6, el7);
         var el7 = dom.createTextNode("\n          ");
@@ -3846,8 +3861,12 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el6 = dom.createTextNode("\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("\n            lorem ipsum\n          ");
+        var el7 = dom.createTextNode("\n            Until the market evens out again, we'll be requiring everyone to supply their own flasks, potions, and food.\n            If you need help or are able to help others, talk to your guildmates!\n          ");
         dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n          ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("br");
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n        ");
         dom.appendChild(el5, el6);
@@ -3883,7 +3902,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/sylvanas.jpg"], ["loc", [null, [1, 0], [1, 77]]]], ["content", "outlet", ["loc", [null, [102, 2], [102, 12]]]]],
+      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/sylvanas.jpg"], ["loc", [null, [1, 0], [1, 77]]]], ["content", "outlet", ["loc", [null, [104, 2], [104, 12]]]]],
       locals: [],
       templates: []
     };
