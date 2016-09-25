@@ -5,15 +5,19 @@
   @extend .blue-grey, .darken-3;
   color: #fff;
 
+  .int-side-nav {
+    @extend .blue-grey, .darken-4;
+  }
   .tabs {
     margin-top: 50px;
   }
 }
 
 @mixin class_crests($imageUrl:'') {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0,0,0,0.8) ,rgba(0, 0, 0, 0.95)), url($imageUrl) no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0,0,0,0.8) ,rgba(0, 0, 0, 0.95)), url($imageUrl) no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0,0,0,0.8) ,rgba(0, 0, 0, 0.95)), url($imageUrl) no-repeat center center;
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7) ,rgba(0, 0, 0, 0.5)), url($imageUrl) no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7) ,rgba(0, 0, 0, 0.5)), url($imageUrl) no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7) ,rgba(0, 0, 0, 0.5)), url($imageUrl) no-repeat center center;
+  background-size: contain;
 }
 
 .roster-tab,
@@ -37,6 +41,11 @@
 
 // Roster Styles
 .roster-tab {
+  .card-content {
+    img {
+      margin-top: 0.5em;
+    }
+  }
   .epgp-count {
     padding-top: 10px;
   }

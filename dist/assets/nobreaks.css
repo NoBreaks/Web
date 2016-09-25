@@ -52,7 +52,7 @@
 .materialize-red-text.text-darken-3 {
   color: #a21318 !important; }
 
-.materialize-red.darken-4 {
+.materialize-red.darken-4, .raiding .materialize-red.int-side-nav {
   background-color: #8b1014 !important; }
 
 .materialize-red-text.text-darken-4 {
@@ -112,7 +112,7 @@
 .red-text.text-darken-3 {
   color: #C62828 !important; }
 
-.red.darken-4 {
+.red.darken-4, .raiding .red.int-side-nav {
   background-color: #B71C1C !important; }
 
 .red-text.text-darken-4 {
@@ -196,7 +196,7 @@
 .pink-text.text-darken-3 {
   color: #ad1457 !important; }
 
-.pink.darken-4 {
+.pink.darken-4, .raiding .pink.int-side-nav {
   background-color: #880e4f !important; }
 
 .pink-text.text-darken-4 {
@@ -280,7 +280,7 @@
 .purple-text.text-darken-3 {
   color: #6a1b9a !important; }
 
-.purple.darken-4 {
+.purple.darken-4, .raiding .purple.int-side-nav {
   background-color: #4a148c !important; }
 
 .purple-text.text-darken-4 {
@@ -364,7 +364,7 @@
 .deep-purple-text.text-darken-3 {
   color: #4527a0 !important; }
 
-.deep-purple.darken-4 {
+.deep-purple.darken-4, .raiding .deep-purple.int-side-nav {
   background-color: #311b92 !important; }
 
 .deep-purple-text.text-darken-4 {
@@ -448,7 +448,7 @@
 .indigo-text.text-darken-3 {
   color: #283593 !important; }
 
-.indigo.darken-4 {
+.indigo.darken-4, .raiding .indigo.int-side-nav {
   background-color: #1a237e !important; }
 
 .indigo-text.text-darken-4 {
@@ -532,7 +532,7 @@
 .blue-text.text-darken-3 {
   color: #1565C0 !important; }
 
-.blue.darken-4 {
+.blue.darken-4, .raiding .blue.int-side-nav {
   background-color: #0D47A1 !important; }
 
 .blue-text.text-darken-4 {
@@ -616,7 +616,7 @@
 .light-blue-text.text-darken-3 {
   color: #0277bd !important; }
 
-.light-blue.darken-4 {
+.light-blue.darken-4, .raiding .light-blue.int-side-nav {
   background-color: #01579b !important; }
 
 .light-blue-text.text-darken-4 {
@@ -700,7 +700,7 @@
 .cyan-text.text-darken-3 {
   color: #00838f !important; }
 
-.cyan.darken-4 {
+.cyan.darken-4, .raiding .cyan.int-side-nav {
   background-color: #006064 !important; }
 
 .cyan-text.text-darken-4 {
@@ -784,7 +784,7 @@
 .teal-text.text-darken-3 {
   color: #00695c !important; }
 
-.teal.darken-4 {
+.teal.darken-4, .raiding .teal.int-side-nav {
   background-color: #004d40 !important; }
 
 .teal-text.text-darken-4 {
@@ -868,7 +868,7 @@
 .green-text.text-darken-3 {
   color: #2E7D32 !important; }
 
-.green.darken-4 {
+.green.darken-4, .raiding .green.int-side-nav {
   background-color: #1B5E20 !important; }
 
 .green-text.text-darken-4 {
@@ -952,7 +952,7 @@
 .light-green-text.text-darken-3 {
   color: #558b2f !important; }
 
-.light-green.darken-4 {
+.light-green.darken-4, .raiding .light-green.int-side-nav {
   background-color: #33691e !important; }
 
 .light-green-text.text-darken-4 {
@@ -1036,7 +1036,7 @@
 .lime-text.text-darken-3 {
   color: #9e9d24 !important; }
 
-.lime.darken-4 {
+.lime.darken-4, .raiding .lime.int-side-nav {
   background-color: #827717 !important; }
 
 .lime-text.text-darken-4 {
@@ -1120,7 +1120,7 @@
 .yellow-text.text-darken-3 {
   color: #f9a825 !important; }
 
-.yellow.darken-4 {
+.yellow.darken-4, .raiding .yellow.int-side-nav {
   background-color: #f57f17 !important; }
 
 .yellow-text.text-darken-4 {
@@ -1204,7 +1204,7 @@
 .amber-text.text-darken-3 {
   color: #ff8f00 !important; }
 
-.amber.darken-4 {
+.amber.darken-4, .raiding .amber.int-side-nav {
   background-color: #ff6f00 !important; }
 
 .amber-text.text-darken-4 {
@@ -1288,7 +1288,7 @@
 .orange-text.text-darken-3 {
   color: #ef6c00 !important; }
 
-.orange.darken-4 {
+.orange.darken-4, .raiding .orange.int-side-nav {
   background-color: #e65100 !important; }
 
 .orange-text.text-darken-4 {
@@ -1372,7 +1372,7 @@
 .deep-orange-text.text-darken-3 {
   color: #d84315 !important; }
 
-.deep-orange.darken-4 {
+.deep-orange.darken-4, .raiding .deep-orange.int-side-nav {
   background-color: #bf360c !important; }
 
 .deep-orange-text.text-darken-4 {
@@ -1456,67 +1456,67 @@
 .brown-text.text-darken-3 {
   color: #4e342e !important; }
 
-.brown.darken-4 {
+.brown.darken-4, .raiding .brown.int-side-nav {
   background-color: #3e2723 !important; }
 
 .brown-text.text-darken-4 {
   color: #3e2723 !important; }
 
-.blue-grey, .raiding {
+.blue-grey, .raiding, .raiding .int-side-nav {
   background-color: #607d8b !important; }
 
 .blue-grey-text {
   color: #607d8b !important; }
 
-.blue-grey.lighten-5, .lighten-5.raiding {
+.blue-grey.lighten-5, .lighten-5.raiding, .raiding .lighten-5.int-side-nav {
   background-color: #eceff1 !important; }
 
 .blue-grey-text.text-lighten-5 {
   color: #eceff1 !important; }
 
-.blue-grey.lighten-4, .lighten-4.raiding {
+.blue-grey.lighten-4, .lighten-4.raiding, .raiding .lighten-4.int-side-nav {
   background-color: #cfd8dc !important; }
 
 .blue-grey-text.text-lighten-4 {
   color: #cfd8dc !important; }
 
-.blue-grey.lighten-3, .lighten-3.raiding {
+.blue-grey.lighten-3, .lighten-3.raiding, .raiding .lighten-3.int-side-nav {
   background-color: #b0bec5 !important; }
 
 .blue-grey-text.text-lighten-3 {
   color: #b0bec5 !important; }
 
-.blue-grey.lighten-2, .lighten-2.raiding {
+.blue-grey.lighten-2, .lighten-2.raiding, .raiding .lighten-2.int-side-nav {
   background-color: #90a4ae !important; }
 
 .blue-grey-text.text-lighten-2 {
   color: #90a4ae !important; }
 
-.blue-grey.lighten-1, .lighten-1.raiding {
+.blue-grey.lighten-1, .lighten-1.raiding, .raiding .lighten-1.int-side-nav {
   background-color: #78909c !important; }
 
 .blue-grey-text.text-lighten-1 {
   color: #78909c !important; }
 
-.blue-grey.darken-1, .darken-1.raiding {
+.blue-grey.darken-1, .darken-1.raiding, .raiding .darken-1.int-side-nav {
   background-color: #546e7a !important; }
 
 .blue-grey-text.text-darken-1 {
   color: #546e7a !important; }
 
-.blue-grey.darken-2, .darken-2.raiding {
+.blue-grey.darken-2, .darken-2.raiding, .raiding .darken-2.int-side-nav {
   background-color: #455a64 !important; }
 
 .blue-grey-text.text-darken-2 {
   color: #455a64 !important; }
 
-.blue-grey.darken-3, .raiding {
+.blue-grey.darken-3, .raiding, .raiding .darken-3.int-side-nav, .raiding .int-side-nav.raiding {
   background-color: #37474f !important; }
 
 .blue-grey-text.text-darken-3 {
   color: #37474f !important; }
 
-.blue-grey.darken-4, .darken-4.raiding {
+.blue-grey.darken-4, .darken-4.raiding, .raiding .int-side-nav {
   background-color: #263238 !important; }
 
 .blue-grey-text.text-darken-4 {
@@ -1576,7 +1576,7 @@
 .grey-text.text-darken-3 {
   color: #424242 !important; }
 
-.grey.darken-4 {
+.grey.darken-4, .raiding .grey.int-side-nav {
   background-color: #212121 !important; }
 
 .grey-text.text-darken-4 {
@@ -6322,68 +6322,83 @@ button, .btn, .btn-large {
     font-size: 1.2em;
     padding-bottom: 10px; }
 
+.roster-tab .card-content img {
+  margin-top: 0.5em; }
+
 .roster-tab .epgp-count {
   padding-top: 10px; }
 
 .roster-tab .card-content.deathknight {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/deathknight.png") no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/deathknight.png") no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/deathknight.png") no-repeat center center; }
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/deathknight.png") no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/deathknight.png") no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/deathknight.png") no-repeat center center;
+  background-size: contain; }
 
 .roster-tab .card-content.demonhunter {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/demonhunter.png") no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/demonhunter.png") no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/demonhunter.png") no-repeat center center; }
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/demonhunter.png") no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/demonhunter.png") no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/demonhunter.png") no-repeat center center;
+  background-size: contain; }
 
 .roster-tab .card-content.druid {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/druid.png") no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/druid.png") no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/druid.png") no-repeat center center; }
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/druid.png") no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/druid.png") no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/druid.png") no-repeat center center;
+  background-size: contain; }
 
 .roster-tab .card-content.hunter {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/hunter.png") no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/hunter.png") no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/hunter.png") no-repeat center center; }
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/hunter.png") no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/hunter.png") no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/hunter.png") no-repeat center center;
+  background-size: contain; }
 
 .roster-tab .card-content.mage {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/mage.png") no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/mage.png") no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/mage.png") no-repeat center center; }
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/mage.png") no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/mage.png") no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/mage.png") no-repeat center center;
+  background-size: contain; }
 
 .roster-tab .card-content.monk {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/monk.png") no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/monk.png") no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/monk.png") no-repeat center center; }
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/monk.png") no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/monk.png") no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/monk.png") no-repeat center center;
+  background-size: contain; }
 
 .roster-tab .card-content.paladin {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/paladin.png") no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/paladin.png") no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/paladin.png") no-repeat center center; }
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/paladin.png") no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/paladin.png") no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/paladin.png") no-repeat center center;
+  background-size: contain; }
 
 .roster-tab .card-content.priest {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/priest.png") no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/priest.png") no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/priest.png") no-repeat center center; }
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/priest.png") no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/priest.png") no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/priest.png") no-repeat center center;
+  background-size: contain; }
 
 .roster-tab .card-content.rogue {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/rogue.png") no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/rogue.png") no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/rogue.png") no-repeat center center; }
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/rogue.png") no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/rogue.png") no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/rogue.png") no-repeat center center;
+  background-size: contain; }
 
 .roster-tab .card-content.shaman {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/shaman.png") no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/shaman.png") no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/shaman.png") no-repeat center center; }
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/shaman.png") no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/shaman.png") no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/shaman.png") no-repeat center center;
+  background-size: contain; }
 
 .roster-tab .card-content.warlock {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warlock.png") no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warlock.png") no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warlock.png") no-repeat center center; }
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warlock.png") no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warlock.png") no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warlock.png") no-repeat center center;
+  background-size: contain; }
 
 .roster-tab .card-content.warrior {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warrior.png") no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warrior.png") no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warrior.png") no-repeat center center; }
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warrior.png") no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warrior.png") no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("https://api.nobreaksguild.com/cdn/images/classes/crests/warrior.png") no-repeat center center;
+  background-size: contain; }
 
 .loot-tab .tab-header {
   text-align: center; }
@@ -6422,9 +6437,10 @@ button, .btn, .btn-large {
     left: 10%;
     right: 10%; }
   .progress-tab .card .card-content {
-    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("") no-repeat center center;
-    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("") no-repeat center center;
-    background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.95)), url("") no-repeat center center; }
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("") no-repeat center center;
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("") no-repeat center center;
+    background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url("") no-repeat center center;
+    background-size: contain; }
 
 .social .row {
   padding: 50px 0; }
