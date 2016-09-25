@@ -1,0 +1,95 @@
+{
+  "raids": [{
+    "name": "The Emerald Nightmare",
+    "lfr": 0,
+    "normal": 2,
+    "heroic": 0,
+    "mythic": 0,
+    "id": 8026,
+    "bosses": [{
+        "id": 103160,
+        "name": "Nythendra",
+        "lfrKills": 0,
+        "lfrTimestamp": 0,
+        "normalKills": 1,
+        "normalTimestamp": 1474416501000,
+        "heroicKills": 0,
+        "heroicTimestamp": 0,
+        "mythicKills": 0,
+        "mythicTimestamp": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/nythendra.jpg"
+    }, {
+        "id": 111000,
+        "name": "Elerethe Renferal",
+        "lfrKills": 0,
+        "lfrTimestamp": 0,
+        "normalKills": 1,
+        "normalTimestamp": 1474500257000,
+        "heroicKills": 0,
+        "heroicTimestamp": 0,
+        "mythicKills": 0,
+        "mythicTimestamp": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/elerethe-renferal.jpg"
+    }, {
+        "id": 105393,
+        "name": "Il'gynoth, Heart of Corruption",
+        "lfrKills": 0,
+        "lfrTimestamp": 0,
+        "normalKills": 1,
+        "normalTimestamp": 1474422207000,
+        "heroicKills": 0,
+        "heroicTimestamp": 0,
+        "mythicKills": 0,
+        "mythicTimestamp": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/ilgynoth.jpg"
+    }, {
+        "id": 100497,
+        "name": "Ursoc",
+        "lfrKills": 0,
+        "lfrTimestamp": 0,
+        "normalKills": 1,
+        "normalTimestamp": 1474419538000,
+        "heroicKills": 0,
+        "heroicTimestamp": 0,
+        "mythicKills": 0,
+        "mythicTimestamp": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/ursoc.jpg"
+    }, {
+        "id": 102679,
+        "name": "Dragons of Nightmare",
+        "lfrKills": 0,
+        "lfrTimestamp": 0,
+        "normalKills": 1,
+        "normalTimestamp": 1474501411000,
+        "heroicKills": 0,
+        "heroicTimestamp": 0,
+        "mythicKills": 0,
+        "mythicTimestamp": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/dragons-of-nightmare.jpg"
+    }, {
+        "id": 113534,
+        "name": "Cenarius",
+        "lfrKills": 0,
+        "lfrTimestamp": 0,
+        "normalKills": 1,
+        "normalTimestamp": 1474504930000,
+        "heroicKills": 0,
+        "heroicTimestamp": 0,
+        "mythicKills": 0,
+        "mythicTimestamp": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/cenarius.jpg"
+    }, {
+        "id": 103769,
+        "name": "Xavius",
+        "lfrKills": 0,
+        "lfrTimestamp": 0,
+        "normalKills": 1,
+        "normalTimestamp": 1474509029000,
+        "heroicKills": 0,
+        "heroicTimestamp": 0,
+        "mythicKills": 0,
+        "mythicTimestamp": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/xavius.jpg"
+    }]
+  }]
+}
