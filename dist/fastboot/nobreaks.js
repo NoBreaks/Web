@@ -4551,11 +4551,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 5,
+              "line": 6,
               "column": 8
             },
             "end": {
-              "line": 7,
+              "line": 8,
               "column": 8
             }
           },
@@ -4582,7 +4582,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1]), 0, 0);
           return morphs;
         },
-        statements: [["content", "model.error.message", ["loc", [null, [6, 14], [6, 37]]]]],
+        statements: [["content", "model.error.message", ["loc", [null, [7, 14], [7, 37]]]]],
         locals: [],
         templates: []
       };
@@ -4597,11 +4597,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 11,
+                  "line": 12,
                   "column": 14
                 },
                 "end": {
-                  "line": 11,
+                  "line": 12,
                   "column": 91
                 }
               },
@@ -4632,11 +4632,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 10,
+                "line": 11,
                 "column": 12
               },
               "end": {
-                "line": 12,
+                "line": 13,
                 "column": 12
               }
             },
@@ -4661,7 +4661,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["block", "link-to", ["raiding.loot", ["get", "model.prevRaidDate", ["loc", [null, [11, 52], [11, 70]]]]], ["class", "white-text"], 0, null, ["loc", [null, [11, 14], [11, 91]]]]],
+          statements: [["block", "link-to", ["raiding.loot", ["get", "model.prevRaidDate", ["loc", [null, [12, 52], [12, 70]]]]], ["class", "white-text"], 0, null, ["loc", [null, [12, 14], [12, 91]]]]],
           locals: [],
           templates: [child0]
         };
@@ -4673,11 +4673,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 9,
+              "line": 10,
               "column": 10
             },
             "end": {
-              "line": 13,
+              "line": 14,
               "column": 10
             }
           },
@@ -4700,7 +4700,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           dom.insertBoundary(fragment, null);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.loot", ["get", "model.prevRaidDate", ["loc", [null, [10, 38], [10, 56]]]]], ["tagName", "i", "class", "prev material-icons"], 0, null, ["loc", [null, [10, 12], [12, 24]]]]],
+        statements: [["block", "link-to", ["raiding.loot", ["get", "model.prevRaidDate", ["loc", [null, [11, 38], [11, 56]]]]], ["tagName", "i", "class", "prev material-icons"], 0, null, ["loc", [null, [11, 12], [13, 24]]]]],
         locals: [],
         templates: [child0]
       };
@@ -4715,11 +4715,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 19,
+                  "line": 20,
                   "column": 14
                 },
                 "end": {
-                  "line": 19,
+                  "line": 20,
                   "column": 91
                 }
               },
@@ -4750,11 +4750,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 18,
+                "line": 19,
                 "column": 12
               },
               "end": {
-                "line": 20,
+                "line": 21,
                 "column": 12
               }
             },
@@ -4779,7 +4779,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["block", "link-to", ["raiding.loot", ["get", "model.nextRaidDate", ["loc", [null, [19, 52], [19, 70]]]]], ["class", "white-text"], 0, null, ["loc", [null, [19, 14], [19, 91]]]]],
+          statements: [["block", "link-to", ["raiding.loot", ["get", "model.nextRaidDate", ["loc", [null, [20, 52], [20, 70]]]]], ["class", "white-text"], 0, null, ["loc", [null, [20, 14], [20, 91]]]]],
           locals: [],
           templates: [child0]
         };
@@ -4791,11 +4791,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 17,
+              "line": 18,
               "column": 10
             },
             "end": {
-              "line": 21,
+              "line": 22,
               "column": 10
             }
           },
@@ -4818,7 +4818,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           dom.insertBoundary(fragment, null);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.loot", ["get", "model.nextRaidDate", ["loc", [null, [18, 38], [18, 56]]]]], ["tagName", "i", "class", "next material-icons"], 0, null, ["loc", [null, [18, 12], [20, 24]]]]],
+        statements: [["block", "link-to", ["raiding.loot", ["get", "model.nextRaidDate", ["loc", [null, [19, 38], [19, 56]]]]], ["tagName", "i", "class", "next material-icons"], 0, null, ["loc", [null, [19, 12], [21, 24]]]]],
         locals: [],
         templates: [child0]
       };
@@ -4831,11 +4831,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 27,
+              "line": 28,
               "column": 4
             },
             "end": {
-              "line": 82,
+              "line": 83,
               "column": 4
             }
           },
@@ -4947,7 +4947,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           morphs[6] = dom.createMorphAt(element5, 3, 3);
           return morphs;
         },
-        statements: [["attribute", "src", ["concat", ["https://api.nobreaksguild.com/cdn/images/icons/", ["get", "item.itemId.icon", ["loc", [null, [32, 71], [32, 87]]]], ".png"]]], ["attribute", "style", ["concat", ["color: #", ["get", "item.itemId.quality.hex", ["loc", [null, [36, 34], [36, 57]]]]]]], ["attribute", "style", ["concat", ["color: #", ["get", "item.itemId.context.hex", ["loc", [null, [37, 39], [37, 62]]]]]]], ["content", "item.itemId.context.name", ["loc", [null, [37, 66], [37, 94]]]], ["content", "item.itemId.name", ["loc", [null, [38, 16], [38, 36]]]], ["content", "item.characterId.name", ["loc", [null, [40, 20], [40, 45]]]], ["content", "item.cost", ["loc", [null, [40, 50], [40, 63]]]]],
+        statements: [["attribute", "src", ["concat", ["https://api.nobreaksguild.com/cdn/images/icons/", ["get", "item.itemId.icon", ["loc", [null, [33, 71], [33, 87]]]], ".png"]]], ["attribute", "style", ["concat", ["color: #", ["get", "item.itemId.quality.hex", ["loc", [null, [37, 34], [37, 57]]]]]]], ["attribute", "style", ["concat", ["color: #", ["get", "item.itemId.context.hex", ["loc", [null, [38, 39], [38, 62]]]]]]], ["content", "item.itemId.context.name", ["loc", [null, [38, 66], [38, 94]]]], ["content", "item.itemId.name", ["loc", [null, [39, 16], [39, 36]]]], ["content", "item.characterId.name", ["loc", [null, [41, 20], [41, 45]]]], ["content", "item.cost", ["loc", [null, [41, 50], [41, 63]]]]],
         locals: ["item"],
         templates: []
       };
@@ -4955,7 +4955,8 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
     return {
       meta: {
         "fragmentReason": {
-          "name": "triple-curlies"
+          "name": "missing-wrapper",
+          "problems": ["multiple-nodes"]
         },
         "revision": "Ember@2.6.2",
         "loc": {
@@ -4965,7 +4966,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 85,
+            "line": 86,
             "column": 0
           }
         },
@@ -4977,6 +4978,12 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("h4");
+        var el2 = dom.createTextNode("Loot");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "loot-tab");
         var el2 = dom.createTextNode("\n  ");
@@ -5051,7 +5058,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element6 = dom.childAt(fragment, [0]);
+        var element6 = dom.childAt(fragment, [2]);
         var element7 = dom.childAt(element6, [1, 1, 1]);
         var morphs = new Array(5);
         morphs[0] = dom.createMorphAt(element7, 1, 1);
@@ -5061,7 +5068,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
         morphs[4] = dom.createMorphAt(dom.childAt(element6, [3]), 1, 1);
         return morphs;
       },
-      statements: [["block", "if", [["get", "model.error", ["loc", [null, [5, 14], [5, 25]]]]], [], 0, null, ["loc", [null, [5, 8], [7, 15]]]], ["block", "if", [["get", "model.prevRaidDate", ["loc", [null, [9, 16], [9, 34]]]]], [], 1, null, ["loc", [null, [9, 10], [13, 17]]]], ["content", "model.raidDate", ["loc", [null, [15, 12], [15, 30]]]], ["block", "if", [["get", "model.nextRaidDate", ["loc", [null, [17, 16], [17, 34]]]]], [], 2, null, ["loc", [null, [17, 10], [21, 17]]]], ["block", "each", [["get", "model.items", ["loc", [null, [27, 12], [27, 23]]]]], [], 3, null, ["loc", [null, [27, 4], [82, 13]]]]],
+      statements: [["block", "if", [["get", "model.error", ["loc", [null, [6, 14], [6, 25]]]]], [], 0, null, ["loc", [null, [6, 8], [8, 15]]]], ["block", "if", [["get", "model.prevRaidDate", ["loc", [null, [10, 16], [10, 34]]]]], [], 1, null, ["loc", [null, [10, 10], [14, 17]]]], ["content", "model.raidDate", ["loc", [null, [16, 12], [16, 30]]]], ["block", "if", [["get", "model.nextRaidDate", ["loc", [null, [18, 16], [18, 34]]]]], [], 2, null, ["loc", [null, [18, 10], [22, 17]]]], ["block", "each", [["get", "model.items", ["loc", [null, [28, 12], [28, 23]]]]], [], 3, null, ["loc", [null, [28, 4], [83, 13]]]]],
       locals: [],
       templates: [child0, child1, child2, child3]
     };
