@@ -5074,19 +5074,16 @@ define("nobreaks/templates/raiding/weekday", ["exports"], function (exports) {
     var child0 = (function () {
       return {
         meta: {
-          "fragmentReason": {
-            "name": "missing-wrapper",
-            "problems": ["wrong-type", "multiple-nodes"]
-          },
+          "fragmentReason": false,
           "revision": "Ember@2.6.2",
           "loc": {
             "source": null,
             "start": {
-              "line": 1,
+              "line": 4,
               "column": 0
             },
             "end": {
-              "line": 5,
+              "line": 8,
               "column": 0
             }
           },
@@ -5116,7 +5113,7 @@ define("nobreaks/templates/raiding/weekday", ["exports"], function (exports) {
           morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
           return morphs;
         },
-        statements: [["inline", "md-tab", [], ["value", "raiding.weekday.roster", "title", "Roster"], ["loc", [null, [3, 2], [3, 58]]]], ["inline", "md-tab", [], ["value", "raiding.weekday.progress", "title", "Progress & Logs"], ["loc", [null, [4, 2], [4, 69]]]]],
+        statements: [["inline", "md-tab", [], ["value", "raiding.weekday.roster", "title", "Roster"], ["loc", [null, [6, 2], [6, 58]]]], ["inline", "md-tab", [], ["value", "raiding.weekday.progress", "title", "Progress & Logs"], ["loc", [null, [7, 2], [7, 69]]]]],
         locals: [],
         templates: []
       };
@@ -5125,7 +5122,7 @@ define("nobreaks/templates/raiding/weekday", ["exports"], function (exports) {
       meta: {
         "fragmentReason": {
           "name": "missing-wrapper",
-          "problems": ["wrong-type", "multiple-nodes"]
+          "problems": ["multiple-nodes", "wrong-type"]
         },
         "revision": "Ember@2.6.2",
         "loc": {
@@ -5135,7 +5132,7 @@ define("nobreaks/templates/raiding/weekday", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 8,
+            "line": 11,
             "column": 0
           }
         },
@@ -5147,6 +5144,19 @@ define("nobreaks/templates/raiding/weekday", ["exports"], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "row tab-header col s12");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("h4");
+        var el3 = dom.createTextNode("Weekday Team");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
         var el1 = dom.createComment("");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
@@ -5159,12 +5169,11 @@ define("nobreaks/templates/raiding/weekday", ["exports"], function (exports) {
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(2);
-        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        morphs[1] = dom.createMorphAt(fragment, 2, 2, contextualElement);
-        dom.insertBoundary(fragment, 0);
+        morphs[0] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+        morphs[1] = dom.createMorphAt(fragment, 4, 4, contextualElement);
         return morphs;
       },
-      statements: [["block", "md-tabs", [], ["selected", ["subexpr", "@mut", [["get", "tabsSelection", ["loc", [null, [2, 11], [2, 24]]]]], [], []], "class", "blue-grey darken-3 col s12"], 0, null, ["loc", [null, [1, 0], [5, 12]]]], ["content", "outlet", ["loc", [null, [7, 0], [7, 10]]]]],
+      statements: [["block", "md-tabs", [], ["selected", ["subexpr", "@mut", [["get", "tabsSelection", ["loc", [null, [5, 11], [5, 24]]]]], [], []], "class", "blue-grey darken-3 col s12"], 0, null, ["loc", [null, [4, 0], [8, 12]]]], ["content", "outlet", ["loc", [null, [10, 0], [10, 10]]]]],
       locals: [],
       templates: [child0]
     };
@@ -5441,11 +5450,11 @@ define("nobreaks/templates/raiding/weekday/roster", ["exports"], function (expor
           "loc": {
             "source": null,
             "start": {
-              "line": 6,
+              "line": 3,
               "column": 4
             },
             "end": {
-              "line": 21,
+              "line": 18,
               "column": 4
             }
           },
@@ -5540,7 +5549,7 @@ define("nobreaks/templates/raiding/weekday/roster", ["exports"], function (expor
           morphs[5] = dom.createMorphAt(dom.childAt(element3, [3]), 1, 1);
           return morphs;
         },
-        statements: [["attribute", "class", ["concat", ["card-content row ", ["subexpr", "index-to-class", [["get", "character.characterId.class", ["loc", [null, [9, 54], [9, 81]]]], true], [], ["loc", [null, [9, 37], [9, 88]]]]]]], ["content", "character.characterId.name", ["loc", [null, [11, 48], [11, 78]]]], ["attribute", "src", ["concat", ["https://us.battle.net/static-render/us/", ["get", "character.characterId.thumbnail", ["loc", [null, [12, 63], [12, 94]]]]]]], ["content", "character.characterId.items.averageItemLevelEquipped", ["loc", [null, [14, 17], [14, 73]]]], ["content", "character.characterId.spec.name", ["loc", [null, [14, 74], [14, 109]]]], ["inline", "epgp-total", [["get", "character.effortPoints", ["loc", [null, [15, 37], [15, 59]]]], ["get", "character.gearPoints", ["loc", [null, [15, 60], [15, 80]]]]], [], ["loc", [null, [15, 24], [15, 82]]]]],
+        statements: [["attribute", "class", ["concat", ["card-content row ", ["subexpr", "index-to-class", [["get", "character.characterId.class", ["loc", [null, [6, 54], [6, 81]]]], true], [], ["loc", [null, [6, 37], [6, 88]]]]]]], ["content", "character.characterId.name", ["loc", [null, [8, 48], [8, 78]]]], ["attribute", "src", ["concat", ["https://us.battle.net/static-render/us/", ["get", "character.characterId.thumbnail", ["loc", [null, [9, 63], [9, 94]]]]]]], ["content", "character.characterId.items.averageItemLevelEquipped", ["loc", [null, [11, 17], [11, 73]]]], ["content", "character.characterId.spec.name", ["loc", [null, [11, 74], [11, 109]]]], ["inline", "epgp-total", [["get", "character.effortPoints", ["loc", [null, [12, 37], [12, 59]]]], ["get", "character.gearPoints", ["loc", [null, [12, 60], [12, 80]]]]], [], ["loc", [null, [12, 24], [12, 82]]]]],
         locals: ["character"],
         templates: []
       };
@@ -5558,7 +5567,7 @@ define("nobreaks/templates/raiding/weekday/roster", ["exports"], function (expor
             "column": 0
           },
           "end": {
-            "line": 24,
+            "line": 21,
             "column": 0
           }
         },
@@ -5572,19 +5581,6 @@ define("nobreaks/templates/raiding/weekday/roster", ["exports"], function (expor
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "roster-tab");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "row tab-header col s12");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("h4");
-        var el4 = dom.createTextNode("Weekday Team");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("ul");
@@ -5605,10 +5601,10 @@ define("nobreaks/templates/raiding/weekday/roster", ["exports"], function (expor
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0, 3]), 1, 1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0, 1]), 1, 1);
         return morphs;
       },
-      statements: [["block", "each", [["get", "model", ["loc", [null, [6, 12], [6, 17]]]]], [], 0, null, ["loc", [null, [6, 4], [21, 13]]]]],
+      statements: [["block", "each", [["get", "model", ["loc", [null, [3, 12], [3, 17]]]]], [], 0, null, ["loc", [null, [3, 4], [18, 13]]]]],
       locals: [],
       templates: [child0]
     };
@@ -5619,19 +5615,16 @@ define("nobreaks/templates/raiding/weekend", ["exports"], function (exports) {
     var child0 = (function () {
       return {
         meta: {
-          "fragmentReason": {
-            "name": "missing-wrapper",
-            "problems": ["wrong-type", "multiple-nodes"]
-          },
+          "fragmentReason": false,
           "revision": "Ember@2.6.2",
           "loc": {
             "source": null,
             "start": {
-              "line": 1,
+              "line": 4,
               "column": 0
             },
             "end": {
-              "line": 5,
+              "line": 8,
               "column": 0
             }
           },
@@ -5661,7 +5654,7 @@ define("nobreaks/templates/raiding/weekend", ["exports"], function (exports) {
           morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
           return morphs;
         },
-        statements: [["inline", "md-tab", [], ["value", "raiding.weekend.roster", "title", "Roster"], ["loc", [null, [3, 2], [3, 58]]]], ["inline", "md-tab", [], ["value", "raiding.weekend.progress", "title", "Progress & Logs"], ["loc", [null, [4, 2], [4, 69]]]]],
+        statements: [["inline", "md-tab", [], ["value", "raiding.weekend.roster", "title", "Roster"], ["loc", [null, [6, 2], [6, 58]]]], ["inline", "md-tab", [], ["value", "raiding.weekend.progress", "title", "Progress & Logs"], ["loc", [null, [7, 2], [7, 69]]]]],
         locals: [],
         templates: []
       };
@@ -5670,7 +5663,7 @@ define("nobreaks/templates/raiding/weekend", ["exports"], function (exports) {
       meta: {
         "fragmentReason": {
           "name": "missing-wrapper",
-          "problems": ["wrong-type", "multiple-nodes"]
+          "problems": ["multiple-nodes", "wrong-type"]
         },
         "revision": "Ember@2.6.2",
         "loc": {
@@ -5680,7 +5673,7 @@ define("nobreaks/templates/raiding/weekend", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 8,
+            "line": 11,
             "column": 0
           }
         },
@@ -5692,6 +5685,19 @@ define("nobreaks/templates/raiding/weekend", ["exports"], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "row tab-header col s12");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("h4");
+        var el3 = dom.createTextNode("Weekend Team");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
         var el1 = dom.createComment("");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
@@ -5704,12 +5710,11 @@ define("nobreaks/templates/raiding/weekend", ["exports"], function (exports) {
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(2);
-        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        morphs[1] = dom.createMorphAt(fragment, 2, 2, contextualElement);
-        dom.insertBoundary(fragment, 0);
+        morphs[0] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+        morphs[1] = dom.createMorphAt(fragment, 4, 4, contextualElement);
         return morphs;
       },
-      statements: [["block", "md-tabs", [], ["selected", ["subexpr", "@mut", [["get", "tabsSelection", ["loc", [null, [2, 11], [2, 24]]]]], [], []], "class", "blue-grey darken-3 col s12"], 0, null, ["loc", [null, [1, 0], [5, 12]]]], ["content", "outlet", ["loc", [null, [7, 0], [7, 10]]]]],
+      statements: [["block", "md-tabs", [], ["selected", ["subexpr", "@mut", [["get", "tabsSelection", ["loc", [null, [5, 11], [5, 24]]]]], [], []], "class", "blue-grey darken-3 col s12"], 0, null, ["loc", [null, [4, 0], [8, 12]]]], ["content", "outlet", ["loc", [null, [10, 0], [10, 10]]]]],
       locals: [],
       templates: [child0]
     };
@@ -5986,11 +5991,11 @@ define("nobreaks/templates/raiding/weekend/roster", ["exports"], function (expor
           "loc": {
             "source": null,
             "start": {
-              "line": 6,
+              "line": 3,
               "column": 4
             },
             "end": {
-              "line": 21,
+              "line": 18,
               "column": 4
             }
           },
@@ -6085,7 +6090,7 @@ define("nobreaks/templates/raiding/weekend/roster", ["exports"], function (expor
           morphs[5] = dom.createMorphAt(dom.childAt(element3, [3]), 1, 1);
           return morphs;
         },
-        statements: [["attribute", "class", ["concat", ["card-content row ", ["subexpr", "index-to-class", [["get", "character.characterId.class", ["loc", [null, [9, 54], [9, 81]]]], true], [], ["loc", [null, [9, 37], [9, 88]]]]]]], ["content", "character.characterId.name", ["loc", [null, [11, 48], [11, 78]]]], ["attribute", "src", ["concat", ["https://us.battle.net/static-render/us/", ["get", "character.characterId.thumbnail", ["loc", [null, [12, 63], [12, 94]]]]]]], ["content", "character.characterId.items.averageItemLevelEquipped", ["loc", [null, [14, 17], [14, 73]]]], ["content", "character.characterId.spec.name", ["loc", [null, [14, 74], [14, 109]]]], ["inline", "epgp-total", [["get", "character.effortPoints", ["loc", [null, [15, 37], [15, 59]]]], ["get", "character.gearPoints", ["loc", [null, [15, 60], [15, 80]]]]], [], ["loc", [null, [15, 24], [15, 82]]]]],
+        statements: [["attribute", "class", ["concat", ["card-content row ", ["subexpr", "index-to-class", [["get", "character.characterId.class", ["loc", [null, [6, 54], [6, 81]]]], true], [], ["loc", [null, [6, 37], [6, 88]]]]]]], ["content", "character.characterId.name", ["loc", [null, [8, 48], [8, 78]]]], ["attribute", "src", ["concat", ["https://us.battle.net/static-render/us/", ["get", "character.characterId.thumbnail", ["loc", [null, [9, 63], [9, 94]]]]]]], ["content", "character.characterId.items.averageItemLevelEquipped", ["loc", [null, [11, 17], [11, 73]]]], ["content", "character.characterId.spec.name", ["loc", [null, [11, 74], [11, 109]]]], ["inline", "epgp-total", [["get", "character.effortPoints", ["loc", [null, [12, 37], [12, 59]]]], ["get", "character.gearPoints", ["loc", [null, [12, 60], [12, 80]]]]], [], ["loc", [null, [12, 24], [12, 82]]]]],
         locals: ["character"],
         templates: []
       };
@@ -6103,7 +6108,7 @@ define("nobreaks/templates/raiding/weekend/roster", ["exports"], function (expor
             "column": 0
           },
           "end": {
-            "line": 24,
+            "line": 21,
             "column": 0
           }
         },
@@ -6117,19 +6122,6 @@ define("nobreaks/templates/raiding/weekend/roster", ["exports"], function (expor
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "roster-tab");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "row tab-header col s12");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("h4");
-        var el4 = dom.createTextNode("Weekend Team");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("ul");
@@ -6150,10 +6142,10 @@ define("nobreaks/templates/raiding/weekend/roster", ["exports"], function (expor
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0, 3]), 1, 1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0, 1]), 1, 1);
         return morphs;
       },
-      statements: [["block", "each", [["get", "model", ["loc", [null, [6, 12], [6, 17]]]]], [], 0, null, ["loc", [null, [6, 4], [21, 13]]]]],
+      statements: [["block", "each", [["get", "model", ["loc", [null, [3, 12], [3, 17]]]]], [], 0, null, ["loc", [null, [3, 4], [18, 13]]]]],
       locals: [],
       templates: [child0]
     };

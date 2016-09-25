@@ -6300,7 +6300,7 @@ button, .btn, .btn-large {
   margin: 0;
   color: #fff; }
   .raiding .tabs {
-    margin-top: 50px; }
+    margin: 2em 0 2em 0; }
   .raiding .expectations ul li i {
     font-size: 1.2em;
     vertical-align: text-top; }
