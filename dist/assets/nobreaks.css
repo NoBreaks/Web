@@ -6363,9 +6363,13 @@ button, .btn, .btn-large {
     font-size: 1.2em;
     padding-bottom: 10px; }
 
-.roster-tab .card-content img {
+.roster-tab .card-content img, .roster-tab .card-content p {
   margin-top: 0.5em;
   margin-bottom: 0.5em; }
+
+.roster-tab .card-content img {
+  border: 2px solid #000;
+  padding: 0; }
 
 .roster-tab .epgp-count {
   padding-top: 10px; }
