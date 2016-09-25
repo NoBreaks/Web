@@ -5437,7 +5437,7 @@ define("nobreaks/templates/raiding/weekday/roster", ["exports"], function (expor
           var el5 = dom.createTextNode("\n            ");
           dom.appendChild(el4, el5);
           var el5 = dom.createElement("div");
-          dom.setAttribute(el5, "class", "info col s6 m10 white-text");
+          dom.setAttribute(el5, "class", "info col s6 m8 white-text");
           var el6 = dom.createTextNode("\n              ");
           dom.appendChild(el5, el6);
           var el6 = dom.createElement("p");
@@ -5967,7 +5967,7 @@ define("nobreaks/templates/raiding/weekend/roster", ["exports"], function (expor
           var el5 = dom.createTextNode("\n            ");
           dom.appendChild(el4, el5);
           var el5 = dom.createElement("div");
-          dom.setAttribute(el5, "class", "info col s6 m10 white-text");
+          dom.setAttribute(el5, "class", "info col s6 m8 white-text");
           var el6 = dom.createTextNode("\n              ");
           dom.appendChild(el5, el6);
           var el6 = dom.createElement("p");

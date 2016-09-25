@@ -83,9 +83,13 @@
 // Roster Styles
 .roster-tab {
   .card-content {
-    img {
+    img, p {
       margin-top: 0.5em;
       margin-bottom: 0.5em;
+    }
+    img {
+      border: 2px solid #000;
+      padding: 0;
     }
   }
   .epgp-count {
