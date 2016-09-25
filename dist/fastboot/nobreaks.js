@@ -6257,7 +6257,7 @@ define("nobreaks/templates/social", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 115,
+            "line": 99,
             "column": 0
           }
         },
@@ -6527,72 +6527,6 @@ define("nobreaks/templates/social", ["exports"], function (exports) {
         var el6 = dom.createTextNode("\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("div");
-        dom.setAttribute(el6, "class", "card-title");
-        var el7 = dom.createTextNode("\n            ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("div");
-        dom.setAttribute(el7, "class", "chip");
-        var el8 = dom.createTextNode("\n              ");
-        dom.appendChild(el7, el8);
-        var el8 = dom.createElement("img");
-        dom.setAttribute(el8, "src", "https://api.nobreaksguild.com/cdn/images/murloc.jpg");
-        dom.setAttribute(el8, "alt", "Themurloc");
-        dom.setAttribute(el8, "title", "Murloc");
-        dom.appendChild(el7, el8);
-        var el8 = dom.createTextNode("\n              Themurloc\n            ");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n          ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("Murloc has a Youtube Channel for game reviews.");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
-        dom.setAttribute(el6, "class", "card-action");
-        var el7 = dom.createTextNode("\n            ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("a");
-        dom.setAttribute(el7, "href", "https://www.youtube.com/channel/UCiTx1a_BI53itw-fHNIib2w");
-        var el8 = dom.createElement("i");
-        dom.setAttribute(el8, "class", "fa fa-youtube-square");
-        dom.setAttribute(el8, "aria-hidden", "true");
-        dom.appendChild(el7, el8);
-        var el8 = dom.createTextNode(" Themurloc");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n          ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n        ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n    ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("section");
-        dom.setAttribute(el3, "class", "col s12 m6");
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "card blue-grey darken-1 white-text");
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("div");
-        dom.setAttribute(el5, "class", "card-content");
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
         dom.setAttribute(el6, "class", "chip");
         var el7 = dom.createTextNode("\n            ");
         dom.appendChild(el6, el7);
@@ -6739,7 +6673,7 @@ define("nobreaks/templates/social", ["exports"], function (exports) {
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/social-header.jpg"], ["loc", [null, [1, 0], [1, 82]]]], ["block", "link-to", ["raiding"], ["tagName", "button", "class", "btn cyan"], 0, null, ["loc", [null, [40, 6], [42, 18]]]], ["content", "outlet", ["loc", [null, [114, 0], [114, 10]]]]],
+      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/social-header.jpg"], ["loc", [null, [1, 0], [1, 82]]]], ["block", "link-to", ["raiding"], ["tagName", "button", "class", "btn cyan"], 0, null, ["loc", [null, [40, 6], [42, 18]]]], ["content", "outlet", ["loc", [null, [98, 0], [98, 10]]]]],
       locals: [],
       templates: [child0]
     };
