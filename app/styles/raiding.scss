@@ -5,11 +5,19 @@
   @extend .blue-grey, .darken-3;
   color: #fff;
 
-  .int-side-nav {
-    @extend .blue-grey, .darken-4;
-  }
   .tabs {
     margin-top: 50px;
+  }
+
+  .expectations {
+    ul {
+      li {
+        i {
+          font-size: 1.2em;
+          vertical-align: text-top;
+        }
+      }
+    }
   }
 }
 
