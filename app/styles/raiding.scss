@@ -5,15 +5,79 @@
   @extend .blue-grey, .darken-3;
   color: #fff;
 
+
+  .pin-container {
+    @media only screen and (min-width: 601px) {
+      // Class for when element is pinned
+      &.pinned {
+        position: fixed !important;
+        top: 64px !important;
+      }
+    }
+
+    @media only screen and (max-width: 600px) {
+      // Class for when element is pinned
+      &.pinned {
+        display: none;
+      }
+    }
+  }
+
+  .int-side-nav {
+
+    li {
+      padding-left: 1em;
+      line-height: 1.5em;
+      border-left: 2px solid transparent;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+
+      a {
+        color: #00bcd4; //cyan
+        &:hover {
+          color: #80deea; // cyan lighten-3
+          transition: all 0.3s ease;
+        }
+      }
+      &.active {
+        border-left: 2px solid #ff9800; //orange
+        transition: all 0.3s ease;
+      }
+      &:hover {
+        border-left: 2px solid #ffb74d; //orange lighten-2
+        transition: all 0.3s ease;
+      }
+      &:nth-child(3), &:nth-child(4) {
+        margin-top: 1em;
+        &:hover {
+          cursor: default;
+          border-left: 2px solid transparent; //orange lighten-2
+          transition: all 0.3s ease;
+        }
+      }
+    }
+  }
   .tabs {
-    margin-top: 50px;
+    margin: 2em 0 2em 0;
+  }
+
+  .expectations {
+    ul {
+      li {
+        i {
+          font-size: 1.2em;
+          vertical-align: text-top;
+        }
+      }
+    }
   }
 }
 
 @mixin class_crests($imageUrl:'') {
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0,0,0,0.8) ,rgba(0, 0, 0, 0.95)), url($imageUrl) no-repeat center center;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0,0,0,0.8) ,rgba(0, 0, 0, 0.95)), url($imageUrl) no-repeat center center;
-  background: linear-gradient(top, rgba(0, 0, 0, 0.95), rgba(0,0,0,0.8) ,rgba(0, 0, 0, 0.95)), url($imageUrl) no-repeat center center;
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7) ,rgba(0, 0, 0, 0.5)), url($imageUrl) no-repeat center center;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7) ,rgba(0, 0, 0, 0.5)), url($imageUrl) no-repeat center center;
+  background: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7) ,rgba(0, 0, 0, 0.5)), url($imageUrl) no-repeat center center;
+  background-size: contain;
 }
 
 .roster-tab,
@@ -37,6 +101,16 @@
 
 // Roster Styles
 .roster-tab {
+  .card-content {
+    img, p {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+    img {
+      border: 2px solid #000;
+      padding: 0;
+    }
+  }
   .epgp-count {
     padding-top: 10px;
   }
@@ -82,7 +156,7 @@
 }
 
 .loot-tab {
-
+  padding-top: 0;
   .tab-header {
     text-align: center;
 
