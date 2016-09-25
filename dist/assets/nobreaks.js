@@ -1312,9 +1312,7 @@ define('nobreaks/routes/raiding', ['exports', 'ember'], function (exports, _embe
 
     activate: function activate() {
       _ember['default'].run.scheduleOnce('afterRender', this, function () {
-        console.log('afterRender');
-
-        $('.pin-container').pushpin({ top: $('.pin-container').offset().top + 50 });
+        _ember['default'].$('.pin-container').pushpin({ top: _ember['default'].$('.pin-container').offset().top - 64 });
       });
     },
 
