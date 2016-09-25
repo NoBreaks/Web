@@ -299,7 +299,7 @@ define('nobreaks/tests/routes/raiding.jshint', ['exports'], function (exports) {
   QUnit.module('JSHint | routes/raiding.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'routes/raiding.js should pass jshint.');
+    assert.ok(false, 'routes/raiding.js should pass jshint.\nroutes/raiding.js: line 12, col 7, \'$\' is not defined.\nroutes/raiding.js: line 12, col 42, \'$\' is not defined.\n\n2 errors');
   });
 });
 define('nobreaks/tests/routes/raiding/index.jshint', ['exports'], function (exports) {

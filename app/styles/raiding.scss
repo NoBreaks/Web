@@ -5,7 +5,26 @@
   @extend .blue-grey, .darken-3;
   color: #fff;
 
+
+  .pin-container {
+    @media only screen and (min-width: 601px) {
+      // Class for when element is pinned
+      &.pinned {
+        position: fixed !important;
+        top: 64px !important;
+      }
+    }
+
+    @media only screen and (max-width: 600px) {
+      // Class for when element is pinned
+      &.pinned {
+        display: none;
+      }
+    }
+  }
+
   .int-side-nav {
+
     li {
       padding-left: 1em;
       line-height: 1.5em;

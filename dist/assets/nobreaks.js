@@ -1310,6 +1310,14 @@ define('nobreaks/routes/raiding', ['exports', 'ember'], function (exports, _embe
   exports['default'] = _ember['default'].Route.extend({
     transitionTarget: '',
 
+    activate: function activate() {
+      _ember['default'].run.scheduleOnce('afterRender', this, function () {
+        console.log('afterRender');
+
+        $('.pin-container').pushpin({ top: $('.pin-container').offset().top + 50 });
+      });
+    },
+
     model: function model() {},
 
     actions: {
@@ -4066,7 +4074,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "col m2");
+        dom.setAttribute(el3, "class", "col m2 pin-container");
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("ul");
@@ -4122,7 +4130,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "col s12 m9");
+        dom.setAttribute(el3, "class", "col s12 m9 right");
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createComment("");
@@ -6645,7 +6653,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("nobreaks/app")["default"].create({"name":"nobreaks","version":"2.0.0+3ff456d7"});
+  require("nobreaks/app")["default"].create({"name":"nobreaks","version":"2.0.0+0e2049f7"});
 }
 
 define('~fastboot/app-factory', ['nobreaks/app', 'nobreaks/config/environment'], function(App, config) {

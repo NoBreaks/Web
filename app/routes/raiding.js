@@ -5,6 +5,14 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   transitionTarget: '',
 
+  activate: function() {
+    Ember.run.scheduleOnce('afterRender', this, () => {
+      console.log('afterRender');
+
+      $('.pin-container').pushpin({ top: $('.pin-container').offset().top + 50 });
+    });
+  },
+
   model() {
   },
 

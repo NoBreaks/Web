@@ -6307,6 +6307,13 @@ button, .btn, .btn-large {
   padding: 20px;
   margin: 0;
   color: #fff; }
+  @media only screen and (min-width: 601px) {
+    .raiding .pin-container.pinned {
+      position: fixed !important;
+      top: 64px !important; } }
+  @media only screen and (max-width: 600px) {
+    .raiding .pin-container.pinned {
+      display: none; } }
   .raiding .int-side-nav li {
     padding-left: 1em;
     line-height: 1.5em;
