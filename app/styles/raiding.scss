@@ -5,6 +5,39 @@
   @extend .blue-grey, .darken-3;
   color: #fff;
 
+  .int-side-nav {
+    li {
+      padding-left: 1em;
+      line-height: 1.5em;
+      border-left: 2px solid transparent;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+
+      a {
+        color: #00bcd4; //cyan
+        &:hover {
+          color: #80deea; // cyan lighten-3
+          transition: all 0.3s ease;
+        }
+      }
+      &.active {
+        border-left: 2px solid #ff9800; //orange
+        transition: all 0.3s ease;
+      }
+      &:hover {
+        border-left: 2px solid #ffb74d; //orange lighten-2
+        transition: all 0.3s ease;
+      }
+      &:nth-child(3), &:nth-child(4) {
+        margin-top: 1em;
+        &:hover {
+          cursor: default;
+          border-left: 2px solid transparent; //orange lighten-2
+          transition: all 0.3s ease;
+        }
+      }
+    }
+  }
   .tabs {
     margin: 2em 0 2em 0;
   }

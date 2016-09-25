@@ -6266,6 +6266,8 @@ button, .btn, .btn-large {
 #home {
   min-height: 800px;
   padding-top: 100px; }
+  #home p {
+    font-size: 1.3em; }
 
 #raiding {
   min-height: 700px;
@@ -6275,6 +6277,8 @@ button, .btn, .btn-large {
     #raiding .col ~ .col img {
       max-width: 320px;
       padding-top: 20px; }
+  #raiding p {
+    font-size: 1.3em; }
 
 #social {
   min-height: 300px; }
@@ -6288,17 +6292,44 @@ button, .btn, .btn-large {
     padding-top: 100px; }
   #join img {
     max-width: 300px; }
+  #join p {
+    font-size: 1.3em; }
 
 #store {
   min-height: 500px;
   padding-top: 100px; }
   #store img {
     width: 300px; }
+  #store p {
+    font-size: 1.3em; }
 
 .raiding {
   padding: 20px;
   margin: 0;
   color: #fff; }
+  .raiding .int-side-nav li {
+    padding-left: 1em;
+    line-height: 1.5em;
+    border-left: 2px solid transparent;
+    font-size: 1.1em;
+    transition: all 0.3s ease; }
+    .raiding .int-side-nav li a {
+      color: #00bcd4; }
+      .raiding .int-side-nav li a:hover {
+        color: #80deea;
+        transition: all 0.3s ease; }
+    .raiding .int-side-nav li.active {
+      border-left: 2px solid #ff9800;
+      transition: all 0.3s ease; }
+    .raiding .int-side-nav li:hover {
+      border-left: 2px solid #ffb74d;
+      transition: all 0.3s ease; }
+    .raiding .int-side-nav li:nth-child(3), .raiding .int-side-nav li:nth-child(4) {
+      margin-top: 1em; }
+      .raiding .int-side-nav li:nth-child(3):hover, .raiding .int-side-nav li:nth-child(4):hover {
+        cursor: default;
+        border-left: 2px solid transparent;
+        transition: all 0.3s ease; }
   .raiding .tabs {
     margin: 2em 0 2em 0; }
   .raiding .expectations ul li i {

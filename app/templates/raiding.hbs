@@ -6,6 +6,9 @@
         {{#link-to 'raiding.index' tagName='li'}}
           {{link-to 'Raiding Home' 'raiding.index'}}
         {{/link-to}}
+        {{#link-to 'raiding.loot' 'latest' tagName='li'}}
+          {{link-to 'Loot' 'raiding.loot' 'latest'}}
+        {{/link-to}}
         <li>Weekday Team
           <ul>
             {{#link-to 'raiding.weekday.roster' tagName='li'}}
@@ -26,9 +29,6 @@
             {{/link-to}}
           </ul>
         </li>
-        {{#link-to 'raiding.loot' 'latest' tagName='li'}}
-          {{link-to 'Loot' 'raiding.loot' 'latest'}}
-        {{/link-to}}
       </ul>
     </div>
     <div class="col s12 m9">

@@ -2769,11 +2769,11 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 99,
+                "line": 92,
                 "column": 8
               },
               "end": {
-                "line": 99,
+                "line": 92,
                 "column": 33
               }
             },
@@ -2804,11 +2804,11 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 98,
+              "line": 91,
               "column": 6
             },
             "end": {
-              "line": 100,
+              "line": 93,
               "column": 6
             }
           },
@@ -2833,7 +2833,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["block", "link-to", ["join"], [], 0, null, ["loc", [null, [99, 8], [99, 33]]]]],
+        statements: [["block", "link-to", ["join"], [], 0, null, ["loc", [null, [92, 8], [92, 33]]]]],
         locals: [],
         templates: [child0]
       };
@@ -2852,7 +2852,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 119,
+            "line": 112,
             "column": 0
           }
         },
@@ -2874,7 +2874,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "row container");
+        dom.setAttribute(el2, "class", "row container intro");
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("h1");
@@ -2884,19 +2884,19 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("\n      We are a raiding guild on US-Thrall, current tier progress is 9/13 Mythic HFC.\n      Although we're not hardcore raiders, we buckle down when necessary to get the job done.\n      No Breaks prides itself on creating a close-knit community with our friendly,\n      albeit weird, members. We have a guild leader that isn't a scrub and we wear pink on Fridays!\n    ");
+        var el4 = dom.createTextNode("\n      We are a raiding guild on US-Thrall.\n      Although we're not hardcore raiders, we buckle down when necessary to get the job done.\n      No Breaks prides itself on creating a close-knit community with our friendly,\n      albeit weird, members. We have a guild leader that isn't a scrub and we wear pink on Fridays!\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("h2");
-        var el4 = dom.createTextNode("Plans for Legion");
+        var el4 = dom.createTextNode("Legion is Here");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("\n      No Breaks will be raiding in Legion! Newly created for this expansion is\n      a weekend team and we are looking for some new members to fill all roles\n      in this exciting new endeavor. This of course will be in addition to our\n      weekday team that has already established itself as a force to be reckoned with!\n      Head on over to the 'Raiding' section to find out more, or head to the 'Joining'\n      section to find information on how to join.\n    ");
+        var el4 = dom.createTextNode("\n      No Breaks is raiding in Legion! Newly created for this expansion is\n      a weekend team and we are looking for some new members to fill all roles\n      in this exciting new endeavor. This of course will be in addition to our\n      weekday team that has already established itself as a force to be reckoned with!\n      Head on over to the 'Raiding' section to find out more, or head to the 'Join'\n      section to find information on how to join.\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
@@ -2975,7 +2975,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
-        var el6 = dom.createTextNode("We had to listen to Murloc bitch about sports");
+        var el6 = dom.createTextNode("\"Less health to worry about. Yayyyyy.\"");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n        ");
@@ -2994,12 +2994,6 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
         var el6 = dom.createTextNode("Angel has one weed");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("li");
-        var el6 = dom.createTextNode("Murloc is talking about lore again");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n        ");
@@ -3157,28 +3151,6 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "col s12 m4");
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("a");
-        dom.setAttribute(el4, "href", "https://www.youtube.com/channel/UCiTx1a_BI53itw-fHNIib2w");
-        dom.setAttribute(el4, "target", "_blank");
-        dom.setAttribute(el4, "class", "btn cyan");
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("i");
-        dom.setAttribute(el5, "class", "fa fa-youtube-square");
-        dom.setAttribute(el5, "aria-hidden", "true");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        Murloc's Channel\n      ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n    ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
@@ -3323,7 +3295,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/legion-2560x1440-wide.jpg"], ["loc", [null, [1, 0], [1, 90]]]], ["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/emerald-nightmare.jpg"], ["loc", [null, [24, 0], [24, 86]]]], ["block", "link-to", ["raiding"], ["tagName", "button", "class", "btn cyan"], 0, null, ["loc", [null, [31, 6], [33, 18]]]], ["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/legion.png"], ["loc", [null, [86, 0], [86, 75]]]], ["block", "link-to", ["join"], ["tagName", "button", "class", "cyan btn"], 1, null, ["loc", [null, [98, 6], [100, 18]]]]],
+      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/legion-2560x1440-wide.jpg"], ["loc", [null, [1, 0], [1, 90]]]], ["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/emerald-nightmare.jpg"], ["loc", [null, [24, 0], [24, 86]]]], ["block", "link-to", ["raiding"], ["tagName", "button", "class", "btn cyan"], 0, null, ["loc", [null, [31, 6], [33, 18]]]], ["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/legion.png"], ["loc", [null, [79, 0], [79, 75]]]], ["block", "link-to", ["join"], ["tagName", "button", "class", "cyan btn"], 1, null, ["loc", [null, [91, 6], [93, 18]]]]],
       locals: [],
       templates: [child0, child1]
     };
@@ -3564,7 +3536,7 @@ define("nobreaks/templates/join", ["exports"], function (exports) {
         var el7 = dom.createTextNode("\n            ");
         dom.appendChild(el6, el7);
         var el7 = dom.createElement("a");
-        dom.setAttribute(el7, "href", "https://forum.nobreaksguild.com/category/26/recruitment");
+        dom.setAttribute(el7, "href", "https://forum.nobreaksguild.com/category/14/recruitment");
         dom.setAttribute(el7, "target", "_blank");
         dom.setAttribute(el7, "class", "btn primary cyan");
         var el8 = dom.createTextNode("Apply");
@@ -3698,12 +3670,12 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 12,
-                "column": 14
+                "line": 10,
+                "column": 10
               },
               "end": {
-                "line": 12,
-                "column": 59
+                "line": 10,
+                "column": 52
               }
             },
             "moduleName": "nobreaks/templates/raiding.hbs"
@@ -3714,7 +3686,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("Roster");
+            var el1 = dom.createTextNode("Loot");
             dom.appendChild(el0, el1);
             return el0;
           },
@@ -3733,12 +3705,12 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 11,
-              "column": 12
+              "line": 9,
+              "column": 8
             },
             "end": {
-              "line": 13,
-              "column": 12
+              "line": 11,
+              "column": 8
             }
           },
           "moduleName": "nobreaks/templates/raiding.hbs"
@@ -3749,7 +3721,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("              ");
+          var el1 = dom.createTextNode("          ");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
@@ -3762,7 +3734,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.weekday.roster"], [], 0, null, ["loc", [null, [12, 14], [12, 59]]]]],
+        statements: [["block", "link-to", ["raiding.loot", "latest"], [], 0, null, ["loc", [null, [10, 10], [10, 52]]]]],
         locals: [],
         templates: [child0]
       };
@@ -3781,7 +3753,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
               },
               "end": {
                 "line": 15,
-                "column": 70
+                "column": 59
               }
             },
             "moduleName": "nobreaks/templates/raiding.hbs"
@@ -3792,7 +3764,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("Progress & Logs");
+            var el1 = dom.createTextNode("Roster");
             dom.appendChild(el0, el1);
             return el0;
           },
@@ -3840,7 +3812,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.weekday.progress"], [], 0, null, ["loc", [null, [15, 14], [15, 70]]]]],
+        statements: [["block", "link-to", ["raiding.weekday.roster"], [], 0, null, ["loc", [null, [15, 14], [15, 59]]]]],
         locals: [],
         templates: [child0]
       };
@@ -3854,12 +3826,12 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 22,
+                "line": 18,
                 "column": 14
               },
               "end": {
-                "line": 22,
-                "column": 59
+                "line": 18,
+                "column": 70
               }
             },
             "moduleName": "nobreaks/templates/raiding.hbs"
@@ -3870,7 +3842,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("Roster");
+            var el1 = dom.createTextNode("Progress & Logs");
             dom.appendChild(el0, el1);
             return el0;
           },
@@ -3889,11 +3861,11 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 21,
+              "line": 17,
               "column": 12
             },
             "end": {
-              "line": 23,
+              "line": 19,
               "column": 12
             }
           },
@@ -3918,7 +3890,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.weekend.roster"], [], 0, null, ["loc", [null, [22, 14], [22, 59]]]]],
+        statements: [["block", "link-to", ["raiding.weekday.progress"], [], 0, null, ["loc", [null, [18, 14], [18, 70]]]]],
         locals: [],
         templates: [child0]
       };
@@ -3937,7 +3909,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
               },
               "end": {
                 "line": 25,
-                "column": 70
+                "column": 59
               }
             },
             "moduleName": "nobreaks/templates/raiding.hbs"
@@ -3948,7 +3920,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("Progress & Logs");
+            var el1 = dom.createTextNode("Roster");
             dom.appendChild(el0, el1);
             return el0;
           },
@@ -3996,7 +3968,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.weekend.progress"], [], 0, null, ["loc", [null, [25, 14], [25, 70]]]]],
+        statements: [["block", "link-to", ["raiding.weekend.roster"], [], 0, null, ["loc", [null, [25, 14], [25, 59]]]]],
         locals: [],
         templates: [child0]
       };
@@ -4010,12 +3982,12 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 30,
-                "column": 10
+                "line": 28,
+                "column": 14
               },
               "end": {
-                "line": 30,
-                "column": 52
+                "line": 28,
+                "column": 70
               }
             },
             "moduleName": "nobreaks/templates/raiding.hbs"
@@ -4026,7 +3998,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("Loot");
+            var el1 = dom.createTextNode("Progress & Logs");
             dom.appendChild(el0, el1);
             return el0;
           },
@@ -4045,12 +4017,12 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 29,
-              "column": 8
+              "line": 27,
+              "column": 12
             },
             "end": {
-              "line": 31,
-              "column": 8
+              "line": 29,
+              "column": 12
             }
           },
           "moduleName": "nobreaks/templates/raiding.hbs"
@@ -4061,7 +4033,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("          ");
+          var el1 = dom.createTextNode("              ");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
@@ -4074,7 +4046,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.loot", "latest"], [], 0, null, ["loc", [null, [30, 10], [30, 52]]]]],
+        statements: [["block", "link-to", ["raiding.weekend.progress"], [], 0, null, ["loc", [null, [28, 14], [28, 70]]]]],
         locals: [],
         templates: [child0]
       };
@@ -4127,6 +4099,8 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         dom.appendChild(el4, el5);
         var el5 = dom.createComment("");
         dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
@@ -4163,11 +4137,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el6 = dom.createTextNode("\n        ");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("      ");
+        var el5 = dom.createTextNode("\n      ");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n    ");
@@ -4197,21 +4167,21 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [2, 1]);
         var element1 = dom.childAt(element0, [1, 1]);
-        var element2 = dom.childAt(element1, [3, 1]);
-        var element3 = dom.childAt(element1, [5, 1]);
+        var element2 = dom.childAt(element1, [4, 1]);
+        var element3 = dom.childAt(element1, [6, 1]);
         var morphs = new Array(8);
         morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
         morphs[1] = dom.createMorphAt(element1, 1, 1);
-        morphs[2] = dom.createMorphAt(element2, 1, 1);
-        morphs[3] = dom.createMorphAt(element2, 2, 2);
-        morphs[4] = dom.createMorphAt(element3, 1, 1);
-        morphs[5] = dom.createMorphAt(element3, 2, 2);
-        morphs[6] = dom.createMorphAt(element1, 7, 7);
+        morphs[2] = dom.createMorphAt(element1, 2, 2);
+        morphs[3] = dom.createMorphAt(element2, 1, 1);
+        morphs[4] = dom.createMorphAt(element2, 2, 2);
+        morphs[5] = dom.createMorphAt(element3, 1, 1);
+        morphs[6] = dom.createMorphAt(element3, 2, 2);
         morphs[7] = dom.createMorphAt(dom.childAt(element0, [3]), 1, 1);
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/sylvanas.jpg"], ["loc", [null, [1, 0], [1, 77]]]], ["block", "link-to", ["raiding.index"], ["tagName", "li"], 0, null, ["loc", [null, [6, 8], [8, 20]]]], ["block", "link-to", ["raiding.weekday.roster"], ["tagName", "li"], 1, null, ["loc", [null, [11, 12], [13, 24]]]], ["block", "link-to", ["raiding.weekday.progress"], ["tagName", "li"], 2, null, ["loc", [null, [14, 12], [16, 24]]]], ["block", "link-to", ["raiding.weekend.roster"], ["tagName", "li"], 3, null, ["loc", [null, [21, 12], [23, 24]]]], ["block", "link-to", ["raiding.weekend.progress"], ["tagName", "li"], 4, null, ["loc", [null, [24, 12], [26, 24]]]], ["block", "link-to", ["raiding.loot", "latest"], ["tagName", "li"], 5, null, ["loc", [null, [29, 8], [31, 20]]]], ["content", "outlet", ["loc", [null, [35, 6], [35, 16]]]]],
+      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/sylvanas.jpg"], ["loc", [null, [1, 0], [1, 77]]]], ["block", "link-to", ["raiding.index"], ["tagName", "li"], 0, null, ["loc", [null, [6, 8], [8, 20]]]], ["block", "link-to", ["raiding.loot", "latest"], ["tagName", "li"], 1, null, ["loc", [null, [9, 8], [11, 20]]]], ["block", "link-to", ["raiding.weekday.roster"], ["tagName", "li"], 2, null, ["loc", [null, [14, 12], [16, 24]]]], ["block", "link-to", ["raiding.weekday.progress"], ["tagName", "li"], 3, null, ["loc", [null, [17, 12], [19, 24]]]], ["block", "link-to", ["raiding.weekend.roster"], ["tagName", "li"], 4, null, ["loc", [null, [24, 12], [26, 24]]]], ["block", "link-to", ["raiding.weekend.progress"], ["tagName", "li"], 5, null, ["loc", [null, [27, 12], [29, 24]]]], ["content", "outlet", ["loc", [null, [35, 6], [35, 16]]]]],
       locals: [],
       templates: [child0, child1, child2, child3, child4, child5]
     };
