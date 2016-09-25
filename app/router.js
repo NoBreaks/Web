@@ -17,16 +17,14 @@ Router.map(function() {
     this.route('index');
     this.route('weekday', function() {
       this.route('roster');
-      this.route('loot');
-      this.route('loot', { path: 'loot/:raidDate' });
       this.route('progress');
     });
     this.route('weekend', function() {
       this.route('roster');
-      this.route('loot');
-      this.route('loot', { path: 'loot/:raidDate' });
       this.route('progress');
     });
+    this.route('loot');
+    this.route('loot', { path: 'loot/:raidDate' });
   });
   this.route('join');
   this.route('social');

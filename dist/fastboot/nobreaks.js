@@ -1300,16 +1300,14 @@ define('nobreaks/router', ['exports', 'ember', 'nobreaks/config/environment', 'e
       this.route('index');
       this.route('weekday', function () {
         this.route('roster');
-        this.route('loot');
-        this.route('loot', { path: 'loot/:raidDate' });
         this.route('progress');
       });
       this.route('weekend', function () {
         this.route('roster');
-        this.route('loot');
-        this.route('loot', { path: 'loot/:raidDate' });
         this.route('progress');
       });
+      this.route('loot');
+      this.route('loot', { path: 'loot/:raidDate' });
     });
     this.route('join');
     this.route('social');
@@ -1385,6 +1383,26 @@ define('nobreaks/routes/raiding', ['exports', 'ember'], function (exports, _embe
 define('nobreaks/routes/raiding/index', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Route.extend({});
 });
+define('nobreaks/routes/raiding/loot', ['exports', 'ember', 'ember-network/fetch', 'nobreaks/const'], function (exports, _ember, _emberNetworkFetch, _nobreaksConst) {
+  exports['default'] = _ember['default'].Route.extend({
+    transitionTarget: '',
+    raidDate: 'latest',
+
+    model: function model(params) {
+      if (params.raidDate) {
+        return (0, _emberNetworkFetch['default'])('' + _nobreaksConst.API_PATH + _nobreaksConst.API_EPGP_LOOT_PATH + '/' + params.raidDate).then(function (response) {
+          return response.json();
+        });
+      }
+    },
+
+    redirect: function redirect(model, transition) {
+      if (!transition.params['raiding.loot'].raidDate) {
+        this.transitionTo('raiding.loot', this.get('raidDate'));
+      }
+    }
+  });
+});
 define('nobreaks/routes/raiding/weekday', ['exports', 'ember'], function (exports, _ember) {
   //import fetch from 'ember-network/fetch';
   //import { API_PATH, API_MEMBERS_PATH } from '../const';
@@ -1408,26 +1426,6 @@ define('nobreaks/routes/raiding/weekday', ['exports', 'ember'], function (export
 
     setupController: function setupController(controller) {
       controller.set('tabsSelection', this.get('transitionTarget'));
-    }
-  });
-});
-define('nobreaks/routes/raiding/weekday/loot', ['exports', 'ember', 'ember-network/fetch', 'nobreaks/const'], function (exports, _ember, _emberNetworkFetch, _nobreaksConst) {
-  exports['default'] = _ember['default'].Route.extend({
-    transitionTarget: '',
-    raidDate: 'latest',
-
-    model: function model(params) {
-      if (params.raidDate) {
-        return (0, _emberNetworkFetch['default'])('' + _nobreaksConst.API_PATH + _nobreaksConst.API_EPGP_LOOT_PATH + '/' + params.raidDate).then(function (response) {
-          return response.json();
-        });
-      }
-    },
-
-    redirect: function redirect(model, transition) {
-      if (!transition.params['raiding.weekday.loot'].raidDate) {
-        this.transitionTo('raiding.weekday.loot', this.get('raidDate'));
-      }
     }
   });
 });
@@ -1474,26 +1472,6 @@ define('nobreaks/routes/raiding/weekend', ['exports', 'ember'], function (export
 
     setupController: function setupController(controller) {
       controller.set('tabsSelection', this.get('transitionTarget'));
-    }
-  });
-});
-define('nobreaks/routes/raiding/weekend/loot', ['exports', 'ember', 'ember-network/fetch', 'nobreaks/const'], function (exports, _ember, _emberNetworkFetch, _nobreaksConst) {
-  exports['default'] = _ember['default'].Route.extend({
-    transitionTarget: '',
-    raidDate: 'latest',
-
-    model: function model(params) {
-      if (params.raidDate) {
-        return (0, _emberNetworkFetch['default'])('' + _nobreaksConst.API_PATH + _nobreaksConst.API_EPGP_LOOT_PATH + '/' + params.raidDate).then(function (response) {
-          return response.json();
-        });
-      }
-    },
-
-    redirect: function redirect(model, transition) {
-      if (!transition.params['raiding.weekend.loot'].raidDate) {
-        this.transitionTo('raiding.weekend.loot', this.get('raidDate'));
-      }
     }
   });
 });
@@ -3651,12 +3629,12 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 9,
-                "column": 14
+                "line": 7,
+                "column": 10
               },
               "end": {
-                "line": 9,
-                "column": 59
+                "line": 7,
+                "column": 52
               }
             },
             "moduleName": "nobreaks/templates/raiding.hbs"
@@ -3667,7 +3645,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("Roster");
+            var el1 = dom.createTextNode("Raiding Home");
             dom.appendChild(el0, el1);
             return el0;
           },
@@ -3686,12 +3664,12 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 8,
-              "column": 12
+              "line": 6,
+              "column": 8
             },
             "end": {
-              "line": 10,
-              "column": 12
+              "line": 8,
+              "column": 8
             }
           },
           "moduleName": "nobreaks/templates/raiding.hbs"
@@ -3702,7 +3680,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("              ");
+          var el1 = dom.createTextNode("          ");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
@@ -3715,7 +3693,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.weekday.roster"], [], 0, null, ["loc", [null, [9, 14], [9, 59]]]]],
+        statements: [["block", "link-to", ["raiding.index"], [], 0, null, ["loc", [null, [7, 10], [7, 52]]]]],
         locals: [],
         templates: [child0]
       };
@@ -3734,7 +3712,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
               },
               "end": {
                 "line": 12,
-                "column": 50
+                "column": 59
               }
             },
             "moduleName": "nobreaks/templates/raiding.hbs"
@@ -3745,7 +3723,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           hasRendered: false,
           buildFragment: function buildFragment(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("Loot");
+            var el1 = dom.createTextNode("Roster");
             dom.appendChild(el0, el1);
             return el0;
           },
@@ -3793,7 +3771,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.weekday"], [], 0, null, ["loc", [null, [12, 14], [12, 50]]]]],
+        statements: [["block", "link-to", ["raiding.weekday.roster"], [], 0, null, ["loc", [null, [12, 14], [12, 59]]]]],
         locals: [],
         templates: [child0]
       };
@@ -3876,6 +3854,240 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         templates: [child0]
       };
     })();
+    var child3 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.6.2",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 22,
+                "column": 14
+              },
+              "end": {
+                "line": 22,
+                "column": 59
+              }
+            },
+            "moduleName": "nobreaks/templates/raiding.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Roster");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 21,
+              "column": 12
+            },
+            "end": {
+              "line": 23,
+              "column": 12
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("              ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "link-to", ["raiding.weekend.roster"], [], 0, null, ["loc", [null, [22, 14], [22, 59]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })();
+    var child4 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.6.2",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 25,
+                "column": 14
+              },
+              "end": {
+                "line": 25,
+                "column": 70
+              }
+            },
+            "moduleName": "nobreaks/templates/raiding.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Progress & Logs");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 24,
+              "column": 12
+            },
+            "end": {
+              "line": 26,
+              "column": 12
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("              ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "link-to", ["raiding.weekend.progress"], [], 0, null, ["loc", [null, [25, 14], [25, 70]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })();
+    var child5 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.6.2",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 30,
+                "column": 10
+              },
+              "end": {
+                "line": 30,
+                "column": 52
+              }
+            },
+            "moduleName": "nobreaks/templates/raiding.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Loot");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 29,
+              "column": 8
+            },
+            "end": {
+              "line": 31,
+              "column": 8
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("          ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "link-to", ["raiding.loot", "latest"], [], 0, null, ["loc", [null, [30, 10], [30, 52]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })();
     return {
       meta: {
         "fragmentReason": {
@@ -3890,7 +4102,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 33,
+            "line": 39,
             "column": 0
           }
         },
@@ -3920,15 +4132,17 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("ul");
         dom.setAttribute(el4, "class", "int-side-nav");
-        var el5 = dom.createTextNode("\n        ");
+        var el5 = dom.createTextNode("\n");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
         var el6 = dom.createTextNode("Weekday Team\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("ul");
         var el7 = dom.createTextNode("\n");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createComment("");
         dom.appendChild(el6, el7);
         var el7 = dom.createComment("");
         dom.appendChild(el6, el7);
@@ -3946,40 +4160,23 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el6 = dom.createTextNode("Weekend Team\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("ul");
-        var el7 = dom.createTextNode("\n            ");
+        var el7 = dom.createTextNode("\n");
         dom.appendChild(el6, el7);
-        var el7 = dom.createElement("li");
-        var el8 = dom.createElement("a");
-        dom.setAttribute(el8, "href", "#");
-        var el9 = dom.createTextNode("Roster");
-        dom.appendChild(el8, el9);
-        dom.appendChild(el7, el8);
+        var el7 = dom.createComment("");
         dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n            ");
+        var el7 = dom.createComment("");
         dom.appendChild(el6, el7);
-        var el7 = dom.createElement("li");
-        var el8 = dom.createElement("a");
-        dom.setAttribute(el8, "href", "#");
-        var el9 = dom.createTextNode("Loot");
-        dom.appendChild(el8, el9);
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n            ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("li");
-        var el8 = dom.createElement("a");
-        dom.setAttribute(el8, "href", "#");
-        var el9 = dom.createTextNode("Progress & Logs");
-        dom.appendChild(el8, el9);
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n          ");
+        var el7 = dom.createTextNode("          ");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n        ");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
+        var el5 = dom.createTextNode("\n");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("      ");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n    ");
@@ -4008,19 +4205,24 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var element0 = dom.childAt(fragment, [2, 1]);
-        var element1 = dom.childAt(element0, [1, 1, 1, 1]);
-        var morphs = new Array(5);
+        var element1 = dom.childAt(element0, [1, 1]);
+        var element2 = dom.childAt(element1, [3, 1]);
+        var element3 = dom.childAt(element1, [5, 1]);
+        var morphs = new Array(8);
         morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
         morphs[1] = dom.createMorphAt(element1, 1, 1);
-        morphs[2] = dom.createMorphAt(element1, 2, 2);
-        morphs[3] = dom.createMorphAt(element1, 3, 3);
-        morphs[4] = dom.createMorphAt(dom.childAt(element0, [3]), 1, 1);
+        morphs[2] = dom.createMorphAt(element2, 1, 1);
+        morphs[3] = dom.createMorphAt(element2, 2, 2);
+        morphs[4] = dom.createMorphAt(element3, 1, 1);
+        morphs[5] = dom.createMorphAt(element3, 2, 2);
+        morphs[6] = dom.createMorphAt(element1, 7, 7);
+        morphs[7] = dom.createMorphAt(dom.childAt(element0, [3]), 1, 1);
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/sylvanas.jpg"], ["loc", [null, [1, 0], [1, 77]]]], ["block", "link-to", ["raiding.weekday.roster"], ["tagName", "li"], 0, null, ["loc", [null, [8, 12], [10, 24]]]], ["block", "link-to", ["raiding.weekday"], ["tagName", "li"], 1, null, ["loc", [null, [11, 12], [13, 24]]]], ["block", "link-to", ["raiding.weekday.progress"], ["tagName", "li"], 2, null, ["loc", [null, [14, 12], [16, 24]]]], ["content", "outlet", ["loc", [null, [29, 6], [29, 16]]]]],
+      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/sylvanas.jpg"], ["loc", [null, [1, 0], [1, 77]]]], ["block", "link-to", ["raiding.index"], ["tagName", "li"], 0, null, ["loc", [null, [6, 8], [8, 20]]]], ["block", "link-to", ["raiding.weekday.roster"], ["tagName", "li"], 1, null, ["loc", [null, [11, 12], [13, 24]]]], ["block", "link-to", ["raiding.weekday.progress"], ["tagName", "li"], 2, null, ["loc", [null, [14, 12], [16, 24]]]], ["block", "link-to", ["raiding.weekend.roster"], ["tagName", "li"], 3, null, ["loc", [null, [21, 12], [23, 24]]]], ["block", "link-to", ["raiding.weekend.progress"], ["tagName", "li"], 4, null, ["loc", [null, [24, 12], [26, 24]]]], ["block", "link-to", ["raiding.loot", "latest"], ["tagName", "li"], 5, null, ["loc", [null, [29, 8], [31, 20]]]], ["content", "outlet", ["loc", [null, [35, 6], [35, 16]]]]],
       locals: [],
-      templates: [child0, child1, child2]
+      templates: [child0, child1, child2, child3, child4, child5]
     };
   })());
 });
@@ -4350,113 +4552,7 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
     };
   })());
 });
-define("nobreaks/templates/raiding/weekday", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    var child0 = (function () {
-      return {
-        meta: {
-          "fragmentReason": {
-            "name": "missing-wrapper",
-            "problems": ["wrong-type", "multiple-nodes"]
-          },
-          "revision": "Ember@2.6.2",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 1,
-              "column": 0
-            },
-            "end": {
-              "line": 6,
-              "column": 0
-            }
-          },
-          "moduleName": "nobreaks/templates/raiding/weekday.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("  ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n  ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n  ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(3);
-          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
-          morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
-          return morphs;
-        },
-        statements: [["inline", "md-tab", [], ["value", "raiding.weekday.roster", "title", "Roster"], ["loc", [null, [3, 2], [3, 58]]]], ["inline", "md-tab", [], ["value", "raiding.weekday.loot", "title", "Loot"], ["loc", [null, [4, 2], [4, 54]]]], ["inline", "md-tab", [], ["value", "raiding.weekday.progress", "title", "Progress & Logs"], ["loc", [null, [5, 2], [5, 69]]]]],
-        locals: [],
-        templates: []
-      };
-    })();
-    return {
-      meta: {
-        "fragmentReason": {
-          "name": "missing-wrapper",
-          "problems": ["wrong-type", "multiple-nodes"]
-        },
-        "revision": "Ember@2.6.2",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 9,
-            "column": 0
-          }
-        },
-        "moduleName": "nobreaks/templates/raiding/weekday.hbs"
-      },
-      isEmpty: false,
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createComment("");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var morphs = new Array(2);
-        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        morphs[1] = dom.createMorphAt(fragment, 2, 2, contextualElement);
-        dom.insertBoundary(fragment, 0);
-        return morphs;
-      },
-      statements: [["block", "md-tabs", [], ["selected", ["subexpr", "@mut", [["get", "tabsSelection", ["loc", [null, [2, 11], [2, 24]]]]], [], []], "class", "blue-grey darken-3 col s12 m8"], 0, null, ["loc", [null, [1, 0], [6, 12]]]], ["content", "outlet", ["loc", [null, [8, 0], [8, 10]]]]],
-      locals: [],
-      templates: [child0]
-    };
-  })());
-});
-define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports) {
+define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
       return {
@@ -4474,7 +4570,7 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
               "column": 8
             }
           },
-          "moduleName": "nobreaks/templates/raiding/weekday/loot.hbs"
+          "moduleName": "nobreaks/templates/raiding/loot.hbs"
         },
         isEmpty: false,
         arity: 0,
@@ -4517,10 +4613,10 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
                 },
                 "end": {
                   "line": 11,
-                  "column": 99
+                  "column": 91
                 }
               },
-              "moduleName": "nobreaks/templates/raiding/weekday/loot.hbs"
+              "moduleName": "nobreaks/templates/raiding/loot.hbs"
             },
             isEmpty: false,
             arity: 0,
@@ -4555,7 +4651,7 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
                 "column": 12
               }
             },
-            "moduleName": "nobreaks/templates/raiding/weekday/loot.hbs"
+            "moduleName": "nobreaks/templates/raiding/loot.hbs"
           },
           isEmpty: false,
           arity: 0,
@@ -4576,7 +4672,7 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["block", "link-to", ["raiding.weekday.loot", ["get", "model.prevRaidDate", ["loc", [null, [11, 60], [11, 78]]]]], ["class", "white-text"], 0, null, ["loc", [null, [11, 14], [11, 99]]]]],
+          statements: [["block", "link-to", ["raiding.loot", ["get", "model.prevRaidDate", ["loc", [null, [11, 52], [11, 70]]]]], ["class", "white-text"], 0, null, ["loc", [null, [11, 14], [11, 91]]]]],
           locals: [],
           templates: [child0]
         };
@@ -4596,7 +4692,7 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
               "column": 10
             }
           },
-          "moduleName": "nobreaks/templates/raiding/weekday/loot.hbs"
+          "moduleName": "nobreaks/templates/raiding/loot.hbs"
         },
         isEmpty: false,
         arity: 0,
@@ -4615,7 +4711,7 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
           dom.insertBoundary(fragment, null);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.weekday.loot", ["get", "model.prevRaidDate", ["loc", [null, [10, 46], [10, 64]]]]], ["tagName", "i", "class", "prev material-icons"], 0, null, ["loc", [null, [10, 12], [12, 24]]]]],
+        statements: [["block", "link-to", ["raiding.loot", ["get", "model.prevRaidDate", ["loc", [null, [10, 38], [10, 56]]]]], ["tagName", "i", "class", "prev material-icons"], 0, null, ["loc", [null, [10, 12], [12, 24]]]]],
         locals: [],
         templates: [child0]
       };
@@ -4635,10 +4731,10 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
                 },
                 "end": {
                   "line": 19,
-                  "column": 99
+                  "column": 91
                 }
               },
-              "moduleName": "nobreaks/templates/raiding/weekday/loot.hbs"
+              "moduleName": "nobreaks/templates/raiding/loot.hbs"
             },
             isEmpty: false,
             arity: 0,
@@ -4673,7 +4769,7 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
                 "column": 12
               }
             },
-            "moduleName": "nobreaks/templates/raiding/weekday/loot.hbs"
+            "moduleName": "nobreaks/templates/raiding/loot.hbs"
           },
           isEmpty: false,
           arity: 0,
@@ -4694,7 +4790,7 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["block", "link-to", ["raiding.weekday.loot", ["get", "model.nextRaidDate", ["loc", [null, [19, 60], [19, 78]]]]], ["class", "white-text"], 0, null, ["loc", [null, [19, 14], [19, 99]]]]],
+          statements: [["block", "link-to", ["raiding.loot", ["get", "model.nextRaidDate", ["loc", [null, [19, 52], [19, 70]]]]], ["class", "white-text"], 0, null, ["loc", [null, [19, 14], [19, 91]]]]],
           locals: [],
           templates: [child0]
         };
@@ -4714,7 +4810,7 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
               "column": 10
             }
           },
-          "moduleName": "nobreaks/templates/raiding/weekday/loot.hbs"
+          "moduleName": "nobreaks/templates/raiding/loot.hbs"
         },
         isEmpty: false,
         arity: 0,
@@ -4733,7 +4829,7 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
           dom.insertBoundary(fragment, null);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.weekday.loot", ["get", "model.nextRaidDate", ["loc", [null, [18, 46], [18, 64]]]]], ["tagName", "i", "class", "next material-icons"], 0, null, ["loc", [null, [18, 12], [20, 24]]]]],
+        statements: [["block", "link-to", ["raiding.loot", ["get", "model.nextRaidDate", ["loc", [null, [18, 38], [18, 56]]]]], ["tagName", "i", "class", "next material-icons"], 0, null, ["loc", [null, [18, 12], [20, 24]]]]],
         locals: [],
         templates: [child0]
       };
@@ -4754,7 +4850,7 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
               "column": 4
             }
           },
-          "moduleName": "nobreaks/templates/raiding/weekday/loot.hbs"
+          "moduleName": "nobreaks/templates/raiding/loot.hbs"
         },
         isEmpty: false,
         arity: 1,
@@ -4884,7 +4980,7 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
             "column": 0
           }
         },
-        "moduleName": "nobreaks/templates/raiding/weekday/loot.hbs"
+        "moduleName": "nobreaks/templates/raiding/loot.hbs"
       },
       isEmpty: false,
       arity: 0,
@@ -4979,6 +5075,107 @@ define("nobreaks/templates/raiding/weekday/loot", ["exports"], function (exports
       statements: [["block", "if", [["get", "model.error", ["loc", [null, [5, 14], [5, 25]]]]], [], 0, null, ["loc", [null, [5, 8], [7, 15]]]], ["block", "if", [["get", "model.prevRaidDate", ["loc", [null, [9, 16], [9, 34]]]]], [], 1, null, ["loc", [null, [9, 10], [13, 17]]]], ["content", "model.raidDate", ["loc", [null, [15, 12], [15, 30]]]], ["block", "if", [["get", "model.nextRaidDate", ["loc", [null, [17, 16], [17, 34]]]]], [], 2, null, ["loc", [null, [17, 10], [21, 17]]]], ["block", "each", [["get", "model.items", ["loc", [null, [27, 12], [27, 23]]]]], [], 3, null, ["loc", [null, [27, 4], [82, 13]]]]],
       locals: [],
       templates: [child0, child1, child2, child3]
+    };
+  })());
+});
+define("nobreaks/templates/raiding/weekday", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      return {
+        meta: {
+          "fragmentReason": {
+            "name": "missing-wrapper",
+            "problems": ["wrong-type", "multiple-nodes"]
+          },
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 5,
+              "column": 0
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding/weekday.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(2);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+          return morphs;
+        },
+        statements: [["inline", "md-tab", [], ["value", "raiding.weekday.roster", "title", "Roster"], ["loc", [null, [3, 2], [3, 58]]]], ["inline", "md-tab", [], ["value", "raiding.weekday.progress", "title", "Progress & Logs"], ["loc", [null, [4, 2], [4, 69]]]]],
+        locals: [],
+        templates: []
+      };
+    })();
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["wrong-type", "multiple-nodes"]
+        },
+        "revision": "Ember@2.6.2",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 8,
+            "column": 0
+          }
+        },
+        "moduleName": "nobreaks/templates/raiding/weekday.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(2);
+        morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
+        morphs[1] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+        dom.insertBoundary(fragment, 0);
+        return morphs;
+      },
+      statements: [["block", "md-tabs", [], ["selected", ["subexpr", "@mut", [["get", "tabsSelection", ["loc", [null, [2, 11], [2, 24]]]]], [], []], "class", "blue-grey darken-3 col s12 m8"], 0, null, ["loc", [null, [1, 0], [5, 12]]]], ["content", "outlet", ["loc", [null, [7, 0], [7, 10]]]]],
+      locals: [],
+      templates: [child0]
     };
   })());
 });
@@ -5477,7 +5674,7 @@ define("nobreaks/templates/raiding/weekend", ["exports"], function (exports) {
               "column": 0
             },
             "end": {
-              "line": 6,
+              "line": 5,
               "column": 0
             }
           },
@@ -5497,22 +5694,17 @@ define("nobreaks/templates/raiding/weekend", ["exports"], function (exports) {
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n  ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
           var el1 = dom.createTextNode("\n");
           dom.appendChild(el0, el1);
           return el0;
         },
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(3);
+          var morphs = new Array(2);
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
-          morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
           return morphs;
         },
-        statements: [["inline", "md-tab", [], ["value", "raiding.weekend.roster", "title", "Roster"], ["loc", [null, [3, 2], [3, 58]]]], ["inline", "md-tab", [], ["value", "raiding.weekend.loot", "title", "Loot"], ["loc", [null, [4, 2], [4, 54]]]], ["inline", "md-tab", [], ["value", "raiding.weekend.progress", "title", "Progress & Logs"], ["loc", [null, [5, 2], [5, 69]]]]],
+        statements: [["inline", "md-tab", [], ["value", "raiding.weekend.roster", "title", "Roster"], ["loc", [null, [3, 2], [3, 58]]]], ["inline", "md-tab", [], ["value", "raiding.weekend.progress", "title", "Progress & Logs"], ["loc", [null, [4, 2], [4, 69]]]]],
         locals: [],
         templates: []
       };
@@ -5531,7 +5723,7 @@ define("nobreaks/templates/raiding/weekend", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 9,
+            "line": 8,
             "column": 0
           }
         },
@@ -5560,535 +5752,9 @@ define("nobreaks/templates/raiding/weekend", ["exports"], function (exports) {
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["block", "md-tabs", [], ["selected", ["subexpr", "@mut", [["get", "tabsSelection", ["loc", [null, [2, 11], [2, 24]]]]], [], []], "class", "blue-grey darken-3 col s12 m8"], 0, null, ["loc", [null, [1, 0], [6, 12]]]], ["content", "outlet", ["loc", [null, [8, 0], [8, 10]]]]],
+      statements: [["block", "md-tabs", [], ["selected", ["subexpr", "@mut", [["get", "tabsSelection", ["loc", [null, [2, 11], [2, 24]]]]], [], []], "class", "blue-grey darken-3 col s12 m8"], 0, null, ["loc", [null, [1, 0], [5, 12]]]], ["content", "outlet", ["loc", [null, [7, 0], [7, 10]]]]],
       locals: [],
       templates: [child0]
-    };
-  })());
-});
-define("nobreaks/templates/raiding/weekend/loot", ["exports"], function (exports) {
-  exports["default"] = Ember.HTMLBars.template((function () {
-    var child0 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.6.2",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 5,
-              "column": 8
-            },
-            "end": {
-              "line": 7,
-              "column": 8
-            }
-          },
-          "moduleName": "nobreaks/templates/raiding/weekend/loot.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("          ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createElement("h5");
-          var el2 = dom.createComment("");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(1);
-          morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1]), 0, 0);
-          return morphs;
-        },
-        statements: [["content", "model.error.message", ["loc", [null, [6, 14], [6, 37]]]]],
-        locals: [],
-        templates: []
-      };
-    })();
-    var child1 = (function () {
-      var child0 = (function () {
-        var child0 = (function () {
-          return {
-            meta: {
-              "fragmentReason": false,
-              "revision": "Ember@2.6.2",
-              "loc": {
-                "source": null,
-                "start": {
-                  "line": 11,
-                  "column": 14
-                },
-                "end": {
-                  "line": 11,
-                  "column": 99
-                }
-              },
-              "moduleName": "nobreaks/templates/raiding/weekend/loot.hbs"
-            },
-            isEmpty: false,
-            arity: 0,
-            cachedFragment: null,
-            hasRendered: false,
-            buildFragment: function buildFragment(dom) {
-              var el0 = dom.createDocumentFragment();
-              var el1 = dom.createTextNode("play_arrow");
-              dom.appendChild(el0, el1);
-              return el0;
-            },
-            buildRenderNodes: function buildRenderNodes() {
-              return [];
-            },
-            statements: [],
-            locals: [],
-            templates: []
-          };
-        })();
-        return {
-          meta: {
-            "fragmentReason": false,
-            "revision": "Ember@2.6.2",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 10,
-                "column": 12
-              },
-              "end": {
-                "line": 12,
-                "column": 12
-              }
-            },
-            "moduleName": "nobreaks/templates/raiding/weekend/loot.hbs"
-          },
-          isEmpty: false,
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("              ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createComment("");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var morphs = new Array(1);
-            morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-            return morphs;
-          },
-          statements: [["block", "link-to", ["raiding.weekend.loot", ["get", "model.prevRaidDate", ["loc", [null, [11, 60], [11, 78]]]]], ["class", "white-text"], 0, null, ["loc", [null, [11, 14], [11, 99]]]]],
-          locals: [],
-          templates: [child0]
-        };
-      })();
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.6.2",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 9,
-              "column": 10
-            },
-            "end": {
-              "line": 13,
-              "column": 10
-            }
-          },
-          "moduleName": "nobreaks/templates/raiding/weekend/loot.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(1);
-          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-          dom.insertBoundary(fragment, 0);
-          dom.insertBoundary(fragment, null);
-          return morphs;
-        },
-        statements: [["block", "link-to", ["raiding.weekend.loot", ["get", "model.prevRaidDate", ["loc", [null, [10, 46], [10, 64]]]]], ["tagName", "i", "class", "prev material-icons"], 0, null, ["loc", [null, [10, 12], [12, 24]]]]],
-        locals: [],
-        templates: [child0]
-      };
-    })();
-    var child2 = (function () {
-      var child0 = (function () {
-        var child0 = (function () {
-          return {
-            meta: {
-              "fragmentReason": false,
-              "revision": "Ember@2.6.2",
-              "loc": {
-                "source": null,
-                "start": {
-                  "line": 19,
-                  "column": 14
-                },
-                "end": {
-                  "line": 19,
-                  "column": 99
-                }
-              },
-              "moduleName": "nobreaks/templates/raiding/weekend/loot.hbs"
-            },
-            isEmpty: false,
-            arity: 0,
-            cachedFragment: null,
-            hasRendered: false,
-            buildFragment: function buildFragment(dom) {
-              var el0 = dom.createDocumentFragment();
-              var el1 = dom.createTextNode("play_arrow");
-              dom.appendChild(el0, el1);
-              return el0;
-            },
-            buildRenderNodes: function buildRenderNodes() {
-              return [];
-            },
-            statements: [],
-            locals: [],
-            templates: []
-          };
-        })();
-        return {
-          meta: {
-            "fragmentReason": false,
-            "revision": "Ember@2.6.2",
-            "loc": {
-              "source": null,
-              "start": {
-                "line": 18,
-                "column": 12
-              },
-              "end": {
-                "line": 20,
-                "column": 12
-              }
-            },
-            "moduleName": "nobreaks/templates/raiding/weekend/loot.hbs"
-          },
-          isEmpty: false,
-          arity: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          buildFragment: function buildFragment(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("              ");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createComment("");
-            dom.appendChild(el0, el1);
-            var el1 = dom.createTextNode("\n");
-            dom.appendChild(el0, el1);
-            return el0;
-          },
-          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-            var morphs = new Array(1);
-            morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-            return morphs;
-          },
-          statements: [["block", "link-to", ["raiding.weekend.loot", ["get", "model.nextRaidDate", ["loc", [null, [19, 60], [19, 78]]]]], ["class", "white-text"], 0, null, ["loc", [null, [19, 14], [19, 99]]]]],
-          locals: [],
-          templates: [child0]
-        };
-      })();
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.6.2",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 17,
-              "column": 10
-            },
-            "end": {
-              "line": 21,
-              "column": 10
-            }
-          },
-          "moduleName": "nobreaks/templates/raiding/weekend/loot.hbs"
-        },
-        isEmpty: false,
-        arity: 0,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(1);
-          morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-          dom.insertBoundary(fragment, 0);
-          dom.insertBoundary(fragment, null);
-          return morphs;
-        },
-        statements: [["block", "link-to", ["raiding.weekend.loot", ["get", "model.nextRaidDate", ["loc", [null, [18, 46], [18, 64]]]]], ["tagName", "i", "class", "next material-icons"], 0, null, ["loc", [null, [18, 12], [20, 24]]]]],
-        locals: [],
-        templates: [child0]
-      };
-    })();
-    var child3 = (function () {
-      return {
-        meta: {
-          "fragmentReason": false,
-          "revision": "Ember@2.6.2",
-          "loc": {
-            "source": null,
-            "start": {
-              "line": 27,
-              "column": 4
-            },
-            "end": {
-              "line": 82,
-              "column": 4
-            }
-          },
-          "moduleName": "nobreaks/templates/raiding/weekend/loot.hbs"
-        },
-        isEmpty: false,
-        arity: 1,
-        cachedFragment: null,
-        hasRendered: false,
-        buildFragment: function buildFragment(dom) {
-          var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("    ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createElement("li");
-          dom.setAttribute(el1, "class", "col s12 m12 l6");
-          var el2 = dom.createTextNode("\n      ");
-          dom.appendChild(el1, el2);
-          var el2 = dom.createElement("div");
-          dom.setAttribute(el2, "class", "card grey darken-4");
-          var el3 = dom.createTextNode("\n        ");
-          dom.appendChild(el2, el3);
-          var el3 = dom.createElement("div");
-          dom.setAttribute(el3, "class", "card-content row");
-          var el4 = dom.createTextNode("\n          ");
-          dom.appendChild(el3, el4);
-          var el4 = dom.createElement("div");
-          dom.setAttribute(el4, "class", "item-icon-wrap");
-          dom.setAttribute(el4, "class", "s3 m2 col");
-          var el5 = dom.createTextNode("\n            ");
-          dom.appendChild(el4, el5);
-          var el5 = dom.createElement("img");
-          dom.appendChild(el4, el5);
-          var el5 = dom.createTextNode("\n          ");
-          dom.appendChild(el4, el5);
-          dom.appendChild(el3, el4);
-          var el4 = dom.createTextNode("\n          ");
-          dom.appendChild(el3, el4);
-          var el4 = dom.createElement("div");
-          dom.setAttribute(el4, "class", "content-wrap s9 m10 col");
-          var el5 = dom.createTextNode("\n            ");
-          dom.appendChild(el4, el5);
-          var el5 = dom.createElement("h6");
-          dom.setAttribute(el5, "class", "name col s12 white-text");
-          var el6 = dom.createTextNode("\n              ");
-          dom.appendChild(el5, el6);
-          var el6 = dom.createElement("p");
-          var el7 = dom.createTextNode("\n                ");
-          dom.appendChild(el6, el7);
-          var el7 = dom.createElement("span");
-          var el8 = dom.createComment("");
-          dom.appendChild(el7, el8);
-          dom.appendChild(el6, el7);
-          var el7 = dom.createTextNode("\n                ");
-          dom.appendChild(el6, el7);
-          var el7 = dom.createComment("");
-          dom.appendChild(el6, el7);
-          var el7 = dom.createTextNode("\n              ");
-          dom.appendChild(el6, el7);
-          dom.appendChild(el5, el6);
-          var el6 = dom.createTextNode("\n              ");
-          dom.appendChild(el5, el6);
-          var el6 = dom.createElement("p");
-          var el7 = dom.createTextNode("To ");
-          dom.appendChild(el6, el7);
-          var el7 = dom.createComment("");
-          dom.appendChild(el6, el7);
-          var el7 = dom.createTextNode(" for ");
-          dom.appendChild(el6, el7);
-          var el7 = dom.createComment("");
-          dom.appendChild(el6, el7);
-          var el7 = dom.createTextNode(" GP");
-          dom.appendChild(el6, el7);
-          dom.appendChild(el5, el6);
-          var el6 = dom.createTextNode("\n            ");
-          dom.appendChild(el5, el6);
-          dom.appendChild(el4, el5);
-          var el5 = dom.createTextNode("\n");
-          dom.appendChild(el4, el5);
-          var el5 = dom.createTextNode("          ");
-          dom.appendChild(el4, el5);
-          dom.appendChild(el3, el4);
-          var el4 = dom.createTextNode("\n        ");
-          dom.appendChild(el3, el4);
-          dom.appendChild(el2, el3);
-          var el3 = dom.createTextNode("\n      ");
-          dom.appendChild(el2, el3);
-          dom.appendChild(el1, el2);
-          var el2 = dom.createTextNode("\n    ");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
-          dom.appendChild(el0, el1);
-          return el0;
-        },
-        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var element0 = dom.childAt(fragment, [1, 1, 1]);
-          var element1 = dom.childAt(element0, [1, 1]);
-          var element2 = dom.childAt(element0, [3, 1]);
-          var element3 = dom.childAt(element2, [1]);
-          var element4 = dom.childAt(element3, [1]);
-          var element5 = dom.childAt(element2, [3]);
-          var morphs = new Array(7);
-          morphs[0] = dom.createAttrMorph(element1, 'src');
-          morphs[1] = dom.createAttrMorph(element3, 'style');
-          morphs[2] = dom.createAttrMorph(element4, 'style');
-          morphs[3] = dom.createMorphAt(element4, 0, 0);
-          morphs[4] = dom.createMorphAt(element3, 3, 3);
-          morphs[5] = dom.createMorphAt(element5, 1, 1);
-          morphs[6] = dom.createMorphAt(element5, 3, 3);
-          return morphs;
-        },
-        statements: [["attribute", "src", ["concat", ["https://api.nobreaksguild.com/cdn/images/icons/", ["get", "item.itemId.icon", ["loc", [null, [32, 71], [32, 87]]]], ".png"]]], ["attribute", "style", ["concat", ["color: #", ["get", "item.itemId.quality.hex", ["loc", [null, [36, 34], [36, 57]]]]]]], ["attribute", "style", ["concat", ["color: #", ["get", "item.itemId.context.hex", ["loc", [null, [37, 39], [37, 62]]]]]]], ["content", "item.itemId.context.name", ["loc", [null, [37, 66], [37, 94]]]], ["content", "item.itemId.name", ["loc", [null, [38, 16], [38, 36]]]], ["content", "item.characterId.name", ["loc", [null, [40, 20], [40, 45]]]], ["content", "item.cost", ["loc", [null, [40, 50], [40, 63]]]]],
-        locals: ["item"],
-        templates: []
-      };
-    })();
-    return {
-      meta: {
-        "fragmentReason": {
-          "name": "triple-curlies"
-        },
-        "revision": "Ember@2.6.2",
-        "loc": {
-          "source": null,
-          "start": {
-            "line": 1,
-            "column": 0
-          },
-          "end": {
-            "line": 85,
-            "column": 0
-          }
-        },
-        "moduleName": "nobreaks/templates/raiding/weekend/loot.hbs"
-      },
-      isEmpty: false,
-      arity: 0,
-      cachedFragment: null,
-      hasRendered: false,
-      buildFragment: function buildFragment(dom) {
-        var el0 = dom.createDocumentFragment();
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1, "class", "loot-tab");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "row tab-header");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "col s12");
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("span");
-        dom.setAttribute(el4, "class", "tab-header-controls");
-        var el5 = dom.createTextNode("\n");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createComment("");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("span");
-        dom.setAttribute(el5, "class", "tab-header-control-nav");
-        var el6 = dom.createTextNode("\n");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("        ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("h4");
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("span");
-        dom.setAttribute(el5, "class", "tab-header-control-nav");
-        var el6 = dom.createTextNode("\n");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createComment("");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("        ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n    ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("ul");
-        dom.setAttribute(el2, "class", "row");
-        var el3 = dom.createTextNode("\n");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createComment("");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        return el0;
-      },
-      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element6 = dom.childAt(fragment, [0]);
-        var element7 = dom.childAt(element6, [1, 1, 1]);
-        var morphs = new Array(5);
-        morphs[0] = dom.createMorphAt(element7, 1, 1);
-        morphs[1] = dom.createMorphAt(dom.childAt(element7, [3]), 1, 1);
-        morphs[2] = dom.createMorphAt(dom.childAt(element7, [5]), 0, 0);
-        morphs[3] = dom.createMorphAt(dom.childAt(element7, [7]), 1, 1);
-        morphs[4] = dom.createMorphAt(dom.childAt(element6, [3]), 1, 1);
-        return morphs;
-      },
-      statements: [["block", "if", [["get", "model.error", ["loc", [null, [5, 14], [5, 25]]]]], [], 0, null, ["loc", [null, [5, 8], [7, 15]]]], ["block", "if", [["get", "model.prevRaidDate", ["loc", [null, [9, 16], [9, 34]]]]], [], 1, null, ["loc", [null, [9, 10], [13, 17]]]], ["content", "model.raidDate", ["loc", [null, [15, 12], [15, 30]]]], ["block", "if", [["get", "model.nextRaidDate", ["loc", [null, [17, 16], [17, 34]]]]], [], 2, null, ["loc", [null, [17, 10], [21, 17]]]], ["block", "each", [["get", "model.items", ["loc", [null, [27, 12], [27, 23]]]]], [], 3, null, ["loc", [null, [27, 4], [82, 13]]]]],
-      locals: [],
-      templates: [child0, child1, child2, child3]
     };
   })());
 });

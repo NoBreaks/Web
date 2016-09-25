@@ -311,6 +311,15 @@ define('nobreaks/tests/routes/raiding/index.jshint', ['exports'], function (expo
     assert.ok(true, 'routes/raiding/index.js should pass jshint.');
   });
 });
+define('nobreaks/tests/routes/raiding/loot.jshint', ['exports'], function (exports) {
+  'use strict';
+
+  QUnit.module('JSHint | routes/raiding/loot.js');
+  QUnit.test('should pass jshint', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'routes/raiding/loot.js should pass jshint.');
+  });
+});
 define('nobreaks/tests/routes/raiding/weekday.jshint', ['exports'], function (exports) {
   'use strict';
 
@@ -318,15 +327,6 @@ define('nobreaks/tests/routes/raiding/weekday.jshint', ['exports'], function (ex
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'routes/raiding/weekday.js should pass jshint.');
-  });
-});
-define('nobreaks/tests/routes/raiding/weekday/loot.jshint', ['exports'], function (exports) {
-  'use strict';
-
-  QUnit.module('JSHint | routes/raiding/weekday/loot.js');
-  QUnit.test('should pass jshint', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'routes/raiding/weekday/loot.js should pass jshint.');
   });
 });
 define('nobreaks/tests/routes/raiding/weekday/progress.jshint', ['exports'], function (exports) {
@@ -354,15 +354,6 @@ define('nobreaks/tests/routes/raiding/weekend.jshint', ['exports'], function (ex
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
     assert.ok(true, 'routes/raiding/weekend.js should pass jshint.');
-  });
-});
-define('nobreaks/tests/routes/raiding/weekend/loot.jshint', ['exports'], function (exports) {
-  'use strict';
-
-  QUnit.module('JSHint | routes/raiding/weekend/loot.js');
-  QUnit.test('should pass jshint', function (assert) {
-    assert.expect(1);
-    assert.ok(true, 'routes/raiding/weekend/loot.js should pass jshint.');
   });
 });
 define('nobreaks/tests/routes/raiding/weekend/progress.jshint', ['exports'], function (exports) {
