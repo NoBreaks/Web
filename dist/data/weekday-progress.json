@@ -17,7 +17,7 @@
         "heroicTimestamp": 0,
         "mythicKills": 0,
         "mythicTimestamp": 0,
-        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/nythendra.jpg"
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/nythendra.png"
     }, {
         "id": 111000,
         "name": "Elerethe Renferal",
@@ -29,7 +29,7 @@
         "heroicTimestamp": 0,
         "mythicKills": 0,
         "mythicTimestamp": 0,
-        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/elerethe-renferal.jpg"
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/elerethe-renferal.png"
     }, {
         "id": 105393,
         "name": "Il'gynoth, Heart of Corruption",
@@ -41,7 +41,7 @@
         "heroicTimestamp": 0,
         "mythicKills": 0,
         "mythicTimestamp": 0,
-        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/ilgynoth.jpg"
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/ilgynoth.png"
     }, {
         "id": 100497,
         "name": "Ursoc",
@@ -53,7 +53,7 @@
         "heroicTimestamp": 0,
         "mythicKills": 0,
         "mythicTimestamp": 0,
-        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/ursoc.jpg"
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/ursoc.png"
     }, {
         "id": 102679,
         "name": "Dragons of Nightmare",
@@ -65,7 +65,7 @@
         "heroicTimestamp": 0,
         "mythicKills": 0,
         "mythicTimestamp": 0,
-        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/dragons-of-nightmare.jpg"
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/dragons-of-nightmare.png"
     }, {
         "id": 113534,
         "name": "Cenarius",
@@ -77,7 +77,7 @@
         "heroicTimestamp": 0,
         "mythicKills": 0,
         "mythicTimestamp": 0,
-        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/cenarius.jpg"
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/cenarius.png"
     }, {
         "id": 103769,
         "name": "Xavius",
@@ -89,7 +89,7 @@
         "heroicTimestamp": 0,
         "mythicKills": 0,
         "mythicTimestamp": 0,
-        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/xavius.jpg"
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/xavius.png"
     }]
   }]
 }
