@@ -6459,9 +6459,6 @@ QUnit.notifications = function( options ) {
       document.addEventListener('DOMContentLoaded', fn);
     }
   }
-  
-  var autostart = QUnit.config.autostart !== false;
-  QUnit.config.autostart = false;
 
   ready(function() {
     var testLoaderModulePath = 'ember-cli-test-loader/test-support/index';
@@ -6509,6 +6506,9 @@ QUnit.notifications = function( options ) {
         throw new Error('\n' + moduleLoadFailures.join('\n'));
       }
     });
+
+    var autostart = QUnit.config.autostart !== false;
+    QUnit.config.autostart = false;
 
     setTimeout(function() {
       TestLoader.load();

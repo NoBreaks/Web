@@ -64340,82 +64340,6 @@ requireModule("ember");
 })();
 
 ;(function() {
-  function objectAt(content, idx) {
-    if (content.objectAt) {
-      return content.objectAt(idx);
-    }
-
-    return content[idx];
-  }
-
-  function arrayIncludes(obj, startAt) {
-    var len = Ember.get(this, 'length');
-    var idx, currentObj;
-
-    if (startAt === undefined) {
-      startAt = 0;
-    }
-
-    if (startAt < 0) {
-      startAt += len;
-    }
-
-    for (idx = startAt; idx < len; idx++) {
-      currentObj = objectAt(this, idx);
-
-      // SameValueZero comparison (NaN !== NaN)
-      if (obj === currentObj || (obj !== obj && currentObj !== currentObj)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  Ember.Array.reopen({
-    // inlined from https://git.io/v6F5T
-    includes: arrayIncludes
-  });
-
-  Ember.MutableArray.reopen({
-    addObject: function(obj) {
-      if (!this.includes(obj)) {
-        this.pushObject(obj);
-      }
-
-      return this;
-    }
-  });
-
-  Ember.Enumerable.reopen({
-    includes: function(obj) {
-      Ember.assert('Enumerable#includes cannot accept a second argument "startAt" as enumerable items are unordered.', arguments.length === 1);
-
-      var len = Ember.get(this, 'length');
-      var idx, next;
-      var last = null;
-      var found = false;
-
-      for (idx = 0; idx < len && !found; idx++) {
-        next = this.nextObject(idx, last);
-
-        found = obj === next || (obj !== obj && next !== next);
-
-        last = next;
-      }
-
-      next = last = null;
-
-      return found;
-    }
-  });
-
-  if ((Ember.EXTEND_PROTOTYPES === true || Ember.EXTEND_PROTOTYPES.Array) && !Array.prototype.includes) {
-    Array.prototype.includes = arrayIncludes;
-  }
-})();
-
-;(function() {
   define('moment', ['exports'], function(self) {
     self['default'] = FastBoot.require('moment-timezone');
   });
@@ -72060,7 +71984,7 @@ define('ember-data/-private/core', ['exports', 'ember', 'ember-data/version'], f
   */
 
   /**
-    All Ember Data classes, methods and functions are defined inside of this namespace.
+    All Ember Data methods and functions are defined inside of this namespace.
   
     @class DS
     @static
@@ -72134,7 +72058,7 @@ define('ember-data/-private/debug', ['exports', 'ember'], function (exports, _em
     return typeClass.detect(addedRecord.type);
   }
 
-  /*
+  /**
     Assert that `addedRecord` has a valid type so it can be added to the
     relationship of the `record`.
   
@@ -72172,18 +72096,6 @@ define('ember-data/-private/ext/date', ['exports', 'ember', 'ember-data/-private
 
   'use strict';
 
-  /**
-     Date.parse with progressive enhancement for ISO 8601 <https://github.com/csnover/js-iso8601>
-  
-     © 2011 Colin Snover <http://zetafleet.com>
-  
-     Released under MIT license.
-  
-     @class Date
-     @namespace Ember
-     @static
-     @deprecated
-  */
   _ember['default'].Date = _ember['default'].Date || {};
 
   var origParse = Date.parse;
@@ -72280,11 +72192,11 @@ define("ember-data/-private/initializers/data-adapter", ["exports", "ember-data/
 
   exports["default"] = initializeDebugAdapter;
 
-  /*
+  /**
     Configures a registry with injections on Ember applications
     for the Ember-Data store. Accepts an optional namespace argument.
   
-    @method initializeDebugAdapter
+    @method initializeStoreInjections
     @param {Ember.Registry} registry
   */
   function initializeDebugAdapter(registry) {
@@ -72296,7 +72208,7 @@ define('ember-data/-private/initializers/store-injections', ['exports'], functio
 
   exports['default'] = initializeStoreInjections;
 
-  /*
+  /**
     Configures a registry with injections on Ember applications
     for the Ember-Data store. Accepts an optional namespace argument.
   
@@ -72327,7 +72239,7 @@ define("ember-data/-private/initializers/store", ["exports", "ember-data/-privat
     }
   }
 
-  /*
+  /**
     Configures a registry for use with an Ember-Data
     store. Accepts an optional namespace argument.
   
@@ -72358,7 +72270,7 @@ define('ember-data/-private/initializers/transforms', ['exports', 'ember-data/-p
 
   exports['default'] = initializeTransforms;
 
-  /*
+  /**
     Configures a registry for use with Ember-Data
     transforms.
   
@@ -72377,11 +72289,11 @@ define('ember-data/-private/instance-initializers/initialize-store-service', ['e
 
   exports['default'] = initializeStoreService;
 
-  /*
+  /**
    Configures a registry for use with an Ember-Data
    store.
   
-   @method initializeStoreService
+   @method initializeStore
    @param {Ember.ApplicationInstance} applicationOrRegistry
    */
   function initializeStoreService(application) {
@@ -73649,7 +73561,7 @@ define('ember-data/-private/system/model/errors', ['exports', 'ember', 'ember-da
     }
   });
 });
-define("ember-data/-private/system/model/internal-model", ["exports", "ember", "ember-data/-private/debug", "ember-data/-private/system/model/states", "ember-data/-private/system/relationships/state/create", "ember-data/-private/system/snapshot", "ember-data/-private/system/empty-object", "ember-data/-private/features", "ember-data/-private/utils", "ember-data/-private/system/references"], function (exports, _ember, _emberDataPrivateDebug, _emberDataPrivateSystemModelStates, _emberDataPrivateSystemRelationshipsStateCreate, _emberDataPrivateSystemSnapshot, _emberDataPrivateSystemEmptyObject, _emberDataPrivateFeatures, _emberDataPrivateUtils, _emberDataPrivateSystemReferences) {
+define("ember-data/-private/system/model/internal-model", ["exports", "ember", "ember-data/-private/debug", "ember-data/-private/system/model/states", "ember-data/-private/system/relationships/state/create", "ember-data/-private/system/snapshot", "ember-data/-private/system/empty-object", "ember-data/-private/utils", "ember-data/-private/system/references"], function (exports, _ember, _emberDataPrivateDebug, _emberDataPrivateSystemModelStates, _emberDataPrivateSystemRelationshipsStateCreate, _emberDataPrivateSystemSnapshot, _emberDataPrivateSystemEmptyObject, _emberDataPrivateUtils, _emberDataPrivateSystemReferences) {
   "use strict";
 
   var _slicedToArray = (function () {
@@ -74088,7 +74000,6 @@ define("ember-data/-private/system/model/internal-model", ["exports", "ember", "
 
       this.record._notifyProperties(dirtyKeys);
     },
-
     /*
       @method transitionTo
       @private
@@ -74507,24 +74418,8 @@ define("ember-data/-private/system/model/internal-model", ["exports", "ember", "
       return reference;
     }
   };
-
-  if (false) {
-    /*
-       Returns the latest truth for an attribute - the canonical value, or the
-       in-flight value.
-        @method lastAcknowledgedValue
-       @private
-    */
-    InternalModel.prototype.lastAcknowledgedValue = function lastAcknowledgedValue(key) {
-      if (key in this._inFlightAttributes) {
-        return this._inFlightAttributes[key];
-      } else {
-        return this._data[key];
-      }
-    };
-  }
 });
-define("ember-data/-private/system/model/model", ["exports", "ember", "ember-data/-private/debug", "ember-data/-private/system/promise-proxies", "ember-data/-private/system/model/errors", "ember-data/-private/system/debug/debug-info", "ember-data/-private/system/relationships/belongs-to", "ember-data/-private/system/relationships/has-many", "ember-data/-private/system/relationships/ext", "ember-data/-private/system/model/attr", "ember-data/-private/features"], function (exports, _ember, _emberDataPrivateDebug, _emberDataPrivateSystemPromiseProxies, _emberDataPrivateSystemModelErrors, _emberDataPrivateSystemDebugDebugInfo, _emberDataPrivateSystemRelationshipsBelongsTo, _emberDataPrivateSystemRelationshipsHasMany, _emberDataPrivateSystemRelationshipsExt, _emberDataPrivateSystemModelAttr, _emberDataPrivateFeatures) {
+define("ember-data/-private/system/model/model", ["exports", "ember", "ember-data/-private/debug", "ember-data/-private/system/promise-proxies", "ember-data/-private/system/model/errors", "ember-data/-private/system/debug/debug-info", "ember-data/-private/system/relationships/belongs-to", "ember-data/-private/system/relationships/has-many", "ember-data/-private/system/relationships/ext", "ember-data/-private/system/model/attr"], function (exports, _ember, _emberDataPrivateDebug, _emberDataPrivateSystemPromiseProxies, _emberDataPrivateSystemModelErrors, _emberDataPrivateSystemDebugDebugInfo, _emberDataPrivateSystemRelationshipsBelongsTo, _emberDataPrivateSystemRelationshipsHasMany, _emberDataPrivateSystemRelationshipsExt, _emberDataPrivateSystemModelAttr) {
   "use strict";
 
   /**
@@ -74928,6 +74823,13 @@ define("ember-data/-private/system/model/model", ["exports", "ember", "ember-dat
        @event rolledBack
     */
     rolledBack: _ember["default"].K,
+
+    /**
+      @property data
+      @private
+      @type {Object}
+    */
+    data: _ember["default"].computed.readOnly('_internalModel._data'),
 
     //TODO Do we want to deprecate these?
     /**
@@ -75345,17 +75247,6 @@ define("ember-data/-private/system/model/model", ["exports", "ember", "ember-dat
     })
   });
 
-  /**
-   @property data
-   @private
-   @type {Object}
-   */
-  Object.defineProperty(Model.prototype, 'data', {
-    get: function get() {
-      return this._internalModel._data;
-    }
-  });
-
   Model.reopenClass({
     /**
       Alias DS.Model's `create` method to `_create`. This allows us to create DS.Model
@@ -75419,28 +75310,6 @@ define("ember-data/-private/system/model/model", ["exports", "ember", "ember-dat
         (0, _emberDataPrivateDebug.deprecate)('Using the injected `container` is deprecated. Please use the `getOwner` helper instead to access the owner of this object.', false, { id: 'ember-application.injected-container', until: '3.0.0' });
 
         return this.store.container;
-      }
-    });
-  }
-
-  if (false) {
-    Model.reopen({
-      /**
-        Discards any unsaved changes to the given attribute.
-         Example
-         ```javascript
-        record.get('name'); // 'Untitled Document'
-        record.set('name', 'Doc 1');
-        record.get('name'); // 'Doc 1'
-        record.resetAttribute('name');
-        record.get('name'); // 'Untitled Document'
-        ```
-         @method resetAttribute
-      */
-      resetAttribute: function resetAttribute(attributeName) {
-        if (attributeName in this._internalModel._attributes) {
-          this.set(attributeName, this._internalModel.lastAcknowledgedValue(attributeName));
-        }
       }
     });
   }
@@ -75675,7 +75544,7 @@ define('ember-data/-private/system/model/states', ['exports', 'ember', 'ember-da
   // `inFlight`: the store has handed off the record to be saved,
   //   but the adapter has not yet acknowledged success.
   // `invalid`: the record has invalid information and cannot be
-  //   sent to the adapter yet.
+  //   send to the adapter yet.
   var DirtyState = {
     initialState: 'uncommitted',
 
@@ -76221,7 +76090,7 @@ define('ember-data/-private/system/normalize-link', ['exports'], function (expor
 
   exports['default'] = _normalizeLink;
 
-  /*
+  /**
     This method normalizes a link to an "links object". If the passed link is
     already an object it's returned without any modifications.
   
@@ -77049,7 +76918,7 @@ define("ember-data/-private/system/record-arrays/record-array", ["exports", "emb
       var content = get(this, 'content');
       if (idx === undefined) {
         content.addObject(internalModel);
-      } else if (!content.includes(internalModel)) {
+      } else if (!content.contains(internalModel)) {
         content.insertAt(idx, internalModel);
       }
     },
@@ -77658,7 +77527,7 @@ define("ember-data/-private/system/relationships/ext", ["exports", "ember", "emb
 
         (0, _emberDataPrivateDebug.assert)("You specified a hasMany (" + meta.type + ") on " + meta.parentType + " but " + meta.type + " was not found.", modelName);
 
-        if (!types.includes(modelName)) {
+        if (!types.contains(modelName)) {
           (0, _emberDataPrivateDebug.assert)("Trying to sideload " + name + " on " + _this.toString() + " but the type doesn't exist.", !!modelName);
           types.push(modelName);
         }
@@ -80159,7 +80028,7 @@ define('ember-data/-private/system/store', ['exports', 'ember', 'ember-data/mode
         return function rejectMissingRecords(resolvedRecords) {
           resolvedRecords = _ember['default'].A(resolvedRecords);
           var missingRecords = requestedRecords.reject(function (record) {
-            return resolvedRecords.includes(record);
+            return resolvedRecords.contains(record);
           });
           if (missingRecords.length) {
             (0, _emberDataPrivateDebug.warn)('Ember Data expected to find records with the following ids in the adapter response but they were missing: ' + _ember['default'].inspect(_ember['default'].A(missingRecords).mapBy('id')), false, {
@@ -82416,7 +82285,7 @@ define('ember-data/-private/utils', ['exports', 'ember'], function (exports, _em
 
   var get = _ember['default'].get;
 
-  /*
+  /**
     Check if the passed model has a `type` attribute or a relationship named `type`.
   
     @method modelHasAttributeOrRelationshipNamedType
@@ -82593,11 +82462,13 @@ define('ember-data/adapter', ['exports', 'ember'], function (exports, _ember) {
       import DS from 'ember-data';
        export default DS.Adapter.extend({
         findRecord: function(store, type, id, snapshot) {
+          var url = [type.modelName, id].join('/');
            return new Ember.RSVP.Promise(function(resolve, reject) {
-            Ember.$.getJSON(`/${type.modelName}/${id}`).then(function(data) {
-              resolve(data);
+            Ember.$.getJSON(url).then(function(data) {
+              Ember.run(null, resolve, data);
             }, function(jqXHR) {
-              reject(jqXHR);
+              jqXHR.then = null; // tame jQuery's ill mannered promises
+              Ember.run(null, reject, jqXHR);
             });
           });
         }
@@ -82619,12 +82490,14 @@ define('ember-data/adapter', ['exports', 'ember'], function (exports, _ember) {
       import DS from 'ember-data';
        export default DS.Adapter.extend({
         findAll: function(store, type, sinceToken) {
+          var url = type;
           var query = { since: sinceToken };
           return new Ember.RSVP.Promise(function(resolve, reject) {
-            Ember.$.getJSON(`/${type.modelName}`, query).then(function(data) {
-              resolve(data);
+            Ember.$.getJSON(url, query).then(function(data) {
+              Ember.run(null, resolve, data);
             }, function(jqXHR) {
-              reject(jqXHR);
+              jqXHR.then = null; // tame jQuery's ill mannered promises
+              Ember.run(null, reject, jqXHR);
             });
           });
         }
@@ -82646,11 +82519,13 @@ define('ember-data/adapter', ['exports', 'ember'], function (exports, _ember) {
       import DS from 'ember-data';
        export default DS.Adapter.extend({
         query: function(store, type, query) {
+          var url = type;
           return new Ember.RSVP.Promise(function(resolve, reject) {
-            Ember.$.getJSON(`/${type.modelName}`, query).then(function(data) {
-              resolve(data);
+            Ember.$.getJSON(url, query).then(function(data) {
+              Ember.run(null, resolve, data);
             }, function(jqXHR) {
-              reject(jqXHR);
+              jqXHR.then = null; // tame jQuery's ill mannered promises
+              Ember.run(null, reject, jqXHR);
             });
           });
         }
@@ -82678,11 +82553,13 @@ define('ember-data/adapter', ['exports', 'ember'], function (exports, _ember) {
       import Ember from 'ember';
        export default DS.Adapter.extend(DS.BuildURLMixin, {
         queryRecord: function(store, type, query) {
-          return new Ember.RSVP.Promise(function(resolve, reject) {
-            Ember.$.getJSON(`/${type.modelName}`, query).then(function(data) {
-              resolve(data);
+          var urlForQueryRecord = this.buildURL(type.modelName, null, null, 'queryRecord', query);
+           return new Ember.RSVP.Promise(function(resolve, reject) {
+            Ember.$.getJSON(urlForQueryRecord, query).then(function(data) {
+              Ember.run(null, resolve, data);
             }, function(jqXHR) {
-              reject(jqXHR);
+              jqXHR.then = null; // tame jQuery's ill mannered promises
+              Ember.run(null, reject, jqXHR);
             });
           });
         }
@@ -82708,13 +82585,10 @@ define('ember-data/adapter', ['exports', 'ember'], function (exports, _ember) {
        The `generateIdForRecord()` method will be invoked with the requesting store as
       the first parameter and the newly created record as the second parameter:
        ```javascript
-      import DS from 'ember-data';
-      import { v4 } from 'uuid';
-       export default DS.Adapter.extend({
-        generateIdForRecord: function(store, inputProperties) {
-          return v4();
-        }
-      });
+      generateIdForRecord: function(store, inputProperties) {
+        var uuid = App.generateUUIDWithStatisticallyLowOddsOfCollision();
+        return uuid;
+      }
       ```
        @method generateIdForRecord
       @param {DS.Store} store
@@ -82733,7 +82607,7 @@ define('ember-data/adapter', ['exports', 'ember'], function (exports, _ember) {
        export default DS.Adapter.extend({
         createRecord: function(store, type, snapshot) {
           var data = this.serialize(snapshot, { includeId: true });
-          var url = `/${type.modelName}`;
+          var url = type;
            // ...
         }
       });
@@ -82757,10 +82631,11 @@ define('ember-data/adapter', ['exports', 'ember'], function (exports, _ember) {
        export default DS.Adapter.extend({
         createRecord: function(store, type, snapshot) {
           var data = this.serialize(snapshot, { includeId: true });
+          var url = type;
            return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.ajax({
               type: 'POST',
-              url: `/${type.modelName}`,
+              url: url,
               dataType: 'json',
               data: data
             }).then(function(data) {
@@ -82799,10 +82674,11 @@ define('ember-data/adapter', ['exports', 'ember'], function (exports, _ember) {
         updateRecord: function(store, type, snapshot) {
           var data = this.serialize(snapshot, { includeId: true });
           var id = snapshot.id;
+          var url = [type, id].join('/');
            return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.ajax({
               type: 'PUT',
-              url: `/${type.modelName}/${id}`,
+              url: url,
               dataType: 'json',
               data: data
             }).then(function(data) {
@@ -82834,10 +82710,11 @@ define('ember-data/adapter', ['exports', 'ember'], function (exports, _ember) {
         deleteRecord: function(store, type, snapshot) {
           var data = this.serialize(snapshot, { includeId: true });
           var id = snapshot.id;
+          var url = [type, id].join('/');
            return new Ember.RSVP.Promise(function(resolve, reject) {
             Ember.$.ajax({
               type: 'DELETE',
-              url: `/${type.modelName}/${id}`,
+              url: url,
               dataType: 'json',
               data: data
             }).then(function(data) {
@@ -82869,29 +82746,7 @@ define('ember-data/adapter', ['exports', 'ember'], function (exports, _ember) {
     coalesceFindRequests: true,
 
     /**
-      The store will call `findMany` instead of multiple `findRecord`
-      requests to find multiple records at once if coalesceFindRequests
-      is true.
-       ```app/adapters/application.js
-      import DS from 'ember-data';
-       export default DS.Adapter.extend({
-        findMany(store, type, ids, snapshots) {
-          return new Ember.RSVP.Promise(function(resolve, reject) {
-            Ember.$.ajax({
-              type: 'GET',
-              url: `/${type.modelName}/`,
-              dataType: 'json',
-              data: { filter: { id: ids.join(',') } }
-            }).then(function(data) {
-              Ember.run(null, resolve, data);
-            }, function(jqXHR) {
-              jqXHR.then = null; // tame jQuery's ill mannered promises
-              Ember.run(null, reject, jqXHR);
-            });
-          });
-        }
-      });
-      ```
+      Find multiple records at once if coalesceFindRequests is true.
        @method findMany
       @param {DS.Store} store
       @param {DS.Model} type   the DS.Model class of the records
@@ -83530,8 +83385,6 @@ define('ember-data/adapters/rest', ['exports', 'ember', 'ember-data/adapter', 'e
 
   var MapWithDefault = _ember['default'].MapWithDefault;
   var get = _ember['default'].get;
-
-  var Promise = _ember['default'].RSVP.Promise;
 
   /**
     The REST adapter allows your store to communicate with an HTTP server by
@@ -84422,20 +84275,41 @@ define('ember-data/adapters/rest', ['exports', 'ember', 'ember-data/adapter', 'e
         method: type
       };
 
-      return new Promise(function (resolve, reject) {
+      return new _ember['default'].RSVP.Promise(function (resolve, reject) {
         var hash = adapter.ajaxOptions(url, type, options);
 
         hash.success = function (payload, textStatus, jqXHR) {
-          var response = ajaxSuccess(adapter, jqXHR, payload, requestData);
-          _ember['default'].run.join(null, resolve, response);
+
+          var response = adapter.handleResponse(jqXHR.status, (0, _emberDataPrivateUtilsParseResponseHeaders['default'])(jqXHR.getAllResponseHeaders()), payload, requestData);
+
+          if (response && response.isAdapterError) {
+            _ember['default'].run.join(null, reject, response);
+          } else {
+            _ember['default'].run.join(null, resolve, response);
+          }
         };
 
         hash.error = function (jqXHR, textStatus, errorThrown) {
-          var responseData = {
-            textStatus: textStatus,
-            errorThrown: errorThrown
-          };
-          var error = ajaxError(adapter, jqXHR, requestData, responseData);
+          (0, _emberDataPrivateDebug.runInDebug)(function () {
+            var message = 'The server returned an empty string for ' + type + ' ' + url + ', which cannot be parsed into a valid JSON. Return either null or {}.';
+            var validJSONString = !(textStatus === "parsererror" && jqXHR.responseText === "");
+            (0, _emberDataPrivateDebug.warn)(message, validJSONString, {
+              id: 'ds.adapter.returned-empty-string-as-JSON'
+            });
+          });
+
+          var error = undefined;
+
+          if (errorThrown instanceof Error) {
+            error = errorThrown;
+          } else if (textStatus === 'timeout') {
+            error = new _emberDataAdaptersErrors.TimeoutError();
+          } else if (textStatus === 'abort') {
+            error = new _emberDataAdaptersErrors.AbortError();
+          } else {
+            error = adapter.handleResponse(jqXHR.status, (0, _emberDataPrivateUtilsParseResponseHeaders['default'])(jqXHR.getAllResponseHeaders()), adapter.parseErrorResponse(jqXHR.responseText) || errorThrown, requestData);
+          }
+
           _ember['default'].run.join(null, reject, error);
         };
 
@@ -84808,16 +84682,36 @@ define('ember-data/adapters/rest', ['exports', 'ember', 'ember-data/adapter', 'e
         return new _ember['default'].RSVP.Promise(function (resolve, reject) {
 
           hash.success = function (payload, textStatus, jqXHR) {
-            var response = ajaxSuccess(adapter, jqXHR, payload, requestData);
-            _ember['default'].run.join(null, resolve, response);
+            var response = adapter.handleResponse(jqXHR.status, (0, _emberDataPrivateUtilsParseResponseHeaders['default'])(jqXHR.getAllResponseHeaders()), payload, requestData);
+
+            if (response instanceof _emberDataAdaptersErrors.AdapterError) {
+              _ember['default'].run.join(null, reject, response);
+            } else {
+              _ember['default'].run.join(null, resolve, response);
+            }
           };
 
           hash.error = function (jqXHR, textStatus, errorThrown) {
-            var responseData = {
-              textStatus: textStatus,
-              errorThrown: errorThrown
-            };
-            var error = ajaxError(adapter, jqXHR, requestData, responseData);
+            (0, _emberDataPrivateDebug.runInDebug)(function () {
+              var message = 'The server returned an empty string for ' + method + ' ' + url + ', which cannot be parsed into a valid JSON. Return either null or {}.';
+              var validJSONString = !(textStatus === "parsererror" && jqXHR.responseText === "");
+              (0, _emberDataPrivateDebug.warn)(message, validJSONString, {
+                id: 'ds.adapter.returned-empty-string-as-JSON'
+              });
+            });
+
+            var error = undefined;
+
+            if (errorThrown instanceof Error) {
+              error = errorThrown;
+            } else if (textStatus === 'timeout') {
+              error = new _emberDataAdaptersErrors.TimeoutError();
+            } else if (textStatus === 'abort') {
+              error = new _emberDataAdaptersErrors.AbortError();
+            } else {
+              error = adapter.handleResponse(jqXHR.status, (0, _emberDataPrivateUtilsParseResponseHeaders['default'])(jqXHR.getAllResponseHeaders()), adapter.parseErrorResponse(jqXHR.responseText) || errorThrown, requestData);
+            }
+
             _ember['default'].run.join(null, reject, error);
           };
 
@@ -84825,49 +84719,6 @@ define('ember-data/adapters/rest', ['exports', 'ember', 'ember-data/adapter', 'e
         }, 'DS: RESTAdapter#makeRequest: ' + method + ' ' + url);
       }
     });
-  }
-
-  function ajaxSuccess(adapter, jqXHR, payload, requestData) {
-    var response = undefined;
-    try {
-      response = adapter.handleResponse(jqXHR.status, (0, _emberDataPrivateUtilsParseResponseHeaders['default'])(jqXHR.getAllResponseHeaders()), payload, requestData);
-    } catch (error) {
-      return Promise.reject(error);
-    }
-
-    if (response && response.isAdapterError) {
-      return Promise.reject(response);
-    } else {
-      return response;
-    }
-  }
-
-  function ajaxError(adapter, jqXHR, requestData, responseData) {
-    (0, _emberDataPrivateDebug.runInDebug)(function () {
-      var message = 'The server returned an empty string for ' + requestData.method + ' ' + requestData.url + ', which cannot be parsed into a valid JSON. Return either null or {}.';
-      var validJSONString = !(responseData.textStatus === "parsererror" && jqXHR.responseText === "");
-      (0, _emberDataPrivateDebug.warn)(message, validJSONString, {
-        id: 'ds.adapter.returned-empty-string-as-JSON'
-      });
-    });
-
-    var error = undefined;
-
-    if (responseData.errorThrown instanceof Error) {
-      error = responseData.errorThrown;
-    } else if (responseData.textStatus === 'timeout') {
-      error = new _emberDataAdaptersErrors.TimeoutError();
-    } else if (responseData.textStatus === 'abort') {
-      error = new _emberDataAdaptersErrors.AbortError();
-    } else {
-      try {
-        error = adapter.handleResponse(jqXHR.status, (0, _emberDataPrivateUtilsParseResponseHeaders['default'])(jqXHR.getAllResponseHeaders()), adapter.parseErrorResponse(jqXHR.responseText) || responseData.errorThrown, requestData);
-      } catch (e) {
-        error = e;
-      }
-    }
-
-    return error;
   }
 
   //From http://stackoverflow.com/questions/280634/endswith-in-javascript
@@ -85244,7 +85095,7 @@ define('ember-data/serializer', ['exports', 'ember'], function (exports, _ember)
 
   });
 });
-define('ember-data/serializers/embedded-records-mixin', ['exports', 'ember', 'ember-data/-private/debug'], function (exports, _ember, _emberDataPrivateDebug) {
+define('ember-data/serializers/embedded-records-mixin', ['exports', 'ember', 'ember-data/-private/debug', 'ember-data/-private/features'], function (exports, _ember, _emberDataPrivateDebug, _emberDataPrivateFeatures) {
   'use strict';
 
   function _toConsumableArray(arr) {
@@ -85440,16 +85291,13 @@ define('ember-data/serializers/embedded-records-mixin', ['exports', 'ember', 'em
       var includeIds = this.hasSerializeIdsOption(attr);
       var includeRecords = this.hasSerializeRecordsOption(attr);
       var embeddedSnapshot = snapshot.belongsTo(attr);
+      var key;
       if (includeIds) {
-        var serializedKey = this._getMappedKey(relationship.key, snapshot.type);
-        if (serializedKey === relationship.key && this.keyForRelationship) {
-          serializedKey = this.keyForRelationship(relationship.key, relationship.kind, "serialize");
-        }
-
+        key = this.keyForRelationship(attr, relationship.kind, 'serialize');
         if (!embeddedSnapshot) {
-          json[serializedKey] = null;
+          json[key] = null;
         } else {
-          json[serializedKey] = embeddedSnapshot.id;
+          json[key] = embeddedSnapshot.id;
 
           if (relationship.options.polymorphic) {
             this.serializePolymorphicType(snapshot, json, relationship);
@@ -85584,6 +85432,7 @@ define('ember-data/serializers/embedded-records-mixin', ['exports', 'ember', 'em
         }
       }
       ```
+       Note that the `ids-and-types` strategy is still behind the `ds-serialize-ids-and-types` feature flag.
        @method serializeHasMany
       @param {DS.Snapshot} snapshot
       @param {Object} json
@@ -85597,17 +85446,15 @@ define('ember-data/serializers/embedded-records-mixin', ['exports', 'ember', 'em
       }
 
       if (this.hasSerializeIdsOption(attr)) {
-        var serializedKey = this._getMappedKey(relationship.key, snapshot.type);
-        if (serializedKey === relationship.key && this.keyForRelationship) {
-          serializedKey = this.keyForRelationship(relationship.key, relationship.kind, "serialize");
-        }
-
+        var serializedKey = this.keyForRelationship(attr, relationship.kind, 'serialize');
         json[serializedKey] = snapshot.hasMany(attr, { ids: true });
       } else if (this.hasSerializeRecordsOption(attr)) {
         this._serializeEmbeddedHasMany(snapshot, json, relationship);
       } else {
-        if (this.hasSerializeIdsAndTypesOption(attr)) {
-          this._serializeHasManyAsIdsAndTypes(snapshot, json, relationship);
+        if (true) {
+          if (this.hasSerializeIdsAndTypesOption(attr)) {
+            this._serializeHasManyAsIdsAndTypes(snapshot, json, relationship);
+          }
         }
       }
     },
@@ -89007,7 +88854,7 @@ define('ember-data/transform', ['exports', 'ember'], function (exports, _ember) 
 define("ember-data/version", ["exports"], function (exports) {
   "use strict";
 
-  exports["default"] = "2.8.1";
+  exports["default"] = "2.7.0";
 });
 define("ember-get-config/find", ["exports"], function (exports) {
   "use strict";
@@ -92541,28 +92388,6 @@ define('ember-resolver/resolver', ['exports', 'ember', 'ember-resolver/utils/mod
       }
     },
 
-    resolveEngine: function resolveEngine(parsedName) {
-      var engineName = parsedName.fullNameWithoutType;
-      var engineModule = engineName + '/engine';
-
-      if (this._moduleRegistry.has(engineModule)) {
-        return this._extractDefaultExport(engineModule);
-      }
-    },
-
-    resolveRouteMap: function resolveRouteMap(parsedName) {
-      var engineName = parsedName.fullNameWithoutType;
-      var engineRoutesModule = engineName + '/routes';
-
-      if (this._moduleRegistry.has(engineRoutesModule)) {
-        var routeMap = this._extractDefaultExport(engineRoutesModule);
-
-        _ember['default'].assert('The route map for ' + engineName + ' should be wrapped by \'buildRoutes\' before exporting.', routeMap.isRouteMap);
-
-        return routeMap;
-      }
-    },
-
     mainModuleName: function mainModuleName(parsedName) {
       // if router:main or adapter:main look for a module with just the type first
       var tmpModuleName = parsedName.prefix + '/' + parsedName.type;
@@ -92643,7 +92468,7 @@ define('ember-resolver/resolver', ['exports', 'ember', 'ember-resolver/utils/mod
         var partializedModuleName = moduleName.replace(/\/-([^\/]*)$/, '/_$1');
 
         if (this._moduleRegistry.has(partializedModuleName)) {
-          _ember['default'].deprecate('Modules should not contain underscores. ' + 'Attempted to lookup "' + moduleName + '" which ' + 'was not found. Please rename "' + partializedModuleName + '" ' + 'to "' + moduleName + '" instead.', false, { id: 'ember-resolver.underscored-modules', until: '3.0.0' });
+          _ember['default'].deprecate('Modules should not contain underscores. ' + 'Attempted to lookup "' + moduleName + '" which ' + 'was not found. Please rename "' + partializedModuleName + '" ' + 'to "' + moduleName + '" instead.', false);
 
           return partializedModuleName;
         } else {
