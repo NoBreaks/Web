@@ -43,22 +43,22 @@ define('nobreaks/tests/controllers/admin/epgp.jshint', ['exports'], function (ex
     assert.ok(true, 'controllers/admin/epgp.js should pass jshint.');
   });
 });
-define('nobreaks/tests/controllers/raiding/weekday/raiding.jshint', ['exports'], function (exports) {
+define('nobreaks/tests/controllers/raiding/weekday.jshint', ['exports'], function (exports) {
   'use strict';
 
-  QUnit.module('JSHint | controllers/raiding/weekday/raiding.js');
+  QUnit.module('JSHint | controllers/raiding/weekday.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'controllers/raiding/weekday/raiding.js should pass jshint.');
+    assert.ok(true, 'controllers/raiding/weekday.js should pass jshint.');
   });
 });
-define('nobreaks/tests/controllers/raiding/weekend/raiding.jshint', ['exports'], function (exports) {
+define('nobreaks/tests/controllers/raiding/weekend.jshint', ['exports'], function (exports) {
   'use strict';
 
-  QUnit.module('JSHint | controllers/raiding/weekend/raiding.js');
+  QUnit.module('JSHint | controllers/raiding/weekend.js');
   QUnit.test('should pass jshint', function (assert) {
     assert.expect(1);
-    assert.ok(true, 'controllers/raiding/weekend/raiding.js should pass jshint.');
+    assert.ok(true, 'controllers/raiding/weekend.js should pass jshint.');
   });
 });
 define('nobreaks/tests/helpers/destroy-app', ['exports', 'ember'], function (exports, _ember) {
