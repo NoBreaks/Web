@@ -4233,7 +4233,7 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 71,
+            "line": 76,
             "column": 0
           }
         },
@@ -4380,7 +4380,7 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("\n      EPGP is a ratio of Effort Points (EP) and Gear Points (GP).\n      Effort points are awarded for a fixed amount for showing up on time, boss kills, and guild contests.\n      They may also be taken away for being tardy without notice, absence without notice, rage quitting, etc.\n      Gear Points is the score given for your equiped and not-equiped gear.\n    ");
+        var el4 = dom.createTextNode("\n      EPGP is a ratio of Effort Points (EP) and Gear Points (GP).\n      Effort points are awarded for a fixed amount for showing up on time, boss kills, and guild contests.\n      They may also be taken away for being tardy without notice, absence without notice, rage quitting, etc.\n      Gear Points is the score given for your equipped and not-equipped gear.\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n    ");
@@ -4402,6 +4402,25 @@ define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("br");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createTextNode("\n      The complete list of EP values can be found here.\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("br");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3, "href", "https://forum.nobreaksguild.com/topic/7/epgp-awards-and-costs");
+        dom.setAttribute(el3, "target", "_blank");
+        dom.setAttribute(el3, "class", "waves-effect waves-light btn cyan");
+        var el4 = dom.createTextNode("EP Info");
+        dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
         dom.appendChild(el2, el3);
