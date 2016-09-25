@@ -1314,7 +1314,7 @@ define('nobreaks/routes/raiding', ['exports', 'ember'], function (exports, _embe
       _ember['default'].run.scheduleOnce('afterRender', this, function () {
         console.log('afterRender');
 
-        $('.pin-container').pushpin({ top: $('.pin-container').offset().top + 50 });
+        _ember['default'].$('.pin-container').pushpin({ top: _ember['default'].$('.pin-container').offset().top - 64 });
       });
     },
 
@@ -6660,7 +6660,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("nobreaks/app")["default"].create({"name":"nobreaks","version":"2.0.0+0e2049f7"});
+  require("nobreaks/app")["default"].create({"name":"nobreaks","version":"2.0.0+a86d1ad3"});
 }
 
 define('~fastboot/app-factory', ['nobreaks/app', 'nobreaks/config/environment'], function(App, config) {

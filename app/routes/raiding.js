@@ -7,9 +7,7 @@ export default Ember.Route.extend({
 
   activate: function() {
     Ember.run.scheduleOnce('afterRender', this, () => {
-      console.log('afterRender');
-
-      $('.pin-container').pushpin({ top: $('.pin-container').offset().top + 50 });
+      Ember.$('.pin-container').pushpin({ top: Ember.$('.pin-container').offset().top - 64 });
     });
   },
 
