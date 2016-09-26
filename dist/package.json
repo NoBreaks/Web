@@ -11,13 +11,13 @@
       "node-fetch"
     ],
     "manifest": {
-      "appFile": "fastboot/nobreaks.js",
-      "vendorFile": "fastboot/vendor.js",
+      "appFile": "fastboot/nobreaks-64a004589299e9bf82df9744049097ba.js",
+      "vendorFile": "fastboot/vendor-dfc6257d1e85d0851d4e08a2ba6cd0cf.js",
       "htmlFile": "index.html"
     },
     "appConfig": {
       "modulePrefix": "nobreaks",
-      "environment": "development",
+      "environment": "production",
       "baseURL": "/",
       "locationType": "auto",
       "EmberENV": {
@@ -25,8 +25,19 @@
       },
       "APP": {
         "name": "nobreaks",
+<<<<<<< HEAD
         "version": "2.0.0+0e81622d",
+=======
+<<<<<<< HEAD
+        "version": "2.0.0+7a15cfeb",
+=======
+        "version": "2.0.0+3ff456d7",
+>>>>>>> 0e81622d2620c3233c98510fc71e2be1ea5ba8aa
+>>>>>>> 7efe2ada1823cf44f492c84abf581f37e1747bba
         "autoboot": false
+      },
+      "googleAnalytics": {
+        "webPropertyId": "UA-75863262-1"
       },
       "materializeDefaults": {
         "modalIsFooterFixed": false,
@@ -37,7 +48,7 @@
         "dropdownInDuration": 300,
         "dropdownOutDuration": 300
       },
-      "exportApplicationGlobal": true
+      "exportApplicationGlobal": false
     }
   }
 }
