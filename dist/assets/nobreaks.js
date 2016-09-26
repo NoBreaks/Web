@@ -515,8 +515,10 @@ define('nobreaks/const', ['exports'], function (exports) {
   exports.API_PATH = API_PATH;
   var CDN_PATH = 'https://api.nobreaksguild.com/cdn';
   exports.CDN_PATH = CDN_PATH;
-  var API_RAIDERS_PATH = '/guild/No%20Breaks/epgp/raiders';
-  exports.API_RAIDERS_PATH = API_RAIDERS_PATH;
+  var API_WEEKDAY_RAIDERS_PATH = '/guild/No%20Breaks/epgp/members?ranks=0,1,4,5';
+  exports.API_WEEKDAY_RAIDERS_PATH = API_WEEKDAY_RAIDERS_PATH;
+  var API_WEEKEND_RAIDERS_PATH = '/guild/No%20Breaks/epgp/members?ranks=6';
+  exports.API_WEEKEND_RAIDERS_PATH = API_WEEKEND_RAIDERS_PATH;
   var API_EPGP_LOOT_PATH = '/guild/No%20Breaks/epgp/loot';
   exports.API_EPGP_LOOT_PATH = API_EPGP_LOOT_PATH;
   var API_EPGP_UPLOAD_PATH = '/guild/No%20Breaks/epgp/upload';
@@ -577,17 +579,22 @@ define('nobreaks/controllers/admin/epgp', ['exports', 'ember', 'ember-network/fe
     }
   });
 });
-define('nobreaks/controllers/raiding', ['exports', 'ember'], function (exports, _ember) {
+define('nobreaks/controllers/raiding/weekday', ['exports', 'ember'], function (exports, _ember) {
   exports['default'] = _ember['default'].Controller.extend({
-    tabsSelection: 'raiding.roster',
-    lootDate: 'latest',
+    tabsSelection: 'raiding.weekday.roster',
 
     tabChange: (function () {
-      if (this.tabsSelection === 'raiding.loot') {
-        this.transitionToRoute(this.tabsSelection, this.get('lootDate'));
-      } else {
-        this.transitionToRoute(this.tabsSelection);
-      }
+      this.transitionToRoute(this.tabsSelection);
+    }).observes('tabsSelection')
+  });
+});
+define('nobreaks/controllers/raiding/weekend', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Controller.extend({
+    tabsSelection: 'raiding.weekend.roster',
+
+    tabChange: (function () {
+      console.log('tabChange', this.tabsSelection);
+      this.transitionToRoute(this.tabsSelection);
     }).observes('tabsSelection')
   });
 });
@@ -615,7 +622,7 @@ define('nobreaks/helpers/epgp-total', ['exports', 'ember'], function (exports, _
   exports.epgpTotal = epgpTotal;
 
   function epgpTotal(params) {
-    return params[0] - params[1];
+    return (params[0] / params[1]).toFixed(2);
   }
 
   exports['default'] = _ember['default'].Helper.helper(epgpTotal);
@@ -1235,10 +1242,17 @@ define('nobreaks/router', ['exports', 'ember', 'nobreaks/config/environment', 'e
 
   Router.map(function () {
     this.route('raiding', function () {
-      this.route('roster');
+      this.route('index');
+      this.route('weekday', function () {
+        this.route('roster');
+        this.route('progress');
+      });
+      this.route('weekend', function () {
+        this.route('roster');
+        this.route('progress');
+      });
       this.route('loot');
       this.route('loot', { path: 'loot/:raidDate' });
-      this.route('progress');
     });
     this.route('join');
     this.route('social');
@@ -1296,6 +1310,12 @@ define('nobreaks/routes/raiding', ['exports', 'ember'], function (exports, _embe
   exports['default'] = _ember['default'].Route.extend({
     transitionTarget: '',
 
+    activate: function activate() {
+      _ember['default'].run.scheduleOnce('afterRender', this, function () {
+        _ember['default'].$('.pin-container').pushpin({ top: _ember['default'].$('.pin-container').offset().top - 64 });
+      });
+    },
+
     model: function model() {},
 
     actions: {
@@ -1305,15 +1325,14 @@ define('nobreaks/routes/raiding', ['exports', 'ember'], function (exports, _embe
     },
 
     redirect: function redirect(model, transition) {
-      var target = transition.targetName !== 'raiding.index' ? transition.targetName : 'raiding.roster';
+      var target = transition.targetName !== 'raiding.index' ? transition.targetName : 'raiding.index';
       this.set('transitionTarget', target);
       this.transitionTo(target);
-    },
-
-    setupController: function setupController(controller) {
-      controller.set('tabsSelection', this.get('transitionTarget'));
     }
   });
+});
+define('nobreaks/routes/raiding/index', ['exports', 'ember'], function (exports, _ember) {
+  exports['default'] = _ember['default'].Route.extend({});
 });
 define('nobreaks/routes/raiding/loot', ['exports', 'ember', 'ember-network/fetch', 'nobreaks/const'], function (exports, _ember, _emberNetworkFetch, _nobreaksConst) {
   exports['default'] = _ember['default'].Route.extend({
@@ -1335,21 +1354,93 @@ define('nobreaks/routes/raiding/loot', ['exports', 'ember', 'ember-network/fetch
     }
   });
 });
-define('nobreaks/routes/raiding/progress', ['exports', 'ember', 'ember-network/fetch'], function (exports, _ember, _emberNetworkFetch) {
+define('nobreaks/routes/raiding/weekday', ['exports', 'ember'], function (exports, _ember) {
+  //import fetch from 'ember-network/fetch';
+  //import { API_PATH, API_MEMBERS_PATH } from '../const';
+
+  exports['default'] = _ember['default'].Route.extend({
+    transitionTarget: '',
+
+    model: function model() {},
+
+    actions: {
+      error: function error(reason) {
+        alert(reason); // "FAIL"
+      }
+    },
+
+    redirect: function redirect(model, transition) {
+      var target = transition.targetName !== 'raiding.weekday.index' ? transition.targetName : 'raiding.weekday.roster';
+      this.set('transitionTarget', target);
+      this.transitionTo(target);
+    },
+
+    setupController: function setupController(controller) {
+      controller.set('tabsSelection', this.get('transitionTarget'));
+    }
+  });
+});
+define('nobreaks/routes/raiding/weekday/progress', ['exports', 'ember', 'ember-network/fetch'], function (exports, _ember, _emberNetworkFetch) {
   exports['default'] = _ember['default'].Route.extend({
 
     model: function model() {
-      return (0, _emberNetworkFetch['default'])('/data/progress.json').then(function (response) {
+      return (0, _emberNetworkFetch['default'])('/data/weekday-progress.json').then(function (response) {
         return response.json();
       });
     }
   });
 });
-define('nobreaks/routes/raiding/roster', ['exports', 'ember', 'ember-network/fetch', 'nobreaks/const'], function (exports, _ember, _emberNetworkFetch, _nobreaksConst) {
+define('nobreaks/routes/raiding/weekday/roster', ['exports', 'ember', 'ember-network/fetch', 'nobreaks/const'], function (exports, _ember, _emberNetworkFetch, _nobreaksConst) {
   exports['default'] = _ember['default'].Route.extend({
 
     model: function model() {
-      return (0, _emberNetworkFetch['default'])('' + _nobreaksConst.API_PATH + _nobreaksConst.API_RAIDERS_PATH).then(function (response) {
+      return (0, _emberNetworkFetch['default'])('' + _nobreaksConst.API_PATH + _nobreaksConst.API_WEEKDAY_RAIDERS_PATH).then(function (response) {
+        return response.json();
+      });
+    }
+  });
+});
+define('nobreaks/routes/raiding/weekend', ['exports', 'ember'], function (exports, _ember) {
+  //import fetch from 'ember-network/fetch';
+  //import { API_PATH, API_MEMBERS_PATH } from '../const';
+
+  exports['default'] = _ember['default'].Route.extend({
+    transitionTarget: '',
+
+    model: function model() {},
+
+    actions: {
+      error: function error(reason) {
+        alert(reason); // "FAIL"
+      }
+    },
+
+    redirect: function redirect(model, transition) {
+      var target = transition.targetName !== 'raiding.weekend.index' ? transition.targetName : 'raiding.weekend.roster';
+      this.set('transitionTarget', target);
+      this.transitionTo(target);
+    },
+
+    setupController: function setupController(controller) {
+      controller.set('tabsSelection', this.get('transitionTarget'));
+    }
+  });
+});
+define('nobreaks/routes/raiding/weekend/progress', ['exports', 'ember', 'ember-network/fetch'], function (exports, _ember, _emberNetworkFetch) {
+  exports['default'] = _ember['default'].Route.extend({
+
+    model: function model() {
+      return (0, _emberNetworkFetch['default'])('/data/weekend-progress.json').then(function (response) {
+        return response.json();
+      });
+    }
+  });
+});
+define('nobreaks/routes/raiding/weekend/roster', ['exports', 'ember', 'ember-network/fetch', 'nobreaks/const'], function (exports, _ember, _emberNetworkFetch, _nobreaksConst) {
+  exports['default'] = _ember['default'].Route.extend({
+
+    model: function model() {
+      return (0, _emberNetworkFetch['default'])('' + _nobreaksConst.API_PATH + _nobreaksConst.API_WEEKEND_RAIDERS_PATH).then(function (response) {
         return response.json();
       });
     }
@@ -1853,7 +1944,7 @@ define("nobreaks/templates/application", ["exports"], function (exports) {
                 },
                 "end": {
                   "line": 10,
-                  "column": 46
+                  "column": 39
                 }
               },
               "moduleName": "nobreaks/templates/application.hbs"
@@ -1912,7 +2003,7 @@ define("nobreaks/templates/application", ["exports"], function (exports) {
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["block", "link-to", ["raiding.roster"], [], 0, null, ["loc", [null, [10, 8], [10, 46]]]]],
+          statements: [["block", "link-to", ["raiding"], [], 0, null, ["loc", [null, [10, 8], [10, 39]]]]],
           locals: [],
           templates: [child0]
         };
@@ -2158,7 +2249,7 @@ define("nobreaks/templates/application", ["exports"], function (exports) {
           morphs[3] = dom.createMorphAt(element0, 6, 6);
           return morphs;
         },
-        statements: [["block", "link-to", ["index"], ["tagName", "li"], 0, null, ["loc", [null, [6, 6], [8, 18]]]], ["block", "link-to", ["raiding.roster"], ["tagName", "li"], 1, null, ["loc", [null, [9, 6], [11, 18]]]], ["block", "link-to", ["join"], ["tagName", "li"], 2, null, ["loc", [null, [12, 6], [14, 18]]]], ["block", "link-to", ["social"], ["tagName", "li"], 3, null, ["loc", [null, [15, 6], [17, 18]]]]],
+        statements: [["block", "link-to", ["index"], ["tagName", "li"], 0, null, ["loc", [null, [6, 6], [8, 18]]]], ["block", "link-to", ["raiding"], ["tagName", "li"], 1, null, ["loc", [null, [9, 6], [11, 18]]]], ["block", "link-to", ["join"], ["tagName", "li"], 2, null, ["loc", [null, [12, 6], [14, 18]]]], ["block", "link-to", ["social"], ["tagName", "li"], 3, null, ["loc", [null, [15, 6], [17, 18]]]]],
         locals: [],
         templates: [child0, child1, child2, child3]
       };
@@ -2278,10 +2369,10 @@ define("nobreaks/templates/application", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("a");
-        dom.setAttribute(el4, "href", "https://www.youtube.com/channel/UCiTx1a_BI53itw-fHNIib2w");
+        dom.setAttribute(el4, "href", "https://forum.nobreaksguild.com/");
         dom.setAttribute(el4, "target", "_blank");
         var el5 = dom.createElement("i");
-        dom.setAttribute(el5, "class", "fa fa-youtube-square");
+        dom.setAttribute(el5, "class", "fa fa-comments");
         dom.setAttribute(el5, "aria-hidden", "true");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
@@ -2565,7 +2656,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
               },
               "end": {
                 "line": 32,
-                "column": 46
+                "column": 39
               }
             },
             "moduleName": "nobreaks/templates/index.hbs"
@@ -2624,7 +2715,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.roster"], [], 0, null, ["loc", [null, [32, 8], [32, 46]]]]],
+        statements: [["block", "link-to", ["raiding"], [], 0, null, ["loc", [null, [32, 8], [32, 39]]]]],
         locals: [],
         templates: [child0]
       };
@@ -2638,11 +2729,11 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 98,
+                "line": 97,
                 "column": 8
               },
               "end": {
-                "line": 98,
+                "line": 97,
                 "column": 33
               }
             },
@@ -2673,11 +2764,11 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 97,
+              "line": 96,
               "column": 6
             },
             "end": {
-              "line": 99,
+              "line": 98,
               "column": 6
             }
           },
@@ -2702,7 +2793,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["block", "link-to", ["join"], [], 0, null, ["loc", [null, [98, 8], [98, 33]]]]],
+        statements: [["block", "link-to", ["join"], [], 0, null, ["loc", [null, [97, 8], [97, 33]]]]],
         locals: [],
         templates: [child0]
       };
@@ -2721,7 +2812,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 118,
+            "line": 117,
             "column": 0
           }
         },
@@ -2743,7 +2834,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "row container");
+        dom.setAttribute(el2, "class", "row container intro");
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("h1");
@@ -2753,19 +2844,19 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("\n      We are a raiding guild on US-Thrall, current tier progress is 9/13 Mythic HFC.\n      Although we're not hardcore raiders, we buckle down when necessary to get the job done.\n      No Breaks prides itself on creating a close-knit community with our friendly,\n      albeit weird, members. We have a guild leader that isn't a scrub and we wear pink on Fridays!\n    ");
+        var el4 = dom.createTextNode("\n      We are a raiding guild on US-Thrall.\n      Although we're not hardcore raiders, we buckle down when necessary to get the job done.\n      No Breaks prides itself on creating a close-knit community with our friendly,\n      albeit weird, members. We have a guild leader that isn't a scrub and we wear pink on Fridays!\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("h2");
-        var el4 = dom.createTextNode("Plans for Legion");
+        var el4 = dom.createTextNode("Legion is Here");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("\n      No Breaks will be raiding in Legion! Newly created for this expansion is\n      a weekend team and we are looking for some new members to fill all roles\n      in this exciting new endeavor. This of course will be in addition to our\n      weekday team that has already established itself as a force to be reckoned with!\n      Head on over to the 'Raiding' section to find out more, or head to the 'Joining'\n      section to find information on how to join.\n    ");
+        var el4 = dom.createTextNode("\n      No Breaks is raiding in Legion! Newly created for this expansion is\n      a weekend team and we are looking for some new members to fill all roles\n      in this exciting new endeavor. This of course will be in addition to our\n      weekday team that has already established itself as a force to be reckoned with!\n      Head on over to the 'Raiding' section to find out more, or head to the 'Join'\n      section to find information on how to join.\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
@@ -2844,7 +2935,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
-        var el6 = dom.createTextNode("We had to listen to Murloc bitch about sports");
+        var el6 = dom.createTextNode("\"Less health to worry about. Yayyyyy.\"");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n        ");
@@ -2863,12 +2954,6 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("li");
         var el6 = dom.createTextNode("Angel has one weed");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("li");
-        var el6 = dom.createTextNode("Murloc is talking about lore again");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n        ");
@@ -2949,6 +3034,12 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         var el6 = dom.createTextNode("14 months later, Mitch still doesn't know the mechanics");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createTextNode("The sysadmin rage deleted the website");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n      ");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
@@ -3027,16 +3118,16 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("a");
-        dom.setAttribute(el4, "href", "https://www.youtube.com/channel/UCiTx1a_BI53itw-fHNIib2w");
+        dom.setAttribute(el4, "href", "https://forum.nobreaksguild.com/");
         dom.setAttribute(el4, "target", "_blank");
         dom.setAttribute(el4, "class", "btn cyan");
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("i");
-        dom.setAttribute(el5, "class", "fa fa-youtube-square");
+        dom.setAttribute(el5, "class", "fa fa-comments");
         dom.setAttribute(el5, "aria-hidden", "true");
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n        Murloc's Channel\n      ");
+        var el5 = dom.createTextNode("Guild Forum\n      ");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
         var el4 = dom.createTextNode("\n    ");
@@ -3186,7 +3277,7 @@ define("nobreaks/templates/index", ["exports"], function (exports) {
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/legion-2560x1440-wide.jpg"], ["loc", [null, [1, 0], [1, 90]]]], ["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/emerald-nightmare.jpg"], ["loc", [null, [24, 0], [24, 86]]]], ["block", "link-to", ["raiding.roster"], ["tagName", "button", "class", "btn cyan"], 0, null, ["loc", [null, [31, 6], [33, 18]]]], ["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/legion.png"], ["loc", [null, [85, 0], [85, 75]]]], ["block", "link-to", ["join"], ["tagName", "button", "class", "cyan btn"], 1, null, ["loc", [null, [97, 6], [99, 18]]]]],
+      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/legion-2560x1440-wide.jpg"], ["loc", [null, [1, 0], [1, 90]]]], ["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/emerald-nightmare.jpg"], ["loc", [null, [24, 0], [24, 86]]]], ["block", "link-to", ["raiding"], ["tagName", "button", "class", "btn cyan"], 0, null, ["loc", [null, [31, 6], [33, 18]]]], ["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/legion.png"], ["loc", [null, [84, 0], [84, 75]]]], ["block", "link-to", ["join"], ["tagName", "button", "class", "cyan btn"], 1, null, ["loc", [null, [96, 6], [98, 18]]]]],
       locals: [],
       templates: [child0, child1]
     };
@@ -3245,7 +3336,7 @@ define("nobreaks/templates/join", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("The officers are Konnovar, Truhealz, Nebet, Skarlin, Shdowhuntr, Themurloc, and Stormpeaks.");
+        var el4 = dom.createTextNode("The officers are Konnovar, Nebet, Skarlin, Shdowhuntr, Stormpeaks, Dêathunknown, Veksaryn, and Shadrÿn.");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
@@ -3427,7 +3518,7 @@ define("nobreaks/templates/join", ["exports"], function (exports) {
         var el7 = dom.createTextNode("\n            ");
         dom.appendChild(el6, el7);
         var el7 = dom.createElement("a");
-        dom.setAttribute(el7, "href", "https://forum.nobreaksguild.com/category/26/recruitment");
+        dom.setAttribute(el7, "href", "https://forum.nobreaksguild.com/category/14/recruitment");
         dom.setAttribute(el7, "target", "_blank");
         dom.setAttribute(el7, "class", "btn primary cyan");
         var el8 = dom.createTextNode("Apply");
@@ -3475,6 +3566,42 @@ define("nobreaks/templates/join", ["exports"], function (exports) {
 define("nobreaks/templates/raiding", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.6.2",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 7,
+                "column": 10
+              },
+              "end": {
+                "line": 7,
+                "column": 52
+              }
+            },
+            "moduleName": "nobreaks/templates/raiding.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Raiding Home");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
       return {
         meta: {
           "fragmentReason": false,
@@ -3482,12 +3609,12 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 23,
-              "column": 2
+              "line": 6,
+              "column": 8
             },
             "end": {
-              "line": 28,
-              "column": 2
+              "line": 8,
+              "column": 8
             }
           },
           "moduleName": "nobreaks/templates/raiding.hbs"
@@ -3498,15 +3625,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         hasRendered: false,
         buildFragment: function buildFragment(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("    ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n    ");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createComment("");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n    ");
+          var el1 = dom.createTextNode("          ");
           dom.appendChild(el0, el1);
           var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
@@ -3515,15 +3634,403 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
           return el0;
         },
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-          var morphs = new Array(3);
+          var morphs = new Array(1);
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
-          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
-          morphs[2] = dom.createMorphAt(fragment, 5, 5, contextualElement);
           return morphs;
         },
-        statements: [["inline", "md-tab", [], ["value", "raiding.roster", "title", "Roster"], ["loc", [null, [25, 4], [25, 52]]]], ["inline", "md-tab", [], ["value", "raiding.loot", "title", "Loot"], ["loc", [null, [26, 4], [26, 48]]]], ["inline", "md-tab", [], ["value", "raiding.progress", "title", "Progress & Logs"], ["loc", [null, [27, 4], [27, 63]]]]],
+        statements: [["block", "link-to", ["raiding.index"], [], 0, null, ["loc", [null, [7, 10], [7, 52]]]]],
         locals: [],
-        templates: []
+        templates: [child0]
+      };
+    })();
+    var child1 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.6.2",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 10,
+                "column": 10
+              },
+              "end": {
+                "line": 10,
+                "column": 52
+              }
+            },
+            "moduleName": "nobreaks/templates/raiding.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Loot");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 9,
+              "column": 8
+            },
+            "end": {
+              "line": 11,
+              "column": 8
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("          ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "link-to", ["raiding.loot", "latest"], [], 0, null, ["loc", [null, [10, 10], [10, 52]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })();
+    var child2 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.6.2",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 15,
+                "column": 14
+              },
+              "end": {
+                "line": 15,
+                "column": 59
+              }
+            },
+            "moduleName": "nobreaks/templates/raiding.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Roster");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 14,
+              "column": 12
+            },
+            "end": {
+              "line": 16,
+              "column": 12
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("              ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "link-to", ["raiding.weekday.roster"], [], 0, null, ["loc", [null, [15, 14], [15, 59]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })();
+    var child3 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.6.2",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 18,
+                "column": 14
+              },
+              "end": {
+                "line": 18,
+                "column": 70
+              }
+            },
+            "moduleName": "nobreaks/templates/raiding.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Progress & Logs");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 17,
+              "column": 12
+            },
+            "end": {
+              "line": 19,
+              "column": 12
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("              ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "link-to", ["raiding.weekday.progress"], [], 0, null, ["loc", [null, [18, 14], [18, 70]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })();
+    var child4 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.6.2",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 25,
+                "column": 14
+              },
+              "end": {
+                "line": 25,
+                "column": 59
+              }
+            },
+            "moduleName": "nobreaks/templates/raiding.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Roster");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 24,
+              "column": 12
+            },
+            "end": {
+              "line": 26,
+              "column": 12
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("              ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "link-to", ["raiding.weekend.roster"], [], 0, null, ["loc", [null, [25, 14], [25, 59]]]]],
+        locals: [],
+        templates: [child0]
+      };
+    })();
+    var child5 = (function () {
+      var child0 = (function () {
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.6.2",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 28,
+                "column": 14
+              },
+              "end": {
+                "line": 28,
+                "column": 70
+              }
+            },
+            "moduleName": "nobreaks/templates/raiding.hbs"
+          },
+          isEmpty: false,
+          arity: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("Progress & Logs");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes() {
+            return [];
+          },
+          statements: [],
+          locals: [],
+          templates: []
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 27,
+              "column": 12
+            },
+            "end": {
+              "line": 29,
+              "column": 12
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("              ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(1);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          return morphs;
+        },
+        statements: [["block", "link-to", ["raiding.weekend.progress"], [], 0, null, ["loc", [null, [28, 14], [28, 70]]]]],
+        locals: [],
+        templates: [child0]
       };
     })();
     return {
@@ -3540,7 +4047,7 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 32,
+            "line": 39,
             "column": 0
           }
         },
@@ -3565,68 +4072,49 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("div");
-        dom.setAttribute(el3, "class", "col s12 m8 offset-m2");
+        dom.setAttribute(el3, "class", "col m2 pin-container");
         var el4 = dom.createTextNode("\n      ");
         dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "card blue-grey darken-1");
+        var el4 = dom.createElement("ul");
+        dom.setAttribute(el4, "class", "int-side-nav");
+        var el5 = dom.createTextNode("\n");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createComment("");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("        ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("li");
+        var el6 = dom.createTextNode("Weekday Team\n          ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("ul");
+        var el7 = dom.createTextNode("\n");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createComment("");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createComment("");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("          ");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n        ");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n        ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("div");
-        dom.setAttribute(el5, "class", "card-content");
-        var el6 = dom.createTextNode("\n          ");
+        var el5 = dom.createElement("li");
+        var el6 = dom.createTextNode("Weekend Team\n          ");
         dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
-        dom.setAttribute(el6, "class", "card-title");
-        var el7 = dom.createElement("h4");
-        var el8 = dom.createTextNode("Raiding");
-        dom.appendChild(el7, el8);
+        var el6 = dom.createElement("ul");
+        var el7 = dom.createTextNode("\n");
         dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("h5");
-        var el7 = dom.createTextNode("Schedule");
+        var el7 = dom.createComment("");
         dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("\n            Weekday Team: Tuesday, Wednesday, and Thursday from 7-10PM EST\n            ");
+        var el7 = dom.createComment("");
         dom.appendChild(el6, el7);
-        var el7 = dom.createElement("br");
+        var el7 = dom.createTextNode("          ");
         dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n            Weekend Team: Friday, Saturday, and Sunday from 7-10PM EST\n          ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("h5");
-        var el7 = dom.createTextNode("Required Addons");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("We require a few addons to make the raiding experience more efficient. They are mandatory.");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("br");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("a");
-        dom.setAttribute(el6, "href", "https://forum.nobreaksguild.com/topic/7/required-addons");
-        dom.setAttribute(el6, "target", "_blank");
-        dom.setAttribute(el6, "class", "btn cyan");
-        var el7 = dom.createTextNode("The Complete List");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("br");
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n        ");
         dom.appendChild(el5, el6);
@@ -3637,16 +4125,19 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         var el4 = dom.createTextNode("\n    ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3, "class", "col s12 m9 right");
+        var el4 = dom.createTextNode("\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
         dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment("");
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
@@ -3656,17 +4147,357 @@ define("nobreaks/templates/raiding", ["exports"], function (exports) {
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element0 = dom.childAt(fragment, [2]);
-        var morphs = new Array(3);
+        var element0 = dom.childAt(fragment, [2, 1]);
+        var element1 = dom.childAt(element0, [1, 1]);
+        var element2 = dom.childAt(element1, [4, 1]);
+        var element3 = dom.childAt(element1, [6, 1]);
+        var morphs = new Array(8);
         morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        morphs[1] = dom.createMorphAt(element0, 3, 3);
-        morphs[2] = dom.createMorphAt(element0, 5, 5);
+        morphs[1] = dom.createMorphAt(element1, 1, 1);
+        morphs[2] = dom.createMorphAt(element1, 2, 2);
+        morphs[3] = dom.createMorphAt(element2, 1, 1);
+        morphs[4] = dom.createMorphAt(element2, 2, 2);
+        morphs[5] = dom.createMorphAt(element3, 1, 1);
+        morphs[6] = dom.createMorphAt(element3, 2, 2);
+        morphs[7] = dom.createMorphAt(dom.childAt(element0, [3]), 1, 1);
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/sylvanas.jpg"], ["loc", [null, [1, 0], [1, 77]]]], ["block", "md-tabs", [], ["selected", ["subexpr", "@mut", [["get", "tabsSelection", ["loc", [null, [24, 13], [24, 26]]]]], [], []], "class", "blue-grey darken-3"], 0, null, ["loc", [null, [23, 2], [28, 14]]]], ["content", "outlet", ["loc", [null, [30, 2], [30, 12]]]]],
+      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/sylvanas.jpg"], ["loc", [null, [1, 0], [1, 77]]]], ["block", "link-to", ["raiding.index"], ["tagName", "li"], 0, null, ["loc", [null, [6, 8], [8, 20]]]], ["block", "link-to", ["raiding.loot", "latest"], ["tagName", "li"], 1, null, ["loc", [null, [9, 8], [11, 20]]]], ["block", "link-to", ["raiding.weekday.roster"], ["tagName", "li"], 2, null, ["loc", [null, [14, 12], [16, 24]]]], ["block", "link-to", ["raiding.weekday.progress"], ["tagName", "li"], 3, null, ["loc", [null, [17, 12], [19, 24]]]], ["block", "link-to", ["raiding.weekend.roster"], ["tagName", "li"], 4, null, ["loc", [null, [24, 12], [26, 24]]]], ["block", "link-to", ["raiding.weekend.progress"], ["tagName", "li"], 5, null, ["loc", [null, [27, 12], [29, 24]]]], ["content", "outlet", ["loc", [null, [35, 6], [35, 16]]]]],
       locals: [],
-      templates: [child0]
+      templates: [child0, child1, child2, child3, child4, child5]
+    };
+  })());
+});
+define("nobreaks/templates/raiding/index", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["multiple-nodes"]
+        },
+        "revision": "Ember@2.6.2",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 77,
+            "column": 0
+          }
+        },
+        "moduleName": "nobreaks/templates/raiding/index.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("h1");
+        var el2 = dom.createTextNode("Raiding");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "raiding-general card blue-grey darken-1");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "card-content");
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3, "class", "card-title");
+        var el4 = dom.createElement("h4");
+        var el5 = dom.createTextNode("Info");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("h5");
+        var el4 = dom.createTextNode("Schedule");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createTextNode("\n      Weekday Team: Tuesday, Wednesday, and Thursday from 7-10PM EST\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("br");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n      Weekend Team: Friday, Saturday, and Sunday from 7-10PM EST\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("h5");
+        var el4 = dom.createTextNode("Required Addons");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createTextNode("We require a few addons to make the raiding experience more efficient. They are mandatory.");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("br");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3, "href", "https://mods.curse.com/addons/wow/deadly-boss-mods");
+        dom.setAttribute(el3, "target", "_blank");
+        dom.setAttribute(el3, "class", "waves-effect waves-light btn cyan");
+        var el4 = dom.createTextNode("DBM");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3, "href", "https://mods.curse.com/addons/wow/exorsus-raid-tools");
+        dom.setAttribute(el3, "target", "_blank");
+        dom.setAttribute(el3, "class", "waves-effect waves-light btn cyan");
+        var el4 = dom.createTextNode("Exorsus");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3, "href", "https://mods.curse.com/addons/wow/epgp_lootmaster");
+        dom.setAttribute(el3, "target", "_blank");
+        dom.setAttribute(el3, "class", "waves-effect waves-light btn cyan");
+        var el4 = dom.createTextNode("EPGP Lootmaster");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("br");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("h5");
+        var el4 = dom.createTextNode("Communication");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createTextNode("We use Mumble. You must have a working headset and microphone to raid. Ask a guildie for the login info.");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("br");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3, "href", "http://www.mumble.com/mumble-download.php");
+        dom.setAttribute(el3, "target", "_blank");
+        dom.setAttribute(el3, "class", "waves-effect waves-light btn cyan");
+        var el4 = dom.createTextNode("Mumble");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "epgp-info card blue-grey darken-1");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "card-content");
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3, "class", "card-title");
+        var el4 = dom.createElement("h4");
+        var el5 = dom.createTextNode("How Loot Works");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("h5");
+        var el4 = dom.createTextNode("EPGP");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createTextNode("\n      EPGP is a ratio of Effort Points (EP) and Gear Points (GP).\n      Effort points are awarded for a fixed amount for showing up on time, boss kills, and guild contests.\n      They may also be taken away for being tardy without notice, absence without notice, rage quitting, etc.\n      Gear Points is the score given for your equipped and not-equipped gear.\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("br");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("h5");
+        var el4 = dom.createTextNode("The Ratio");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createTextNode("\n      EPGP is not DKP. You won't be bidding on items. If you roll on an item you want,\n      the lootmaster will be able to see all the rolls for said item and compare EPGP ratios.\n      The roll with highest effort points vs lowest gear points wins the roll.\n      This system ensures fair loot distribution across the raid group to maintain even gear scores.\n      The lootmaster does have final say in who wins the item.\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("br");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createTextNode("\n      The complete list of EP values can be found here.\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("br");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3, "href", "https://forum.nobreaksguild.com/topic/7/epgp-awards-and-costs");
+        dom.setAttribute(el3, "target", "_blank");
+        dom.setAttribute(el3, "class", "waves-effect waves-light btn cyan");
+        var el4 = dom.createTextNode("EP Info");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "expectations card blue-grey darken-1");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2, "class", "card-content");
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3, "class", "card-title");
+        var el4 = dom.createElement("h4");
+        var el5 = dom.createTextNode("What We Expect of our Raiders");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("h5");
+        var el4 = dom.createTextNode("Attendance");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createTextNode("\n      Please post in the forums or on the facebook page if you will be late\n      or cannot make your raid time. It gives us time to find a replacement\n      for you and saves you from losing EP! We understand life happens sometimes.\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("h5");
+        var el4 = dom.createTextNode("Attitude");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createTextNode("\n      Although we find rage-quitting to be highly entertaining, we prefer it doesn't happen. We're here to have fun!\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("ul");
+        var el4 = dom.createTextNode("\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("li");
+        var el5 = dom.createElement("i");
+        dom.setAttribute(el5, "class", "material-icons");
+        var el6 = dom.createTextNode("chevron_right");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode(" If something happens and you're not having fun, tell us.");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("li");
+        var el5 = dom.createElement("i");
+        dom.setAttribute(el5, "class", "material-icons");
+        var el6 = dom.createTextNode("chevron_right");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode(" If you need a minute to fix something or take care of real life issues, step out of the raid and come back when you're ready.");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n      ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("li");
+        var el5 = dom.createElement("i");
+        dom.setAttribute(el5, "class", "material-icons");
+        var el6 = dom.createTextNode("chevron_right");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode(" We know progression is rough. Keep your cool.");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("h5");
+        var el4 = dom.createTextNode("Be Prepared");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createTextNode("\n      Until the market evens out again, we'll be requiring everyone to supply their own flasks, potions, and food.\n      If you need help or are able to help others, talk to your guildmates!\n    ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("br");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes() {
+        return [];
+      },
+      statements: [],
+      locals: [],
+      templates: []
     };
   })());
 });
@@ -3680,11 +4511,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 5,
+              "line": 6,
               "column": 8
             },
             "end": {
-              "line": 7,
+              "line": 8,
               "column": 8
             }
           },
@@ -3711,7 +4542,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(dom.childAt(fragment, [1]), 0, 0);
           return morphs;
         },
-        statements: [["content", "model.error.message", ["loc", [null, [6, 14], [6, 37]]]]],
+        statements: [["content", "model.error.message", ["loc", [null, [7, 14], [7, 37]]]]],
         locals: [],
         templates: []
       };
@@ -3726,11 +4557,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 11,
+                  "line": 12,
                   "column": 14
                 },
                 "end": {
-                  "line": 11,
+                  "line": 12,
                   "column": 91
                 }
               },
@@ -3761,11 +4592,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 10,
+                "line": 11,
                 "column": 12
               },
               "end": {
-                "line": 12,
+                "line": 13,
                 "column": 12
               }
             },
@@ -3790,7 +4621,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["block", "link-to", ["raiding.loot", ["get", "model.prevRaidDate", ["loc", [null, [11, 52], [11, 70]]]]], ["class", "white-text"], 0, null, ["loc", [null, [11, 14], [11, 91]]]]],
+          statements: [["block", "link-to", ["raiding.loot", ["get", "model.prevRaidDate", ["loc", [null, [12, 52], [12, 70]]]]], ["class", "white-text"], 0, null, ["loc", [null, [12, 14], [12, 91]]]]],
           locals: [],
           templates: [child0]
         };
@@ -3802,11 +4633,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 9,
+              "line": 10,
               "column": 10
             },
             "end": {
-              "line": 13,
+              "line": 14,
               "column": 10
             }
           },
@@ -3829,7 +4660,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           dom.insertBoundary(fragment, null);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.loot", ["get", "model.prevRaidDate", ["loc", [null, [10, 38], [10, 56]]]]], ["tagName", "i", "class", "prev material-icons"], 0, null, ["loc", [null, [10, 12], [12, 24]]]]],
+        statements: [["block", "link-to", ["raiding.loot", ["get", "model.prevRaidDate", ["loc", [null, [11, 38], [11, 56]]]]], ["tagName", "i", "class", "prev material-icons"], 0, null, ["loc", [null, [11, 12], [13, 24]]]]],
         locals: [],
         templates: [child0]
       };
@@ -3844,11 +4675,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 19,
+                  "line": 20,
                   "column": 14
                 },
                 "end": {
-                  "line": 19,
+                  "line": 20,
                   "column": 91
                 }
               },
@@ -3879,11 +4710,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 18,
+                "line": 19,
                 "column": 12
               },
               "end": {
-                "line": 20,
+                "line": 21,
                 "column": 12
               }
             },
@@ -3908,7 +4739,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
             morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
             return morphs;
           },
-          statements: [["block", "link-to", ["raiding.loot", ["get", "model.nextRaidDate", ["loc", [null, [19, 52], [19, 70]]]]], ["class", "white-text"], 0, null, ["loc", [null, [19, 14], [19, 91]]]]],
+          statements: [["block", "link-to", ["raiding.loot", ["get", "model.nextRaidDate", ["loc", [null, [20, 52], [20, 70]]]]], ["class", "white-text"], 0, null, ["loc", [null, [20, 14], [20, 91]]]]],
           locals: [],
           templates: [child0]
         };
@@ -3920,11 +4751,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 17,
+              "line": 18,
               "column": 10
             },
             "end": {
-              "line": 21,
+              "line": 22,
               "column": 10
             }
           },
@@ -3947,7 +4778,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           dom.insertBoundary(fragment, null);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.loot", ["get", "model.nextRaidDate", ["loc", [null, [18, 38], [18, 56]]]]], ["tagName", "i", "class", "next material-icons"], 0, null, ["loc", [null, [18, 12], [20, 24]]]]],
+        statements: [["block", "link-to", ["raiding.loot", ["get", "model.nextRaidDate", ["loc", [null, [19, 38], [19, 56]]]]], ["tagName", "i", "class", "next material-icons"], 0, null, ["loc", [null, [19, 12], [21, 24]]]]],
         locals: [],
         templates: [child0]
       };
@@ -3960,11 +4791,11 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 27,
+              "line": 28,
               "column": 4
             },
             "end": {
-              "line": 82,
+              "line": 83,
               "column": 4
             }
           },
@@ -4076,7 +4907,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
           morphs[6] = dom.createMorphAt(element5, 3, 3);
           return morphs;
         },
-        statements: [["attribute", "src", ["concat", ["https://api.nobreaksguild.com/cdn/images/icons/", ["get", "item.itemId.icon", ["loc", [null, [32, 71], [32, 87]]]], ".png"]]], ["attribute", "style", ["concat", ["color: #", ["get", "item.itemId.quality.hex", ["loc", [null, [36, 34], [36, 57]]]]]]], ["attribute", "style", ["concat", ["color: #", ["get", "item.itemId.context.hex", ["loc", [null, [37, 39], [37, 62]]]]]]], ["content", "item.itemId.context.name", ["loc", [null, [37, 66], [37, 94]]]], ["content", "item.itemId.name", ["loc", [null, [38, 16], [38, 36]]]], ["content", "item.characterId.name", ["loc", [null, [40, 20], [40, 45]]]], ["content", "item.cost", ["loc", [null, [40, 50], [40, 63]]]]],
+        statements: [["attribute", "src", ["concat", ["https://api.nobreaksguild.com/cdn/images/icons/", ["get", "item.itemId.icon", ["loc", [null, [33, 71], [33, 87]]]], ".png"]]], ["attribute", "style", ["concat", ["color: #", ["get", "item.itemId.quality.hex", ["loc", [null, [37, 34], [37, 57]]]]]]], ["attribute", "style", ["concat", ["color: #", ["get", "item.itemId.context.hex", ["loc", [null, [38, 39], [38, 62]]]]]]], ["content", "item.itemId.context.name", ["loc", [null, [38, 66], [38, 94]]]], ["content", "item.itemId.name", ["loc", [null, [39, 16], [39, 36]]]], ["content", "item.characterId.name", ["loc", [null, [41, 20], [41, 45]]]], ["content", "item.cost", ["loc", [null, [41, 50], [41, 63]]]]],
         locals: ["item"],
         templates: []
       };
@@ -4084,7 +4915,8 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
     return {
       meta: {
         "fragmentReason": {
-          "name": "triple-curlies"
+          "name": "missing-wrapper",
+          "problems": ["multiple-nodes"]
         },
         "revision": "Ember@2.6.2",
         "loc": {
@@ -4094,7 +4926,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 85,
+            "line": 86,
             "column": 0
           }
         },
@@ -4106,6 +4938,12 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
       hasRendered: false,
       buildFragment: function buildFragment(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("h4");
+        var el2 = dom.createTextNode("Loot");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "loot-tab");
         var el2 = dom.createTextNode("\n  ");
@@ -4180,7 +5018,7 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
         return el0;
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
-        var element6 = dom.childAt(fragment, [0]);
+        var element6 = dom.childAt(fragment, [2]);
         var element7 = dom.childAt(element6, [1, 1, 1]);
         var morphs = new Array(5);
         morphs[0] = dom.createMorphAt(element7, 1, 1);
@@ -4190,13 +5028,123 @@ define("nobreaks/templates/raiding/loot", ["exports"], function (exports) {
         morphs[4] = dom.createMorphAt(dom.childAt(element6, [3]), 1, 1);
         return morphs;
       },
-      statements: [["block", "if", [["get", "model.error", ["loc", [null, [5, 14], [5, 25]]]]], [], 0, null, ["loc", [null, [5, 8], [7, 15]]]], ["block", "if", [["get", "model.prevRaidDate", ["loc", [null, [9, 16], [9, 34]]]]], [], 1, null, ["loc", [null, [9, 10], [13, 17]]]], ["content", "model.raidDate", ["loc", [null, [15, 12], [15, 30]]]], ["block", "if", [["get", "model.nextRaidDate", ["loc", [null, [17, 16], [17, 34]]]]], [], 2, null, ["loc", [null, [17, 10], [21, 17]]]], ["block", "each", [["get", "model.items", ["loc", [null, [27, 12], [27, 23]]]]], [], 3, null, ["loc", [null, [27, 4], [82, 13]]]]],
+      statements: [["block", "if", [["get", "model.error", ["loc", [null, [6, 14], [6, 25]]]]], [], 0, null, ["loc", [null, [6, 8], [8, 15]]]], ["block", "if", [["get", "model.prevRaidDate", ["loc", [null, [10, 16], [10, 34]]]]], [], 1, null, ["loc", [null, [10, 10], [14, 17]]]], ["content", "model.raidDate", ["loc", [null, [16, 12], [16, 30]]]], ["block", "if", [["get", "model.nextRaidDate", ["loc", [null, [18, 16], [18, 34]]]]], [], 2, null, ["loc", [null, [18, 10], [22, 17]]]], ["block", "each", [["get", "model.items", ["loc", [null, [28, 12], [28, 23]]]]], [], 3, null, ["loc", [null, [28, 4], [83, 13]]]]],
       locals: [],
       templates: [child0, child1, child2, child3]
     };
   })());
 });
-define("nobreaks/templates/raiding/progress", ["exports"], function (exports) {
+define("nobreaks/templates/raiding/weekday", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 8,
+              "column": 0
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding/weekday.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(2);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+          return morphs;
+        },
+        statements: [["inline", "md-tab", [], ["value", "raiding.weekday.roster", "title", "Roster"], ["loc", [null, [6, 2], [6, 58]]]], ["inline", "md-tab", [], ["value", "raiding.weekday.progress", "title", "Progress & Logs"], ["loc", [null, [7, 2], [7, 69]]]]],
+        locals: [],
+        templates: []
+      };
+    })();
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["multiple-nodes", "wrong-type"]
+        },
+        "revision": "Ember@2.6.2",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 11,
+            "column": 0
+          }
+        },
+        "moduleName": "nobreaks/templates/raiding/weekday.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "row tab-header col s12");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("h4");
+        var el3 = dom.createTextNode("Weekday Team");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(2);
+        morphs[0] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+        morphs[1] = dom.createMorphAt(fragment, 4, 4, contextualElement);
+        return morphs;
+      },
+      statements: [["block", "md-tabs", [], ["selected", ["subexpr", "@mut", [["get", "tabsSelection", ["loc", [null, [5, 11], [5, 24]]]]], [], []], "class", "blue-grey darken-3 col s12"], 0, null, ["loc", [null, [4, 0], [8, 12]]]], ["content", "outlet", ["loc", [null, [10, 0], [10, 10]]]]],
+      locals: [],
+      templates: [child0]
+    };
+  })());
+});
+define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
       var child0 = (function () {
@@ -4208,15 +5156,15 @@ define("nobreaks/templates/raiding/progress", ["exports"], function (exports) {
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 16,
+                  "line": 12,
                   "column": 14
                 },
                 "end": {
-                  "line": 20,
+                  "line": 16,
                   "column": 14
                 }
               },
-              "moduleName": "nobreaks/templates/raiding/progress.hbs"
+              "moduleName": "nobreaks/templates/raiding/weekday/progress.hbs"
             },
             isEmpty: false,
             arity: 0,
@@ -4256,15 +5204,15 @@ define("nobreaks/templates/raiding/progress", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 10,
+                "line": 6,
                 "column": 6
               },
               "end": {
-                "line": 26,
+                "line": 22,
                 "column": 6
               }
             },
-            "moduleName": "nobreaks/templates/raiding/progress.hbs"
+            "moduleName": "nobreaks/templates/raiding/weekday/progress.hbs"
           },
           isEmpty: false,
           arity: 1,
@@ -4329,7 +5277,7 @@ define("nobreaks/templates/raiding/progress", ["exports"], function (exports) {
             morphs[3] = dom.createAttrMorph(element2, 'src');
             return morphs;
           },
-          statements: [["attribute", "class", ["concat", ["col s12 m6 l3 ", ["subexpr", "if", [["get", "boss.mythicKills", ["loc", [null, [11, 36], [11, 52]]]], "killed"], [], ["loc", [null, [11, 31], [11, 63]]]]]]], ["content", "boss.name", ["loc", [null, [15, 50], [15, 63]]]], ["block", "if", [["get", "boss.mythicKills", ["loc", [null, [16, 20], [16, 36]]]]], [], 0, null, ["loc", [null, [16, 14], [20, 21]]]], ["attribute", "src", ["get", "boss.thumbnail", ["loc", [null, [21, 25], [21, 39]]]]]],
+          statements: [["attribute", "class", ["concat", ["col s12 m6 l3 ", ["subexpr", "if", [["get", "boss.heroicKills", ["loc", [null, [7, 36], [7, 52]]]], "killed"], [], ["loc", [null, [7, 31], [7, 63]]]]]]], ["content", "boss.name", ["loc", [null, [11, 50], [11, 63]]]], ["block", "if", [["get", "boss.heroicKills", ["loc", [null, [12, 20], [12, 36]]]]], [], 0, null, ["loc", [null, [12, 14], [16, 21]]]], ["attribute", "src", ["get", "boss.thumbnail", ["loc", [null, [17, 25], [17, 39]]]]]],
           locals: ["boss"],
           templates: [child0]
         };
@@ -4341,15 +5289,15 @@ define("nobreaks/templates/raiding/progress", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 5,
+              "line": 2,
               "column": 2
             },
             "end": {
-              "line": 29,
+              "line": 25,
               "column": 2
             }
           },
-          "moduleName": "nobreaks/templates/raiding/progress.hbs"
+          "moduleName": "nobreaks/templates/raiding/weekday/progress.hbs"
         },
         isEmpty: false,
         arity: 1,
@@ -4360,14 +5308,16 @@ define("nobreaks/templates/raiding/progress", ["exports"], function (exports) {
           var el1 = dom.createTextNode("  ");
           dom.appendChild(el0, el1);
           var el1 = dom.createElement("div");
-          dom.setAttribute(el1, "class", "raid");
+          dom.setAttribute(el1, "class", "raid col s12");
           var el2 = dom.createTextNode("\n    ");
           dom.appendChild(el1, el2);
           var el2 = dom.createElement("h5");
           var el3 = dom.createComment("");
           dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode(" (Heroic)");
+          dom.appendChild(el2, el3);
           dom.appendChild(el1, el2);
-          var el2 = dom.createTextNode("\n\n    ");
+          var el2 = dom.createTextNode("\n    ");
           dom.appendChild(el1, el2);
           var el2 = dom.createElement("ul");
           dom.setAttribute(el2, "class", "row");
@@ -4392,7 +5342,7 @@ define("nobreaks/templates/raiding/progress", ["exports"], function (exports) {
           morphs[1] = dom.createMorphAt(dom.childAt(element3, [3]), 1, 1);
           return morphs;
         },
-        statements: [["content", "raid.name", ["loc", [null, [7, 8], [7, 21]]]], ["block", "each", [["get", "raid.bosses", ["loc", [null, [10, 14], [10, 25]]]]], [], 0, null, ["loc", [null, [10, 6], [26, 15]]]]],
+        statements: [["content", "raid.name", ["loc", [null, [4, 8], [4, 21]]]], ["block", "each", [["get", "raid.bosses", ["loc", [null, [6, 14], [6, 25]]]]], [], 0, null, ["loc", [null, [6, 6], [22, 15]]]]],
         locals: ["raid"],
         templates: [child0]
       };
@@ -4410,11 +5360,11 @@ define("nobreaks/templates/raiding/progress", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 31,
+            "line": 27,
             "column": 0
           }
         },
-        "moduleName": "nobreaks/templates/raiding/progress.hbs"
+        "moduleName": "nobreaks/templates/raiding/weekday/progress.hbs"
       },
       isEmpty: false,
       arity: 0,
@@ -4424,19 +5374,6 @@ define("nobreaks/templates/raiding/progress", ["exports"], function (exports) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "progress-tab");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "row tab-header");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("h4");
-        var el4 = dom.createTextNode("Mythic Progression");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         var el2 = dom.createComment("");
@@ -4448,16 +5385,16 @@ define("nobreaks/templates/raiding/progress", ["exports"], function (exports) {
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 3, 3);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 1, 1);
         return morphs;
       },
-      statements: [["block", "each", [["get", "model.raids", ["loc", [null, [5, 10], [5, 21]]]]], [], 0, null, ["loc", [null, [5, 2], [29, 11]]]]],
+      statements: [["block", "each", [["get", "model.raids", ["loc", [null, [2, 10], [2, 21]]]]], [], 0, null, ["loc", [null, [2, 2], [25, 11]]]]],
       locals: [],
       templates: [child0]
     };
   })());
 });
-define("nobreaks/templates/raiding/roster", ["exports"], function (exports) {
+define("nobreaks/templates/raiding/weekday/roster", ["exports"], function (exports) {
   exports["default"] = Ember.HTMLBars.template((function () {
     var child0 = (function () {
       return {
@@ -4467,15 +5404,15 @@ define("nobreaks/templates/raiding/roster", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 6,
+              "line": 3,
               "column": 4
             },
             "end": {
-              "line": 31,
+              "line": 18,
               "column": 4
             }
           },
-          "moduleName": "nobreaks/templates/raiding/roster.hbs"
+          "moduleName": "nobreaks/templates/raiding/weekday/roster.hbs"
         },
         isEmpty: false,
         arity: 1,
@@ -4486,7 +5423,7 @@ define("nobreaks/templates/raiding/roster", ["exports"], function (exports) {
           var el1 = dom.createTextNode("    ");
           dom.appendChild(el0, el1);
           var el1 = dom.createElement("li");
-          dom.setAttribute(el1, "class", "col s12 m6 l3");
+          dom.setAttribute(el1, "class", "col s12 m6 l4");
           var el2 = dom.createTextNode("\n      ");
           dom.appendChild(el1, el2);
           var el2 = dom.createElement("div");
@@ -4516,53 +5453,21 @@ define("nobreaks/templates/raiding/roster", ["exports"], function (exports) {
           dom.setAttribute(el5, "class", "info col s6 m8 white-text");
           var el6 = dom.createTextNode("\n              ");
           dom.appendChild(el5, el6);
-          var el6 = dom.createElement("h6");
-          var el7 = dom.createTextNode("Item Level");
+          var el6 = dom.createElement("p");
+          var el7 = dom.createComment("");
+          dom.appendChild(el6, el7);
+          var el7 = dom.createTextNode(" ");
+          dom.appendChild(el6, el7);
+          var el7 = dom.createComment("");
           dom.appendChild(el6, el7);
           dom.appendChild(el5, el6);
           var el6 = dom.createTextNode("\n              ");
           dom.appendChild(el5, el6);
           var el6 = dom.createElement("p");
-          var el7 = dom.createComment("");
-          dom.appendChild(el6, el7);
-          var el7 = dom.createTextNode(" /\n              ");
+          var el7 = dom.createTextNode("EP/GP: ");
           dom.appendChild(el6, el7);
           var el7 = dom.createComment("");
           dom.appendChild(el6, el7);
-          dom.appendChild(el5, el6);
-          var el6 = dom.createTextNode("\n\n              ");
-          dom.appendChild(el5, el6);
-          var el6 = dom.createElement("h6");
-          var el7 = dom.createTextNode("Spec");
-          dom.appendChild(el6, el7);
-          dom.appendChild(el5, el6);
-          var el6 = dom.createTextNode("\n              ");
-          dom.appendChild(el5, el6);
-          var el6 = dom.createElement("p");
-          var el7 = dom.createComment("");
-          dom.appendChild(el6, el7);
-          dom.appendChild(el5, el6);
-          var el6 = dom.createTextNode("\n            ");
-          dom.appendChild(el5, el6);
-          dom.appendChild(el4, el5);
-          var el5 = dom.createTextNode("\n            ");
-          dom.appendChild(el4, el5);
-          var el5 = dom.createElement("div");
-          dom.setAttribute(el5, "class", "epgp-count col s6 white-text");
-          var el6 = dom.createTextNode("\n              EP: ");
-          dom.appendChild(el5, el6);
-          var el6 = dom.createComment("");
-          dom.appendChild(el5, el6);
-          var el6 = dom.createTextNode("\n            ");
-          dom.appendChild(el5, el6);
-          dom.appendChild(el4, el5);
-          var el5 = dom.createTextNode("\n            ");
-          dom.appendChild(el4, el5);
-          var el5 = dom.createElement("div");
-          dom.setAttribute(el5, "class", "epgp-count col s6 white-text right-align");
-          var el6 = dom.createTextNode("\n              GP: ");
-          dom.appendChild(el5, el6);
-          var el6 = dom.createComment("");
           dom.appendChild(el5, el6);
           var el6 = dom.createTextNode("\n            ");
           dom.appendChild(el5, el6);
@@ -4588,19 +5493,17 @@ define("nobreaks/templates/raiding/roster", ["exports"], function (exports) {
           var element1 = dom.childAt(element0, [1]);
           var element2 = dom.childAt(element1, [3]);
           var element3 = dom.childAt(element1, [5]);
-          var element4 = dom.childAt(element3, [3]);
-          var morphs = new Array(8);
+          var element4 = dom.childAt(element3, [1]);
+          var morphs = new Array(6);
           morphs[0] = dom.createAttrMorph(element0, 'class');
           morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
           morphs[2] = dom.createAttrMorph(element2, 'src');
           morphs[3] = dom.createMorphAt(element4, 0, 0);
           morphs[4] = dom.createMorphAt(element4, 2, 2);
-          morphs[5] = dom.createMorphAt(dom.childAt(element3, [7]), 0, 0);
-          morphs[6] = dom.createMorphAt(dom.childAt(element1, [7]), 1, 1);
-          morphs[7] = dom.createMorphAt(dom.childAt(element1, [9]), 1, 1);
+          morphs[5] = dom.createMorphAt(dom.childAt(element3, [3]), 1, 1);
           return morphs;
         },
-        statements: [["attribute", "class", ["concat", ["card-content row ", ["subexpr", "index-to-class", [["get", "character.characterId.class", ["loc", [null, [9, 54], [9, 81]]]], true], [], ["loc", [null, [9, 37], [9, 88]]]]]]], ["content", "character.characterId.name", ["loc", [null, [11, 48], [11, 78]]]], ["attribute", "src", ["concat", ["https://us.battle.net/static-render/us/", ["get", "character.characterId.thumbnail", ["loc", [null, [12, 63], [12, 94]]]]]]], ["content", "character.characterId.items.averageItemLevelEquipped", ["loc", [null, [15, 17], [15, 73]]]], ["content", "character.characterId.items.averageItemLevel", ["loc", [null, [16, 14], [16, 62]]]], ["content", "character.characterId.spec.name", ["loc", [null, [19, 17], [19, 52]]]], ["content", "character.effortPoints", ["loc", [null, [22, 18], [22, 44]]]], ["content", "character.gearPoints", ["loc", [null, [25, 18], [25, 42]]]]],
+        statements: [["attribute", "class", ["concat", ["card-content row ", ["subexpr", "index-to-class", [["get", "character.characterId.class", ["loc", [null, [6, 54], [6, 81]]]], true], [], ["loc", [null, [6, 37], [6, 88]]]]]]], ["content", "character.characterId.name", ["loc", [null, [8, 48], [8, 78]]]], ["attribute", "src", ["concat", ["https://us.battle.net/static-render/us/", ["get", "character.characterId.thumbnail", ["loc", [null, [9, 63], [9, 94]]]]]]], ["content", "character.characterId.items.averageItemLevelEquipped", ["loc", [null, [11, 17], [11, 73]]]], ["content", "character.characterId.spec.name", ["loc", [null, [11, 74], [11, 109]]]], ["inline", "epgp-total", [["get", "character.effortPoints", ["loc", [null, [12, 37], [12, 59]]]], ["get", "character.gearPoints", ["loc", [null, [12, 60], [12, 80]]]]], [], ["loc", [null, [12, 24], [12, 82]]]]],
         locals: ["character"],
         templates: []
       };
@@ -4618,11 +5521,11 @@ define("nobreaks/templates/raiding/roster", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 34,
+            "line": 21,
             "column": 0
           }
         },
-        "moduleName": "nobreaks/templates/raiding/roster.hbs"
+        "moduleName": "nobreaks/templates/raiding/weekday/roster.hbs"
       },
       isEmpty: false,
       arity: 0,
@@ -4632,19 +5535,6 @@ define("nobreaks/templates/raiding/roster", ["exports"], function (exports) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("div");
         dom.setAttribute(el1, "class", "roster-tab");
-        var el2 = dom.createTextNode("\n  ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("div");
-        dom.setAttribute(el2, "class", "row tab-header");
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("h4");
-        var el4 = dom.createTextNode("Mythic Raid Team");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n  ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n  ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("ul");
@@ -4665,10 +5555,540 @@ define("nobreaks/templates/raiding/roster", ["exports"], function (exports) {
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0, 3]), 1, 1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0, 1]), 1, 1);
         return morphs;
       },
-      statements: [["block", "each", [["get", "model", ["loc", [null, [6, 12], [6, 17]]]]], [], 0, null, ["loc", [null, [6, 4], [31, 13]]]]],
+      statements: [["block", "each", [["get", "model", ["loc", [null, [3, 12], [3, 17]]]]], [], 0, null, ["loc", [null, [3, 4], [18, 13]]]]],
+      locals: [],
+      templates: [child0]
+    };
+  })());
+});
+define("nobreaks/templates/raiding/weekend", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 8,
+              "column": 0
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding/weekend.hbs"
+        },
+        isEmpty: false,
+        arity: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var morphs = new Array(2);
+          morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
+          morphs[1] = dom.createMorphAt(fragment, 3, 3, contextualElement);
+          return morphs;
+        },
+        statements: [["inline", "md-tab", [], ["value", "raiding.weekend.roster", "title", "Roster"], ["loc", [null, [6, 2], [6, 58]]]], ["inline", "md-tab", [], ["value", "raiding.weekend.progress", "title", "Progress & Logs"], ["loc", [null, [7, 2], [7, 69]]]]],
+        locals: [],
+        templates: []
+      };
+    })();
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "missing-wrapper",
+          "problems": ["multiple-nodes", "wrong-type"]
+        },
+        "revision": "Ember@2.6.2",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 11,
+            "column": 0
+          }
+        },
+        "moduleName": "nobreaks/templates/raiding/weekend.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "row tab-header col s12");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("h4");
+        var el3 = dom.createTextNode("Weekend Team");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createComment("");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(2);
+        morphs[0] = dom.createMorphAt(fragment, 2, 2, contextualElement);
+        morphs[1] = dom.createMorphAt(fragment, 4, 4, contextualElement);
+        return morphs;
+      },
+      statements: [["block", "md-tabs", [], ["selected", ["subexpr", "@mut", [["get", "tabsSelection", ["loc", [null, [5, 11], [5, 24]]]]], [], []], "class", "blue-grey darken-3 col s12"], 0, null, ["loc", [null, [4, 0], [8, 12]]]], ["content", "outlet", ["loc", [null, [10, 0], [10, 10]]]]],
+      locals: [],
+      templates: [child0]
+    };
+  })());
+});
+define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      var child0 = (function () {
+        var child0 = (function () {
+          return {
+            meta: {
+              "fragmentReason": false,
+              "revision": "Ember@2.6.2",
+              "loc": {
+                "source": null,
+                "start": {
+                  "line": 12,
+                  "column": 14
+                },
+                "end": {
+                  "line": 16,
+                  "column": 14
+                }
+              },
+              "moduleName": "nobreaks/templates/raiding/weekend/progress.hbs"
+            },
+            isEmpty: false,
+            arity: 0,
+            cachedFragment: null,
+            hasRendered: false,
+            buildFragment: function buildFragment(dom) {
+              var el0 = dom.createDocumentFragment();
+              var el1 = dom.createTextNode("                ");
+              dom.appendChild(el0, el1);
+              var el1 = dom.createElement("div");
+              dom.setAttribute(el1, "class", "killed");
+              var el2 = dom.createTextNode("\n                  ");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createElement("img");
+              dom.setAttribute(el2, "class", "dead");
+              dom.setAttribute(el2, "src", "https://api.nobreaksguild.com/cdn/images/bosses/dead.png");
+              dom.appendChild(el1, el2);
+              var el2 = dom.createTextNode("\n                ");
+              dom.appendChild(el1, el2);
+              dom.appendChild(el0, el1);
+              var el1 = dom.createTextNode("\n");
+              dom.appendChild(el0, el1);
+              return el0;
+            },
+            buildRenderNodes: function buildRenderNodes() {
+              return [];
+            },
+            statements: [],
+            locals: [],
+            templates: []
+          };
+        })();
+        return {
+          meta: {
+            "fragmentReason": false,
+            "revision": "Ember@2.6.2",
+            "loc": {
+              "source": null,
+              "start": {
+                "line": 6,
+                "column": 6
+              },
+              "end": {
+                "line": 22,
+                "column": 6
+              }
+            },
+            "moduleName": "nobreaks/templates/raiding/weekend/progress.hbs"
+          },
+          isEmpty: false,
+          arity: 1,
+          cachedFragment: null,
+          hasRendered: false,
+          buildFragment: function buildFragment(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("      ");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("li");
+            var el2 = dom.createTextNode("\n        ");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("div");
+            dom.setAttribute(el2, "class", "card grey darken-4");
+            var el3 = dom.createTextNode("\n          ");
+            dom.appendChild(el2, el3);
+            var el3 = dom.createElement("div");
+            dom.setAttribute(el3, "class", "card-content row");
+            var el4 = dom.createTextNode("\n            ");
+            dom.appendChild(el3, el4);
+            var el4 = dom.createElement("div");
+            dom.setAttribute(el4, "class", "content-wrap");
+            var el5 = dom.createTextNode("\n              ");
+            dom.appendChild(el4, el5);
+            var el5 = dom.createElement("h6");
+            dom.setAttribute(el5, "class", "name col s12 white-text");
+            var el6 = dom.createComment("");
+            dom.appendChild(el5, el6);
+            dom.appendChild(el4, el5);
+            var el5 = dom.createTextNode("\n");
+            dom.appendChild(el4, el5);
+            var el5 = dom.createComment("");
+            dom.appendChild(el4, el5);
+            var el5 = dom.createTextNode("              ");
+            dom.appendChild(el4, el5);
+            var el5 = dom.createElement("img");
+            dom.appendChild(el4, el5);
+            var el5 = dom.createTextNode("\n            ");
+            dom.appendChild(el4, el5);
+            dom.appendChild(el3, el4);
+            var el4 = dom.createTextNode("\n          ");
+            dom.appendChild(el3, el4);
+            dom.appendChild(el2, el3);
+            var el3 = dom.createTextNode("\n        ");
+            dom.appendChild(el2, el3);
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n      ");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+            var element0 = dom.childAt(fragment, [1]);
+            var element1 = dom.childAt(element0, [1, 1, 1]);
+            var element2 = dom.childAt(element1, [5]);
+            var morphs = new Array(4);
+            morphs[0] = dom.createAttrMorph(element0, 'class');
+            morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
+            morphs[2] = dom.createMorphAt(element1, 3, 3);
+            morphs[3] = dom.createAttrMorph(element2, 'src');
+            return morphs;
+          },
+          statements: [["attribute", "class", ["concat", ["col s12 m6 l3 ", ["subexpr", "if", [["get", "boss.heroicKills", ["loc", [null, [7, 36], [7, 52]]]], "killed"], [], ["loc", [null, [7, 31], [7, 63]]]]]]], ["content", "boss.name", ["loc", [null, [11, 50], [11, 63]]]], ["block", "if", [["get", "boss.heroicKills", ["loc", [null, [12, 20], [12, 36]]]]], [], 0, null, ["loc", [null, [12, 14], [16, 21]]]], ["attribute", "src", ["get", "boss.thumbnail", ["loc", [null, [17, 25], [17, 39]]]]]],
+          locals: ["boss"],
+          templates: [child0]
+        };
+      })();
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 2,
+              "column": 2
+            },
+            "end": {
+              "line": 25,
+              "column": 2
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding/weekend/progress.hbs"
+        },
+        isEmpty: false,
+        arity: 1,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("  ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("div");
+          dom.setAttribute(el1, "class", "raid col s12");
+          var el2 = dom.createTextNode("\n    ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("h5");
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode(" (Heroic)");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n    ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("ul");
+          dom.setAttribute(el2, "class", "row");
+          var el3 = dom.createTextNode("\n");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createComment("");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("    ");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n  ");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var element3 = dom.childAt(fragment, [1]);
+          var morphs = new Array(2);
+          morphs[0] = dom.createMorphAt(dom.childAt(element3, [1]), 0, 0);
+          morphs[1] = dom.createMorphAt(dom.childAt(element3, [3]), 1, 1);
+          return morphs;
+        },
+        statements: [["content", "raid.name", ["loc", [null, [4, 8], [4, 21]]]], ["block", "each", [["get", "raid.bosses", ["loc", [null, [6, 14], [6, 25]]]]], [], 0, null, ["loc", [null, [6, 6], [22, 15]]]]],
+        locals: ["raid"],
+        templates: [child0]
+      };
+    })();
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "triple-curlies"
+        },
+        "revision": "Ember@2.6.2",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 27,
+            "column": 0
+          }
+        },
+        "moduleName": "nobreaks/templates/raiding/weekend/progress.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "progress-tab");
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createComment("");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 1, 1);
+        return morphs;
+      },
+      statements: [["block", "each", [["get", "model.raids", ["loc", [null, [2, 10], [2, 21]]]]], [], 0, null, ["loc", [null, [2, 2], [25, 11]]]]],
+      locals: [],
+      templates: [child0]
+    };
+  })());
+});
+define("nobreaks/templates/raiding/weekend/roster", ["exports"], function (exports) {
+  exports["default"] = Ember.HTMLBars.template((function () {
+    var child0 = (function () {
+      return {
+        meta: {
+          "fragmentReason": false,
+          "revision": "Ember@2.6.2",
+          "loc": {
+            "source": null,
+            "start": {
+              "line": 3,
+              "column": 4
+            },
+            "end": {
+              "line": 18,
+              "column": 4
+            }
+          },
+          "moduleName": "nobreaks/templates/raiding/weekend/roster.hbs"
+        },
+        isEmpty: false,
+        arity: 1,
+        cachedFragment: null,
+        hasRendered: false,
+        buildFragment: function buildFragment(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createTextNode("    ");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("li");
+          dom.setAttribute(el1, "class", "col s12 m6 l4");
+          var el2 = dom.createTextNode("\n      ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("div");
+          dom.setAttribute(el2, "class", "card grey darken-4");
+          var el3 = dom.createTextNode("\n        ");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createElement("div");
+          var el4 = dom.createTextNode("\n          ");
+          dom.appendChild(el3, el4);
+          var el4 = dom.createElement("div");
+          dom.setAttribute(el4, "class", "content-wrap");
+          var el5 = dom.createTextNode("\n            ");
+          dom.appendChild(el4, el5);
+          var el5 = dom.createElement("h6");
+          dom.setAttribute(el5, "class", "name col s12 white-text");
+          var el6 = dom.createComment("");
+          dom.appendChild(el5, el6);
+          dom.appendChild(el4, el5);
+          var el5 = dom.createTextNode("\n            ");
+          dom.appendChild(el4, el5);
+          var el5 = dom.createElement("img");
+          dom.setAttribute(el5, "class", "col s6 m4");
+          dom.appendChild(el4, el5);
+          var el5 = dom.createTextNode("\n            ");
+          dom.appendChild(el4, el5);
+          var el5 = dom.createElement("div");
+          dom.setAttribute(el5, "class", "info col s6 m8 white-text");
+          var el6 = dom.createTextNode("\n              ");
+          dom.appendChild(el5, el6);
+          var el6 = dom.createElement("p");
+          var el7 = dom.createComment("");
+          dom.appendChild(el6, el7);
+          var el7 = dom.createTextNode(" ");
+          dom.appendChild(el6, el7);
+          var el7 = dom.createComment("");
+          dom.appendChild(el6, el7);
+          dom.appendChild(el5, el6);
+          var el6 = dom.createTextNode("\n              ");
+          dom.appendChild(el5, el6);
+          var el6 = dom.createElement("p");
+          var el7 = dom.createTextNode("EP/GP: ");
+          dom.appendChild(el6, el7);
+          var el7 = dom.createComment("");
+          dom.appendChild(el6, el7);
+          dom.appendChild(el5, el6);
+          var el6 = dom.createTextNode("\n            ");
+          dom.appendChild(el5, el6);
+          dom.appendChild(el4, el5);
+          var el5 = dom.createTextNode("\n          ");
+          dom.appendChild(el4, el5);
+          dom.appendChild(el3, el4);
+          var el4 = dom.createTextNode("\n        ");
+          dom.appendChild(el3, el4);
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("\n      ");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n    ");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+          var element0 = dom.childAt(fragment, [1, 1, 1]);
+          var element1 = dom.childAt(element0, [1]);
+          var element2 = dom.childAt(element1, [3]);
+          var element3 = dom.childAt(element1, [5]);
+          var element4 = dom.childAt(element3, [1]);
+          var morphs = new Array(6);
+          morphs[0] = dom.createAttrMorph(element0, 'class');
+          morphs[1] = dom.createMorphAt(dom.childAt(element1, [1]), 0, 0);
+          morphs[2] = dom.createAttrMorph(element2, 'src');
+          morphs[3] = dom.createMorphAt(element4, 0, 0);
+          morphs[4] = dom.createMorphAt(element4, 2, 2);
+          morphs[5] = dom.createMorphAt(dom.childAt(element3, [3]), 1, 1);
+          return morphs;
+        },
+        statements: [["attribute", "class", ["concat", ["card-content row ", ["subexpr", "index-to-class", [["get", "character.characterId.class", ["loc", [null, [6, 54], [6, 81]]]], true], [], ["loc", [null, [6, 37], [6, 88]]]]]]], ["content", "character.characterId.name", ["loc", [null, [8, 48], [8, 78]]]], ["attribute", "src", ["concat", ["https://us.battle.net/static-render/us/", ["get", "character.characterId.thumbnail", ["loc", [null, [9, 63], [9, 94]]]]]]], ["content", "character.characterId.items.averageItemLevelEquipped", ["loc", [null, [11, 17], [11, 73]]]], ["content", "character.characterId.spec.name", ["loc", [null, [11, 74], [11, 109]]]], ["inline", "epgp-total", [["get", "character.effortPoints", ["loc", [null, [12, 37], [12, 59]]]], ["get", "character.gearPoints", ["loc", [null, [12, 60], [12, 80]]]]], [], ["loc", [null, [12, 24], [12, 82]]]]],
+        locals: ["character"],
+        templates: []
+      };
+    })();
+    return {
+      meta: {
+        "fragmentReason": {
+          "name": "triple-curlies"
+        },
+        "revision": "Ember@2.6.2",
+        "loc": {
+          "source": null,
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 21,
+            "column": 0
+          }
+        },
+        "moduleName": "nobreaks/templates/raiding/weekend/roster.hbs"
+      },
+      isEmpty: false,
+      arity: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      buildFragment: function buildFragment(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1, "class", "roster-tab");
+        var el2 = dom.createTextNode("\n  ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("ul");
+        dom.setAttribute(el2, "class", "row");
+        var el3 = dom.createTextNode("\n");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createComment("");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("  ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+        var morphs = new Array(1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0, 1]), 1, 1);
+        return morphs;
+      },
+      statements: [["block", "each", [["get", "model", ["loc", [null, [3, 12], [3, 17]]]]], [], 0, null, ["loc", [null, [3, 4], [18, 13]]]]],
       locals: [],
       templates: [child0]
     };
@@ -4685,12 +6105,12 @@ define("nobreaks/templates/social", ["exports"], function (exports) {
             "loc": {
               "source": null,
               "start": {
-                "line": 41,
+                "line": 40,
                 "column": 8
               },
               "end": {
-                "line": 41,
-                "column": 46
+                "line": 40,
+                "column": 39
               }
             },
             "moduleName": "nobreaks/templates/social.hbs"
@@ -4720,11 +6140,11 @@ define("nobreaks/templates/social", ["exports"], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 40,
+              "line": 39,
               "column": 6
             },
             "end": {
-              "line": 42,
+              "line": 41,
               "column": 6
             }
           },
@@ -4749,7 +6169,7 @@ define("nobreaks/templates/social", ["exports"], function (exports) {
           morphs[0] = dom.createMorphAt(fragment, 1, 1, contextualElement);
           return morphs;
         },
-        statements: [["block", "link-to", ["raiding.roster"], [], 0, null, ["loc", [null, [41, 8], [41, 46]]]]],
+        statements: [["block", "link-to", ["raiding"], [], 0, null, ["loc", [null, [40, 8], [40, 39]]]]],
         locals: [],
         templates: [child0]
       };
@@ -4768,7 +6188,7 @@ define("nobreaks/templates/social", ["exports"], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 115,
+            "line": 98,
             "column": 0
           }
         },
@@ -4813,12 +6233,6 @@ define("nobreaks/templates/social", ["exports"], function (exports) {
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("h4");
         var el4 = dom.createTextNode("Raiding");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("We will be continuing our current raid schedule as soon as everyone is geared up in Legion. (Exact date is TBD.)");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n    ");
@@ -5038,72 +6452,6 @@ define("nobreaks/templates/social", ["exports"], function (exports) {
         var el6 = dom.createTextNode("\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("div");
-        dom.setAttribute(el6, "class", "card-title");
-        var el7 = dom.createTextNode("\n            ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("div");
-        dom.setAttribute(el7, "class", "chip");
-        var el8 = dom.createTextNode("\n              ");
-        dom.appendChild(el7, el8);
-        var el8 = dom.createElement("img");
-        dom.setAttribute(el8, "src", "https://api.nobreaksguild.com/cdn/images/murloc.jpg");
-        dom.setAttribute(el8, "alt", "Themurloc");
-        dom.setAttribute(el8, "title", "Murloc");
-        dom.appendChild(el7, el8);
-        var el8 = dom.createTextNode("\n              Themurloc\n            ");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n          ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("p");
-        var el7 = dom.createTextNode("Murloc has a Youtube Channel for game reviews.");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
-        dom.setAttribute(el6, "class", "card-action");
-        var el7 = dom.createTextNode("\n            ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("a");
-        dom.setAttribute(el7, "href", "https://www.youtube.com/channel/UCiTx1a_BI53itw-fHNIib2w");
-        var el8 = dom.createElement("i");
-        dom.setAttribute(el8, "class", "fa fa-youtube-square");
-        dom.setAttribute(el8, "aria-hidden", "true");
-        dom.appendChild(el7, el8);
-        var el8 = dom.createTextNode(" Themurloc");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n          ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n        ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n      ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n    ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("section");
-        dom.setAttribute(el3, "class", "col s12 m6");
-        var el4 = dom.createTextNode("\n      ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4, "class", "card blue-grey darken-1 white-text");
-        var el5 = dom.createTextNode("\n        ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("div");
-        dom.setAttribute(el5, "class", "card-content");
-        var el6 = dom.createTextNode("\n          ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
         dom.setAttribute(el6, "class", "chip");
         var el7 = dom.createTextNode("\n            ");
         dom.appendChild(el6, el7);
@@ -5245,12 +6593,12 @@ define("nobreaks/templates/social", ["exports"], function (exports) {
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(3);
         morphs[0] = dom.createMorphAt(fragment, 0, 0, contextualElement);
-        morphs[1] = dom.createMorphAt(dom.childAt(fragment, [2, 3, 15]), 5, 5);
+        morphs[1] = dom.createMorphAt(dom.childAt(fragment, [2, 3, 13]), 5, 5);
         morphs[2] = dom.createMorphAt(fragment, 4, 4, contextualElement);
         dom.insertBoundary(fragment, 0);
         return morphs;
       },
-      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/social-header.jpg"], ["loc", [null, [1, 0], [1, 82]]]], ["block", "link-to", ["raiding.roster"], ["tagName", "button", "class", "btn cyan"], 0, null, ["loc", [null, [40, 6], [42, 18]]]], ["content", "outlet", ["loc", [null, [114, 0], [114, 10]]]]],
+      statements: [["inline", "md-parallax", [], ["image", "https://api.nobreaksguild.com/cdn/images/social-header.jpg"], ["loc", [null, [1, 0], [1, 82]]]], ["block", "link-to", ["raiding"], ["tagName", "button", "class", "btn cyan"], 0, null, ["loc", [null, [39, 6], [41, 18]]]], ["content", "outlet", ["loc", [null, [97, 0], [97, 10]]]]],
       locals: [],
       templates: [child0]
     };

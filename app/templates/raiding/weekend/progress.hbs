@@ -1,0 +1,26 @@
+<div class="progress-tab">
+  {{#each model.raids as |raid|}}
+  <div class="raid col s12">
+    <h5>{{raid.name}} (Heroic)</h5>
+    <ul class="row">
+      {{#each raid.bosses as |boss|}}
+      <li class="col s12 m6 l3 {{if boss.heroicKills 'killed'}}">
+        <div class="card grey darken-4">
+          <div class="card-content row">
+            <div class="content-wrap">
+              <h6 class="name col s12 white-text">{{boss.name}}</h6>
+              {{#if boss.heroicKills}}
+                <div class="killed">
+                  <img class="dead" src="https://api.nobreaksguild.com/cdn/images/bosses/dead.png" />
+                </div>
+              {{/if}}
+              <img src={{boss.thumbnail}} />
+            </div>
+          </div>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+  {{/each}}
+</div>

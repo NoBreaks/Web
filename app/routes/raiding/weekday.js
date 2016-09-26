@@ -5,12 +5,6 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   transitionTarget: '',
 
-  activate: function() {
-    Ember.run.scheduleOnce('afterRender', this, () => {
-      Ember.$('.pin-container').pushpin({ top: Ember.$('.pin-container').offset().top - 64 });
-    });
-  },
-
   model() {
   },
 
@@ -21,9 +15,13 @@ export default Ember.Route.extend({
   },
 
   redirect(model, transition) {
-    let target = (transition.targetName !== 'raiding.index') ?
-      transition.targetName : 'raiding.index';
+    let target = (transition.targetName !== 'raiding.weekday.index') ?
+      transition.targetName : 'raiding.weekday.roster';
     this.set('transitionTarget', target);
     this.transitionTo(target);
+  },
+
+  setupController(controller) {
+    controller.set('tabsSelection', this.get('transitionTarget'));
   }
 });
