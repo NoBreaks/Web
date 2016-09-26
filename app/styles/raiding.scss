@@ -199,6 +199,12 @@
   .card {
     position: relative;
 
+    &.logs {
+      .card-content {
+        background: none;
+      }
+    }
+
     .name {
       white-space: nowrap;
       text-overflow: ellipsis;

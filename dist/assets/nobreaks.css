@@ -6471,6 +6471,8 @@ button, .btn, .btn-large {
 
 .progress-tab .card {
   position: relative; }
+  .progress-tab .card.logs .card-content {
+    background: none; }
   .progress-tab .card .name {
     white-space: nowrap;
     text-overflow: ellipsis;

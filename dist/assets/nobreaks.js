@@ -5156,11 +5156,11 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 12,
+                  "line": 22,
                   "column": 14
                 },
                 "end": {
-                  "line": 16,
+                  "line": 26,
                   "column": 14
                 }
               },
@@ -5204,11 +5204,11 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
             "loc": {
               "source": null,
               "start": {
-                "line": 6,
+                "line": 16,
                 "column": 6
               },
               "end": {
-                "line": 22,
+                "line": 32,
                 "column": 6
               }
             },
@@ -5277,7 +5277,7 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
             morphs[3] = dom.createAttrMorph(element2, 'src');
             return morphs;
           },
-          statements: [["attribute", "class", ["concat", ["col s12 m6 l3 ", ["subexpr", "if", [["get", "boss.heroicKills", ["loc", [null, [7, 36], [7, 52]]]], "killed"], [], ["loc", [null, [7, 31], [7, 63]]]]]]], ["content", "boss.name", ["loc", [null, [11, 50], [11, 63]]]], ["block", "if", [["get", "boss.heroicKills", ["loc", [null, [12, 20], [12, 36]]]]], [], 0, null, ["loc", [null, [12, 14], [16, 21]]]], ["attribute", "src", ["get", "boss.thumbnail", ["loc", [null, [17, 25], [17, 39]]]]]],
+          statements: [["attribute", "class", ["concat", ["col s12 m6 l3 ", ["subexpr", "if", [["get", "boss.heroicKills", ["loc", [null, [17, 36], [17, 52]]]], "killed"], [], ["loc", [null, [17, 31], [17, 63]]]]]]], ["content", "boss.name", ["loc", [null, [21, 50], [21, 63]]]], ["block", "if", [["get", "boss.heroicKills", ["loc", [null, [22, 20], [22, 36]]]]], [], 0, null, ["loc", [null, [22, 14], [26, 21]]]], ["attribute", "src", ["get", "boss.thumbnail", ["loc", [null, [27, 25], [27, 39]]]]]],
           locals: ["boss"],
           templates: [child0]
         };
@@ -5293,7 +5293,7 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
               "column": 2
             },
             "end": {
-              "line": 25,
+              "line": 35,
               "column": 2
             }
           },
@@ -5311,10 +5311,56 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
           dom.setAttribute(el1, "class", "raid col s12");
           var el2 = dom.createTextNode("\n    ");
           dom.appendChild(el1, el2);
-          var el2 = dom.createElement("h5");
-          var el3 = dom.createComment("");
+          var el2 = dom.createElement("div");
+          dom.setAttribute(el2, "class", "col s12");
+          var el3 = dom.createTextNode("\n      ");
           dom.appendChild(el2, el3);
-          var el3 = dom.createTextNode(" (Heroic)");
+          var el3 = dom.createElement("div");
+          dom.setAttribute(el3, "class", "logs card blue-grey darken-1");
+          var el4 = dom.createTextNode("\n        ");
+          dom.appendChild(el3, el4);
+          var el4 = dom.createElement("div");
+          dom.setAttribute(el4, "class", "card-content");
+          var el5 = dom.createTextNode("\n          ");
+          dom.appendChild(el4, el5);
+          var el5 = dom.createElement("div");
+          dom.setAttribute(el5, "class", "card-title");
+          var el6 = dom.createElement("h4");
+          var el7 = dom.createTextNode("Logs");
+          dom.appendChild(el6, el7);
+          dom.appendChild(el5, el6);
+          dom.appendChild(el4, el5);
+          var el5 = dom.createTextNode("\n          ");
+          dom.appendChild(el4, el5);
+          var el5 = dom.createElement("a");
+          dom.setAttribute(el5, "href", "https://www.warcraftlogs.com/reports/yZHJ7acBA349nLDt/");
+          dom.setAttribute(el5, "target", "_blank");
+          dom.setAttribute(el5, "class", "waves-effect waves-light btn cyan");
+          var el6 = dom.createTextNode("Warcraft Logs");
+          dom.appendChild(el5, el6);
+          dom.appendChild(el4, el5);
+          var el5 = dom.createTextNode("\n        ");
+          dom.appendChild(el4, el5);
+          dom.appendChild(el3, el4);
+          var el4 = dom.createTextNode("\n      ");
+          dom.appendChild(el3, el4);
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("\n    ");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n    ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("div");
+          dom.setAttribute(el2, "class", "col s12");
+          var el3 = dom.createTextNode("\n      ");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createElement("h5");
+          var el4 = dom.createComment("");
+          dom.appendChild(el3, el4);
+          var el4 = dom.createTextNode(" (Heroic)");
+          dom.appendChild(el3, el4);
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("\n    ");
           dom.appendChild(el2, el3);
           dom.appendChild(el1, el2);
           var el2 = dom.createTextNode("\n    ");
@@ -5338,11 +5384,11 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
           var element3 = dom.childAt(fragment, [1]);
           var morphs = new Array(2);
-          morphs[0] = dom.createMorphAt(dom.childAt(element3, [1]), 0, 0);
-          morphs[1] = dom.createMorphAt(dom.childAt(element3, [3]), 1, 1);
+          morphs[0] = dom.createMorphAt(dom.childAt(element3, [3, 1]), 0, 0);
+          morphs[1] = dom.createMorphAt(dom.childAt(element3, [5]), 1, 1);
           return morphs;
         },
-        statements: [["content", "raid.name", ["loc", [null, [4, 8], [4, 21]]]], ["block", "each", [["get", "raid.bosses", ["loc", [null, [6, 14], [6, 25]]]]], [], 0, null, ["loc", [null, [6, 6], [22, 15]]]]],
+        statements: [["content", "raid.name", ["loc", [null, [13, 10], [13, 23]]]], ["block", "each", [["get", "raid.bosses", ["loc", [null, [16, 14], [16, 25]]]]], [], 0, null, ["loc", [null, [16, 6], [32, 15]]]]],
         locals: ["raid"],
         templates: [child0]
       };
@@ -5360,7 +5406,7 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
             "column": 0
           },
           "end": {
-            "line": 27,
+            "line": 37,
             "column": 0
           }
         },
@@ -5388,7 +5434,7 @@ define("nobreaks/templates/raiding/weekday/progress", ["exports"], function (exp
         morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 1, 1);
         return morphs;
       },
-      statements: [["block", "each", [["get", "model.raids", ["loc", [null, [2, 10], [2, 21]]]]], [], 0, null, ["loc", [null, [2, 2], [25, 11]]]]],
+      statements: [["block", "each", [["get", "model.raids", ["loc", [null, [2, 10], [2, 21]]]]], [], 0, null, ["loc", [null, [2, 2], [35, 11]]]]],
       locals: [],
       templates: [child0]
     };
@@ -5686,11 +5732,11 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
               "loc": {
                 "source": null,
                 "start": {
-                  "line": 12,
+                  "line": 22,
                   "column": 14
                 },
                 "end": {
-                  "line": 16,
+                  "line": 26,
                   "column": 14
                 }
               },
@@ -5734,11 +5780,11 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
             "loc": {
               "source": null,
               "start": {
-                "line": 6,
+                "line": 16,
                 "column": 6
               },
               "end": {
-                "line": 22,
+                "line": 32,
                 "column": 6
               }
             },
@@ -5807,7 +5853,7 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
             morphs[3] = dom.createAttrMorph(element2, 'src');
             return morphs;
           },
-          statements: [["attribute", "class", ["concat", ["col s12 m6 l3 ", ["subexpr", "if", [["get", "boss.heroicKills", ["loc", [null, [7, 36], [7, 52]]]], "killed"], [], ["loc", [null, [7, 31], [7, 63]]]]]]], ["content", "boss.name", ["loc", [null, [11, 50], [11, 63]]]], ["block", "if", [["get", "boss.heroicKills", ["loc", [null, [12, 20], [12, 36]]]]], [], 0, null, ["loc", [null, [12, 14], [16, 21]]]], ["attribute", "src", ["get", "boss.thumbnail", ["loc", [null, [17, 25], [17, 39]]]]]],
+          statements: [["attribute", "class", ["concat", ["col s12 m6 l3 ", ["subexpr", "if", [["get", "boss.heroicKills", ["loc", [null, [17, 36], [17, 52]]]], "killed"], [], ["loc", [null, [17, 31], [17, 63]]]]]]], ["content", "boss.name", ["loc", [null, [21, 50], [21, 63]]]], ["block", "if", [["get", "boss.heroicKills", ["loc", [null, [22, 20], [22, 36]]]]], [], 0, null, ["loc", [null, [22, 14], [26, 21]]]], ["attribute", "src", ["get", "boss.thumbnail", ["loc", [null, [27, 25], [27, 39]]]]]],
           locals: ["boss"],
           templates: [child0]
         };
@@ -5823,7 +5869,7 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
               "column": 2
             },
             "end": {
-              "line": 25,
+              "line": 35,
               "column": 2
             }
           },
@@ -5841,10 +5887,56 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
           dom.setAttribute(el1, "class", "raid col s12");
           var el2 = dom.createTextNode("\n    ");
           dom.appendChild(el1, el2);
-          var el2 = dom.createElement("h5");
-          var el3 = dom.createComment("");
+          var el2 = dom.createElement("div");
+          dom.setAttribute(el2, "class", "col s12");
+          var el3 = dom.createTextNode("\n      ");
           dom.appendChild(el2, el3);
-          var el3 = dom.createTextNode(" (Heroic)");
+          var el3 = dom.createElement("div");
+          dom.setAttribute(el3, "class", "logs card blue-grey darken-1");
+          var el4 = dom.createTextNode("\n        ");
+          dom.appendChild(el3, el4);
+          var el4 = dom.createElement("div");
+          dom.setAttribute(el4, "class", "card-content");
+          var el5 = dom.createTextNode("\n          ");
+          dom.appendChild(el4, el5);
+          var el5 = dom.createElement("div");
+          dom.setAttribute(el5, "class", "card-title");
+          var el6 = dom.createElement("h4");
+          var el7 = dom.createTextNode("Logs");
+          dom.appendChild(el6, el7);
+          dom.appendChild(el5, el6);
+          dom.appendChild(el4, el5);
+          var el5 = dom.createTextNode("\n          ");
+          dom.appendChild(el4, el5);
+          var el5 = dom.createElement("a");
+          dom.setAttribute(el5, "href", "https://www.warcraftlogs.com/reports/yZHJ7acBA349nLDt/");
+          dom.setAttribute(el5, "target", "_blank");
+          dom.setAttribute(el5, "class", "waves-effect waves-light btn cyan");
+          var el6 = dom.createTextNode("Warcraft Logs");
+          dom.appendChild(el5, el6);
+          dom.appendChild(el4, el5);
+          var el5 = dom.createTextNode("\n        ");
+          dom.appendChild(el4, el5);
+          dom.appendChild(el3, el4);
+          var el4 = dom.createTextNode("\n      ");
+          dom.appendChild(el3, el4);
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("\n    ");
+          dom.appendChild(el2, el3);
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("\n    ");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createElement("div");
+          dom.setAttribute(el2, "class", "col s12");
+          var el3 = dom.createTextNode("\n      ");
+          dom.appendChild(el2, el3);
+          var el3 = dom.createElement("h5");
+          var el4 = dom.createComment("");
+          dom.appendChild(el3, el4);
+          var el4 = dom.createTextNode(" (Heroic)");
+          dom.appendChild(el3, el4);
+          dom.appendChild(el2, el3);
+          var el3 = dom.createTextNode("\n    ");
           dom.appendChild(el2, el3);
           dom.appendChild(el1, el2);
           var el2 = dom.createTextNode("\n    ");
@@ -5868,11 +5960,11 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
         buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
           var element3 = dom.childAt(fragment, [1]);
           var morphs = new Array(2);
-          morphs[0] = dom.createMorphAt(dom.childAt(element3, [1]), 0, 0);
-          morphs[1] = dom.createMorphAt(dom.childAt(element3, [3]), 1, 1);
+          morphs[0] = dom.createMorphAt(dom.childAt(element3, [3, 1]), 0, 0);
+          morphs[1] = dom.createMorphAt(dom.childAt(element3, [5]), 1, 1);
           return morphs;
         },
-        statements: [["content", "raid.name", ["loc", [null, [4, 8], [4, 21]]]], ["block", "each", [["get", "raid.bosses", ["loc", [null, [6, 14], [6, 25]]]]], [], 0, null, ["loc", [null, [6, 6], [22, 15]]]]],
+        statements: [["content", "raid.name", ["loc", [null, [13, 10], [13, 23]]]], ["block", "each", [["get", "raid.bosses", ["loc", [null, [16, 14], [16, 25]]]]], [], 0, null, ["loc", [null, [16, 6], [32, 15]]]]],
         locals: ["raid"],
         templates: [child0]
       };
@@ -5890,7 +5982,7 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
             "column": 0
           },
           "end": {
-            "line": 27,
+            "line": 37,
             "column": 0
           }
         },
@@ -5918,7 +6010,7 @@ define("nobreaks/templates/raiding/weekend/progress", ["exports"], function (exp
         morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0]), 1, 1);
         return morphs;
       },
-      statements: [["block", "each", [["get", "model.raids", ["loc", [null, [2, 10], [2, 21]]]]], [], 0, null, ["loc", [null, [2, 2], [25, 11]]]]],
+      statements: [["block", "each", [["get", "model.raids", ["loc", [null, [2, 10], [2, 21]]]]], [], 0, null, ["loc", [null, [2, 2], [35, 11]]]]],
       locals: [],
       templates: [child0]
     };
