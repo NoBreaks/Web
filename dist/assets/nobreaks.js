@@ -5304,7 +5304,7 @@ catch(err) {
 /* jshint ignore:start */
 
 if (!runningTests) {
-  require("nobreaks/app")["default"].create({"name":"nobreaks","version":"2.0.0+84889503"});
+  require("nobreaks/app")["default"].create({"name":"nobreaks","version":"2.0.0+0e81622d"});
 }
 
 define('~fastboot/app-factory', ['nobreaks/app', 'nobreaks/config/environment'], function(App, config) {
