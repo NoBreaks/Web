@@ -110,8 +110,12 @@
   .epgp-count {
     padding-top: 10px;
   }
+  .substrict {
+    padding-left: 5px;
+    font-size: 0.6em;
+  }
   .card-content {
-
+    min-height: 160px;
     &.deathknight {
       @include class_crests('https://api.nobreaksguild.com/cdn/images/classes/crests/deathknight.png');
     }
