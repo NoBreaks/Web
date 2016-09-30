@@ -111,7 +111,7 @@
     padding-top: 10px;
   }
   .card-content {
-
+    min-height: 160px;
     &.deathknight {
       @include class_crests('https://api.nobreaksguild.com/cdn/images/classes/crests/deathknight.png');
     }
