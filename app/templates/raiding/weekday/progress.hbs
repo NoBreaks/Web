@@ -1,14 +1,14 @@
 <div class="progress-tab">
-  {{#each model.raids as |raid|}}
-  <div class="raid col s12">
-    <div class="col s12">
-      <div class="logs card blue-grey darken-1">
-        <div class="card-content">
-          <div class="card-title"><h4>Logs</h4></div>
-          <a href="https://www.warcraftlogs.com/guilds/101146" target="_blank" class="waves-effect waves-light btn cyan">Warcraft Logs</a>
-        </div>
+  <div class="col s12">
+    <div class="logs card blue-grey darken-1">
+      <div class="card-content">
+        <div class="card-title"><h4>Logs</h4></div>
+        <a href="https://www.warcraftlogs.com/guilds/101146" target="_blank" class="waves-effect waves-light btn cyan">Warcraft Logs</a>
       </div>
     </div>
+  </div>
+  {{#each model.raids as |raid|}}
+  <div class="raid col s12">
     <div class="col s12">
       <h5>{{raid.name}} (Heroic)</h5>
     </div>

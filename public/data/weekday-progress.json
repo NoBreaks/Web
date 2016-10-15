@@ -1,5 +1,49 @@
 {
   "raids": [{
+    "name": "Trials of Valor",
+    "lfr": 0,
+    "normal": 0,
+    "heroic": 0,
+    "mythic": 0,
+    "id": 8028,
+    "bosses": [{
+        "id": 103160,
+        "name": "Guarm",
+        "lfrKills": 0,
+        "lfrTimestamp": 0,
+        "normalKills": 0,
+        "normalTimestamp": 0,
+        "heroicKills": 0,
+        "heroicTimestamp": 0,
+        "mythicKills": 0,
+        "mythicTimestamp": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/trials-of-valor/guarm.png"
+    }, {
+        "id": 103160,
+        "name": "Helya",
+        "lfrKills": 0,
+        "lfrTimestamp": 0,
+        "normalKills": 0,
+        "normalTimestamp": 0,
+        "heroicKills": 0,
+        "heroicTimestamp": 0,
+        "mythicKills": 0,
+        "mythicTimestamp": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/trials-of-valor/helya.png"
+    }, {
+        "id": 103160,
+        "name": "Odyn",
+        "lfrKills": 0,
+        "lfrTimestamp": 0,
+        "normalKills": 0,
+        "normalTimestamp": 0,
+        "heroicKills": 0,
+        "heroicTimestamp": 0,
+        "mythicKills": 0,
+        "mythicTimestamp": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/trials-of-valor/odyn.png"
+    }]
+  }, {
     "name": "The Emerald Nightmare",
     "lfr": 0,
     "normal": 2,
