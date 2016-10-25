@@ -1,6 +1,6 @@
 {
   "raids": [{
-    "name": "Trials of Valor",
+    "name": "Trials of Valor (Normal)",
     "lfr": 0,
     "normal": 0,
     "heroic": 0,
@@ -44,7 +44,7 @@
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/trials-of-valor/odyn.png"
     }]
   }, {
-    "name": "The Emerald Nightmare",
+    "name": "The Emerald Nightmare (Heroic)",
     "lfr": 0,
     "normal": 2,
     "heroic": 0,
@@ -81,7 +81,7 @@
         "lfrTimestamp": 0,
         "normalKills": 1,
         "normalTimestamp": 1474422207000,
-        "heroicKills": 0,
+        "heroicKills": 1,
         "heroicTimestamp": 0,
         "mythicKills": 0,
         "mythicTimestamp": 0,
