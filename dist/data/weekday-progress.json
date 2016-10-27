@@ -44,7 +44,7 @@
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/trials-of-valor/odyn.png"
     }]
   }, {
-    "name": "The Emerald Nightmare (Heroic)",
+    "name": "The Emerald Nightmare (Mythic)",
     "lfr": 0,
     "normal": 2,
     "heroic": 0,
@@ -59,7 +59,7 @@
         "normalTimestamp": 1474416501000,
         "heroicKills": 1,
         "heroicTimestamp": 0,
-        "mythicKills": 0,
+        "mythicKills": 1,
         "mythicTimestamp": 0,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/nythendra.png"
     }, {
