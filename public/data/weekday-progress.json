@@ -1,6 +1,6 @@
 {
   "raids": [{
-    "name": "Trials of Valor (Normal)",
+    "name": "Trials of Valor (Heroic)",
     "id": 8028,
     "bosses": [{
         "id": 103160,
@@ -10,12 +10,12 @@
     }, {
         "id": 103160,
         "name": "Guarm",
-        "kill": 1,
+        "kill": 0,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/trials-of-valor/guarm.png"
     }, {
         "id": 103160,
         "name": "Helya",
-        "kill": 1,
+        "kill": 0,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/trials-of-valor/helya.png"
     }]
   }, {
