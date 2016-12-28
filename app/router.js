@@ -15,6 +15,9 @@ const Router = Ember.Router.extend(ResetScrollMixin, googlePageview, {
 Router.map(function() {
   this.route('raiding', function() {
     this.route('index');
+    this.route('mythic', function() {
+      this.route('progress');
+    });
     this.route('weekday', function() {
       this.route('roster');
       this.route('progress');

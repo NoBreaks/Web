@@ -19,7 +19,7 @@
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/trials-of-valor/helya.png"
     }]
   }, {
-    "name": "The Emerald Nightmare (Mythic)",
+    "name": "The Emerald Nightmare (Heroic)",
     "id": 8026,
     "bosses": [{
         "id": 103160,
@@ -29,32 +29,32 @@
     }, {
         "id": 111000,
         "name": "Elerethe Renferal",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/elerethe-renferal.png"
     }, {
         "id": 105393,
         "name": "Il'gynoth, Heart of Corruption",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/ilgynoth.png"
     }, {
         "id": 100497,
         "name": "Ursoc",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/ursoc.png"
     }, {
         "id": 102679,
         "name": "Dragons of Nightmare",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/dragons-of-nightmare.png"
     }, {
         "id": 113534,
         "name": "Cenarius",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/cenarius.png"
     }, {
         "id": 103769,
         "name": "Xavius",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/emerald-nightmare/xavius.png"
     }]
   }]
