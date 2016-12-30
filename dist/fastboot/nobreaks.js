@@ -3407,7 +3407,7 @@ define("nobreaks/templates/join", ["exports"], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("The officers are Konnovar, Nebet, Skarelin, Shdowhuntr, Stormpeaks, Dêathunknown, Veksaryn, and Shadrÿn.");
+        var el4 = dom.createTextNode("The officers are Konnovar, Nebet, Skarelin, Shdowhuntr, Rizzenfolg, Dêathunknown, Reynie, Veksaryn, and Shadrÿn.");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n  ");
@@ -3469,13 +3469,13 @@ define("nobreaks/templates/join", ["exports"], function (exports) {
         var el6 = dom.createTextNode("\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("td");
-        var el7 = dom.createTextNode("Tanks: None");
+        var el7 = dom.createTextNode("Tanks: Low (Bear Offspec)");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("td");
-        var el7 = dom.createTextNode("Tanks: Low (Off Tank)");
+        var el7 = dom.createTextNode("Tanks: None");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n        ");
@@ -3493,7 +3493,7 @@ define("nobreaks/templates/join", ["exports"], function (exports) {
         var el6 = dom.createTextNode("\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("td");
-        var el7 = dom.createTextNode("Healers: High");
+        var el7 = dom.createTextNode("Healers: Low");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n        ");
@@ -3511,7 +3511,7 @@ define("nobreaks/templates/join", ["exports"], function (exports) {
         var el6 = dom.createTextNode("\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("td");
-        var el7 = dom.createTextNode("Melee DPS: Medium");
+        var el7 = dom.createTextNode("Melee DPS: 1 Leather Only");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n        ");
@@ -3523,13 +3523,13 @@ define("nobreaks/templates/join", ["exports"], function (exports) {
         var el6 = dom.createTextNode("\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("td");
-        var el7 = dom.createTextNode("Ranged DPS: High");
+        var el7 = dom.createTextNode("Ranged DPS: 2 Hunters, 1 Boomie w/ Bear, 1 Warlock");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n          ");
         dom.appendChild(el5, el6);
         var el6 = dom.createElement("td");
-        var el7 = dom.createTextNode("Ranged DPS: High");
+        var el7 = dom.createTextNode("Ranged DPS: 1 Warlock, Any other");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n        ");
