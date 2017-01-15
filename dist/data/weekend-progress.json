@@ -54,7 +54,7 @@
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/nighthold/guldan.png"
     }]
   }, {
-    "name": "Trials of Valor (Normal)",
+    "name": "Trials of Valor (Heroic)",
     "id": 8440,
     "bosses": [{
         "id": 115323,
@@ -69,7 +69,7 @@
     }, {
         "id": 93394,
         "name": "Helya",
-        "kill": 1,
+        "kill": 0,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/trials-of-valor/helya.png"
     }]
   }, {
