@@ -30,7 +30,7 @@
     }, {
         "id": 104528,
         "name": "High Botanist Tel'arn",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/nighthold/telarn.png"
     }, {
         "id": 103685,
@@ -40,17 +40,17 @@
     }, {
         "id": 103758,
         "name": "Star Augur Etraeus",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/nighthold/etraeus.png"
     }, {
         "id": 110965,
         "name": "Grand Magistrix Elisande",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/nighthold/elisande.png"
     }, {
         "id": 105503,
         "name": "Gul'dan",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/nighthold/guldan.png"
     }]
   }, {
