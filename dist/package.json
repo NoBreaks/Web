@@ -11,7 +11,7 @@
       "node-fetch"
     ],
     "manifest": {
-      "appFile": "fastboot/nobreaks-e9281afaffcdd89d48b0a6e2c2afece2.js",
+      "appFile": "fastboot/nobreaks-8ba2fca031af9c5b3a0fd6599ba9247a.js",
       "vendorFile": "fastboot/vendor-5664e7b261ae37eadb49e8bf81550e54.js",
       "htmlFile": "index.html"
     },
@@ -25,7 +25,7 @@
       },
       "APP": {
         "name": "nobreaks",
-        "version": "2.0.0+da0b1bfd",
+        "version": "2.0.0+17889d46",
         "autoboot": false
       },
       "googleAnalytics": {
