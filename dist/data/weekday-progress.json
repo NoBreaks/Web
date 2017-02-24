@@ -35,12 +35,12 @@
     }, {
         "id": 103685,
         "name": "Tichondrius",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/nighthold/tichondrius.png"
     }, {
         "id": 103758,
         "name": "Star Augur Etraeus",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/nighthold/etraeus.png"
     }, {
         "id": 110965,
