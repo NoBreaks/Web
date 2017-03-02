@@ -25,7 +25,7 @@
       },
       "APP": {
         "name": "nobreaks",
-        "version": "2.0.0+3541c2d8",
+        "version": "2.0.0+275fba1d",
         "autoboot": false
       },
       "googleAnalytics": {
