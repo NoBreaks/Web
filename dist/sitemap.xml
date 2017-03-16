@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://nobreaksguild.com/</loc></url>
-<url><loc>https://nobreaksguild.com/raiding/roster/</loc></url>
+<url><loc>https://nobreaksguild.com/raiding/index/</loc></url>
 <url><loc>https://nobreaksguild.com/raiding/loot/latest/</loc></url>
-<url><loc>https://nobreaksguild.com/raiding/progress/</loc></url>
+<url><loc>https://nobreaksguild.com/raiding/mythic/</loc></url>
+<url><loc>https://nobreaksguild.com/raiding/mythic/progress/</loc></url>
+<url><loc>https://nobreaksguild.com/raiding/weekday/</loc></url>
+<url><loc>https://nobreaksguild.com/raiding/weekday/roster/</loc></url>
+<url><loc>https://nobreaksguild.com/raiding/weekday/progress/</loc></url>
+<url><loc>https://nobreaksguild.com/raiding/weekend/</loc></url>
+<url><loc>https://nobreaksguild.com/raiding/weekend/progress/</loc></url>
+<url><loc>https://nobreaksguild.com/raiding/weekend/roster/</loc></url>
 <url><loc>https://nobreaksguild.com/join/</loc></url>
 <url><loc>https://nobreaksguild.com/social/</loc></url>
 </urlset>
