@@ -40,11 +40,18 @@ button, .btn {
 #footer {
   a {
     color: #fff;
-    font-size: 1.8em;
+    font-size: 1em;
     padding: 0 5px;
+    transition: color .3s ease;
+
+    &:hover {
+      color: #80deea; //cyan lighten-3
+      transition: color .3s ease;
+    }
   }
   p {
     text-align: left;
+    line-height: 3;
 
     ~p {
       text-align: right;
