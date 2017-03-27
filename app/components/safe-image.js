@@ -10,8 +10,6 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     this.$().on('error', function() {
       this.set('isBroken', true);
-      console.log('alt', this.alt)
-      console.log(this)
       this.$().attr('src', this.alt);
     }.bind(this));
   },
