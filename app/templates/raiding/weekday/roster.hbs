@@ -6,7 +6,7 @@
         <div class="card-content row {{index-to-class character.characterId.class true}}">
           <div class="content-wrap">
             <h6 class="name col s12 white-text">{{character.characterId.name}}</h6>
-            <img src="https://render-us.worldofwarcraft.com/character/{{character.characterId.thumbnail}}" class="col s6 m4"/>
+            {{safe-image src=character.characterId.thumbnail alt=character.characterId.thumbnailAlt class="col s6 m4"}}
             <div class="info col s6 m8 white-text">
               <p>{{character.characterId.items.averageItemLevelEquipped}} {{character.characterId.spec.name}}</p>
               <p>{{epgp-total character.effortPoints character.gearPoints}}<span class="substrict">EP/GP</span></p>
