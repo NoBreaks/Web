@@ -1,5 +1,54 @@
 {
   "raids": [{
+    "name": "Tomb of Sargeras (Heroic)",
+    "id": 8524,
+    "bosses": [{
+        "id": 115844,
+        "name": "Goroth",
+        "kill": 1,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/goroth.png"
+    }, {
+        "id": 116689,
+        "name": "Demonic Inquisition",
+        "kill": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/demonic-inquisition.png"
+    }, {
+        "id": 116407,
+        "name": "Harjatan",
+        "kill": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/harjatan.png"
+    }, {
+        "id": 118523,
+        "name": "Sisters of the Moon",
+        "kill": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/sisters-of-the-moon.png"
+    }, {
+        "id": 115767,
+        "name": "Mistress Sassz'ine",
+        "kill": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/mistress-sasszine.png"
+    }, {
+        "id": 118460,
+        "name": "The Desolate Host",
+        "kill": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/desolate-host.png"
+    }, {
+        "id": 118289,
+        "name": "Maiden of Vigilance",
+        "kill": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/maiden-of-vigilance.png"
+    }, {
+        "id": 116939,
+        "name": "Fallen Avatar",
+        "kill": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/fallen-avatar.png"
+    }, {
+        "id": 117269,
+        "name": "Kil'jaeden",
+        "kill": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/kiljaeden.png"
+    }]
+    },{
     "name": "Nighthold (Mythic)",
     "id": 8025,
     "bosses": [{
