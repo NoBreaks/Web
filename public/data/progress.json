@@ -30,7 +30,7 @@
     }, {
         "id": 118460,
         "name": "The Desolate Host",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/desolate-host.png"
     }, {
         "id": 118289,
