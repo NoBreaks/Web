@@ -1,6 +1,6 @@
 {
   "raids": [{
-    "name": "Antorus, The Burning Throne (Normal)",
+    "name": "Antorus, The Burning Throne (Heroic)",
     "id": 8440,
     "bosses": [{
         "id": 115323,
@@ -15,27 +15,27 @@
     }, {
         "id": 115323,
         "name": "Antoran High Command",
-        "kill": 1,
+        "kill": 0,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/antorus/highcommand.jpeg"
     }, {
         "id": 115323,
         "name": "Portal Keeper Hasabel",
-        "kill": 1,
+        "kill": 0,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/antorus/hasabel.jpeg"
     }, {
         "id": 115323,
         "name": "Eonar",
-        "kill": 1,
+        "kill": 0,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/antorus/eonar.jpeg"
     }, {
         "id": 115323,
         "name": "Imonar the Soulhunter",
-        "kill": 1,
+        "kill": 0,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/antorus/imonar.jpeg"
     }, {
         "id": 115323,
         "name": "Kin'garoth",
-        "kill": 1,
+        "kill": 0,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/antorus/kingaroth.jpeg"
     }, {
         "id": 115323,
