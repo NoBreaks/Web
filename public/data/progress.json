@@ -15,7 +15,7 @@
     }, {
         "id": 115323,
         "name": "Antoran High Command",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/antorus/highcommand.jpeg"
     }, {
         "id": 115323,
@@ -30,7 +30,7 @@
     }, {
         "id": 115323,
         "name": "Imonar the Soulhunter",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/antorus/imonar.jpeg"
     }, {
         "id": 115323,
