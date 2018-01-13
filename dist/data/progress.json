@@ -55,7 +55,7 @@
     }, {
         "id": 115323,
         "name": "Argus",
-        "kill": 0,
+        "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/antorus/argus.jpeg"
     }]
   }, {
@@ -77,15 +77,15 @@
         "kill": 1,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/harjatan.png"
     }, {
-        "id": 118523,
-        "name": "Sisters of the Moon",
-        "kill": 0,
-        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/sisters-of-the-moon.png"
-    }, {
         "id": 115767,
         "name": "Mistress Sassz'ine",
         "kill": 0,
         "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/mistress-sasszine.png"
+    }, {
+        "id": 118523,
+        "name": "Sisters of the Moon",
+        "kill": 0,
+        "thumbnail": "https://api.nobreaksguild.com/cdn/images/bosses/tomb-of-sargeras/sisters-of-the-moon.png"
     }, {
         "id": 118460,
         "name": "The Desolate Host",
